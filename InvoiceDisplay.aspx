@@ -16,7 +16,54 @@
 
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+   
+    function BaseCurrencyCalculation()
+    {
+        var _txt1 = document.getElementById('<%= txtamountfc.ClientID %>');
+        var _txt2 = document.getElementById('<%= txtexchangerate.ClientID %>');
+        var _txt3 = document.getElementById('<%= txtamountbc.ClientID %>');
+        var t1=0, t2=0;
+        
+        if(_txt1.value != "") t1=_txt1.value;
+        if(_txt2.value != "") t2=_txt2.value;
+        
+        _txt3.value = parseInt(t1) * parseInt(t2);
+    }
+        function ForeignCurrencyCalculation()
+    {
+        var _txt1 = document.getElementById('<%= txtrate.ClientID %>');
+        var _txt2 = document.getElementById('<%= txtquantity.ClientID %>');
+        var _txt3 = document.getElementById('<%= txtamountfc.ClientID %>');
+        var t1=0, t2=0;
+        
+        if(_txt1.value != "") t1=_txt1.value;
+        if(_txt2.value != "") t2=_txt2.value;
+        
+        _txt3.value = parseInt(t1) * parseInt(t2);
+        }
+        function TaxandTotalamountCalculation()
+    {
+        var _txt1 = document.getElementById('<%= txtamountbc.ClientID %>');
+        var _txt2 = document.getElementById('<%= txtpercentage.ClientID %>');
+        var _txt3 = document.getElementById('<%= txttaxamount.ClientID %>');
+        var _txt4 = document.getElementById('<%= txttotalamount.ClientID %>');
+        var t1=0, t2=0, t3=0;
+        
+        if(_txt1.value != "") t1=_txt1.value;
+        if (_txt2.value != "") t2 = _txt2.value;
+        
+        
+        
+        _txt3.value = parseInt(t1) * parseInt(t2);
+        if (_txt3.value != "") t3 = _txt3.value;
+        _txt4.value = parseInt(t1) + parseInt(t3);
+        }
+       
 
+    </script>
+   
+     
     
     
     
@@ -390,7 +437,7 @@ Description:
             </div>
             <asp:Button ID="btnChargePopup" runat="server" style="display:none" />
             <ajaxToolkit:ModalPopupExtender ID="mpechargedisplay" runat="server" TargetControlID="btnChargePopup" PopupControlID="pn2popup" BackgroundCssClass="modalBackground"></ajaxToolkit:ModalPopupExtender>
-            <asp:Panel ID="pn2popup" runat="server" BackColor="Yellow" Height="700px" Width="750px" style="display:none">
+            <asp:Panel ID="pn2popup" runat="server" BackColor="Yellow" Height="599px" Width="750px" style="display:none">
                 <table width="100%" style="border:Solid 3px #D55500; width:100%; height:100%">
                     <tr style="background-color:orangered">
                         <td colspan="2" style="height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Add Charge Details</td>
@@ -430,7 +477,7 @@ Description:
 Quantity:
 </td>
 <td>
-<asp:TextBox ID="txtquantity" runat="server" style="width:270px"/>
+<asp:TextBox ID="txtquantity" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px"/>
 </td>
 </tr>
     <tr>
@@ -447,33 +494,32 @@ Quantity:
         <tr>
             <td align="left" style="font-size:19px">Rate </td>
             <td>
-                <asp:TextBox ID="txtrate" runat="server" style="width:270px" />
+                <asp:TextBox ID="txtrate" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px" />
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px">Amount in FC </td>
+            <td align="left" style="font-size:19px">Amount in Foreign Currency </td>
             <td>
-                <asp:TextBox ID="txtamountfc" runat="server" style="width:270px" />
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Amount in BC </td>
-            <td>
-                <asp:TextBox ID="txtamountbc" runat="server" AutoPostBack="true" OnTextChanged="txtamountbc_TextChanged" style="width:270px" />
+                
+                 <asp:TextBox ID="txtamountfc" runat="server" onkeyup="BaseCurrencyCalculation();ForeignCurrencyCalculation();"  style="width:270px" />
+                
             </td>
         </tr>
         <tr>
             <td align="left" style="font-size:19px">Exchange Rate </td>
             <td>
-                <asp:TextBox ID="txtexchangerate" runat="server" style="width:270px" />
+                <asp:TextBox ID="txtexchangerate" runat="server" onkeyup="BaseCurrencyCalculation();" style="width:270px" />
+                
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px">Amount </td>
+            <td align="left" style="font-size:19px">Amount in Base Currency  </td>
             <td>
-                <asp:TextBox ID="txtamount" runat="server" style="width:270px" />
+                
+                <asp:TextBox ID="txtamountbc" runat="server" onkeyup="BaseCurrencyCalculation();TaxandTotalamountCalculation();"  style="width:270px" />
             </td>
         </tr>
+        
         <tr>
             <td align="left" style="font-size:19px">Taxable </td>
             <td>
@@ -492,19 +538,19 @@ Quantity:
         <tr>
             <td align="left" style="font-size:19px"><asp:Label ID="lblpercentage" runat="server" Text="Tax Percentage"></asp:Label> </td>
             <td>
-                <asp:TextBox ID="txtpercentage" runat="server" style="width:270px" />
+                <asp:TextBox ID="txtpercentage" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
             </td>
         </tr>
         <tr>
             <td align="left" style="font-size:19px"><asp:Label ID="lbltaxamount" runat="server" Text="TaxAmount"></asp:Label> </td>
             <td>
-                <asp:TextBox ID="txttaxamount" runat="server" style="width:270px" />
+                <asp:TextBox ID="txttaxamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
             </td>
         </tr>
         <tr>
             <td align="left" style="font-size:19px"><asp:Label ID="lbltotalamount" runat="server" Text="Total Amount"></asp:Label> </td>
             <td>
-                <asp:TextBox ID="txttotalamount" runat="server" style="width:270px" />
+                <asp:TextBox ID="txttotalamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
                
             </td>
         </tr>

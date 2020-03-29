@@ -391,15 +391,6 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txtamountfc;
         
         /// <summary>
-        /// txtamountbc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtamountbc;
-        
-        /// <summary>
         /// txtexchangerate control.
         /// </summary>
         /// <remarks>
@@ -409,13 +400,13 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txtexchangerate;
         
         /// <summary>
-        /// txtamount control.
+        /// txtamountbc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtamount;
+        protected global::System.Web.UI.WebControls.TextBox txtamountbc;
         
         /// <summary>
         /// radiotaxable control.

@@ -261,11 +261,7 @@ namespace FinalYearProject
             mpechargedisplay.Show();
         }
 
-        protected void txtamountbc_TextChanged(object sender, EventArgs e)
-        {
-            int fcvalue = Convert.ToInt32(txtamountbc.Text) * Convert.ToInt32(txtexchangerate.Text);
-            txtamountfc.Text = fcvalue.ToString();
-        }
+      
 
        
 
