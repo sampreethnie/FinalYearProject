@@ -70,7 +70,7 @@
     <style type="text/css">
         .modalBackground
         {
-            background-color:black;
+            background-color:blue;
             filter:alpha(opacity=60);
             opacity:0.6;
         }
