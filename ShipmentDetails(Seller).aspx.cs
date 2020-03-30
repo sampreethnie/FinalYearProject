@@ -83,37 +83,16 @@ namespace FinalYearProject
 
             protected void GridViewSeller_RowDataBound(object sender, GridViewRowEventArgs e)
             {
-                if (e.Row.RowType == DataControlRowType.Header)
-                {
-                    e.Row.Cells[2].Text = "ShipmentNumber";
-                    e.Row.Cells[3].Text = "Creation Date";
-                    e.Row.Cells[4].Text = "Customer Name";
-                    e.Row.Cells[5].Text = "Number of Packages";
-                    e.Row.Cells[6].Text = "HAWB";
-                    e.Row.Cells[7].Text = "HAWB Date";
-                    e.Row.Cells[8].Text = "MAWB";
-                    e.Row.Cells[9].Text = "MAWB Date";
-                    e.Row.Cells[10].Text = "Airline";
-                    e.Row.Cells[11].Text = "Flight Number";
-                    e.Row.Cells[12].Text = "ETD";
-                    e.Row.Cells[13].Text = "ETA";
-                    e.Row.Cells[14].Text = "ATD";
-                    e.Row.Cells[15].Text = "ATA";
-                    e.Row.Cells[16].Text = "Delivered";
-                    e.Row.Cells[17].Text = "DeliveryDate";
-                    e.Row.Cells[18].Text = "Received By";
-
                
-                }
                 if(e.Row.RowType == DataControlRowType.DataRow)
                 {
                     
                        
-                      if(e.Row.Cells[16].Text == "Yes")
+                      if(e.Row.Cells[16].Text == "Y")
                       {
                           e.Row.Cells[16].Text="Yes";
                       }
-                      if(e.Row.Cells[16].Text == "No")
+                      if(e.Row.Cells[16].Text == "N")
                       {
                           e.Row.Cells[16].Text = "No";
                       }
@@ -276,7 +255,9 @@ namespace FinalYearProject
 
                GridViewSeller.SelectedRow.Cells[0].Enabled = false;
                GridViewSeller.SelectedRow.Cells[1].Enabled = false;
-           
+            
+
+
                Updatebutton.Visible = false;
           
            

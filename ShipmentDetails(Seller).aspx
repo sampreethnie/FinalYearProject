@@ -167,14 +167,30 @@
 
                 <label style="font-size:17px">Total Count:</label>
                 <asp:Label ID="lbltotalcount" runat="server" Font-Bold="true" Font-Size="17px"></asp:Label>
-                <asp:GridView ID="GridViewSeller"  runat="server" OnRowDataBound="GridViewSeller_RowDataBound" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="shipmentnumber" OnSelectedIndexChanged="GridViewSeller_SelectedIndexChanged" OnRowDeleting ="GridViewSeller_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
+                <asp:GridView ID="GridViewSeller"  runat="server" AutoGenerateColumns="false" OnRowDataBound="GridViewSeller_RowDataBound" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="shipmentnumber" OnSelectedIndexChanged="GridViewSeller_SelectedIndexChanged" OnRowDeleting ="GridViewSeller_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     
                     <Columns>
-                        <asp:CommandField HeaderText="Select" ShowSelectButton="true" />
+                        <asp:CommandField HeaderText="Select"  ShowSelectButton="true" />
                         <asp:CommandField HeaderText="Delete" ShowDeleteButton="true" />
-
+                        <asp:BoundField DataField="shipmentnumber" HeaderText="ShipmentNumber" />
+                        <asp:BoundField DataField="creationdate" HeaderText="CreationDate" />
+                        <asp:BoundField DataField="customer_M_Company_Name" HeaderText="CustomerName" />
+                        <asp:BoundField DataField="numberofpackages" HeaderText="NumberOfPackages" />
+                        <asp:BoundField DataField="hawb" HeaderText="HAWB" />
+                        <asp:BoundField DataField="hawbdate" HeaderText="HAWB Date" />
+                        <asp:BoundField DataField="mawb" HeaderText="MAWB Date" />
+                        <asp:BoundField DataField="mawbdate" HeaderText="MAWB Date" />
+                        <asp:BoundField DataField="airline" HeaderText="Airline" />
+                        <asp:BoundField DataField="flightnumber" HeaderText="FlightNumber" />
+                        <asp:BoundField DataField="etd" HeaderText="ETD" />
+                        <asp:BoundField DataField="eta" HeaderText="ETA" />
+                        <asp:BoundField DataField="atd" HeaderText="ATD" />
+                        <asp:BoundField DataField="ata" HeaderText="ATA" />
+                        <asp:BoundField DataField="delivered" HeaderText="Delivered" />
+                        <asp:BoundField DataField="delivery" HeaderText="DeliveryDate" />
+                        <asp:BoundField DataField="receivedbyname" HeaderText="ReceivedBy" />
                     </Columns>
                     
                     <EditRowStyle BackColor="#999999" />
