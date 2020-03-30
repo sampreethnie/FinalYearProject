@@ -112,33 +112,34 @@
           <label style="font-size:19px;margin-left:20px;margin-right:50px"> Number of packages <br> <asp:TextBox ID="txtnoofpackages" Width="145px"  runat="server"></asp:TextBox> </label>
             
              <label style="font-size:19px;margin-left:20px;margin-right:50px"> HAWB <br> <asp:TextBox ID="txthawb" Width="145px"  runat="server"></asp:TextBox> </label>
-            
-            <label style="font-size:19px;margin-left:20px;margin-right:50px"> HAWB Date * <br > <asp:TextBox ID="txthawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <br /> <br />
+            <label style="font-size:19px;margin-left:20px;margin-right:77px"> HAWB Date * <br > <asp:TextBox ID="txthawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarhawbdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txthawbdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
-            <label style="font-size:19px"> MAWB <br> <asp:TextBox ID="txtmawb" Width="145px" runat="server"></asp:TextBox> </label>
+            <label style="font-size:19px;margin-right:50px"> MAWB <br> <asp:TextBox ID="txtmawb" Width="145px" runat="server"></asp:TextBox> </label>
            
 
-            <br /> <br /> <br /> <br /> 
+            
             
 
             
              
             
-            <label style="font-size:19px;margin-left:20px;margin-right:50px"> MAWB Date * <br > <asp:TextBox ID="txtmawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <label style="font-size:19px;margin-left:20px;margin-right:66px"> MAWB Date * <br > <asp:TextBox ID="txtmawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtendermawbdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtmawbdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
-            <label style="font-size:19px;margin-left:20px;margin-right:50px"> Airline <br> <asp:TextBox ID="txtairline" Width="145px" runat="server"></asp:TextBox> </label>
+            <label style="font-size:19px;margin-left:20px;margin-right:73px"> Airline <br> <asp:TextBox ID="txtairline" Width="145px" runat="server"></asp:TextBox> </label>
             
             <label style="font-size:19px;margin-left:20px;margin-right:50px"> FlightNumber <br> <asp:TextBox ID="txtflightnumber" Width="145px" runat="server"></asp:TextBox> </label>
-            
-            <label style="font-size:19px;margin-left:20px;margin-right:50px"> ETD * <br > <asp:TextBox ID="txtetd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <br />
+                <br />
+            <label style="font-size:19px;margin-left:20px;margin-right:59px"> ETD * <br > <asp:TextBox ID="txtetd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderetd" PopupButtonID="imgPopup" runat="server" TargetControlID="txtetd" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
              <label style="font-size:19px;margin-left:20px;margin-right:50px"> ETA * <br > <asp:TextBox ID="txteta" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtendereta" PopupButtonID="imgPopup" OnClientDateSelectionChanged="AppendTime" runat="server" TargetControlID="txteta" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
-             <label style="font-size:19px;margin-left:20px;margin-right:50px"> ATD * <br > <asp:TextBox ID="txtatd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+             <label style="font-size:19px;margin-left:20px;margin-right:80px"> ATD * <br > <asp:TextBox ID="txtatd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderatd" PopupButtonID="imgPopup" OnClientDateSelectionChanged="AppendTime" runat="server" TargetControlID="txtatd" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
              <label style="font-size:19px"> ATA * <br > <asp:TextBox ID="txtata" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
