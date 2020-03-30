@@ -139,7 +139,7 @@
              <label style="font-size:19px;margin-left:20px;margin-right:50px"> ETA * <br > <asp:TextBox ID="txteta" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtendereta" PopupButtonID="imgPopup" OnClientDateSelectionChanged="AppendTime" runat="server" TargetControlID="txteta" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
-             <label style="font-size:19px;margin-left:20px;margin-right:80px"> ATD * <br > <asp:TextBox ID="txtatd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+             <label style="font-size:19px;margin-left:20px;margin-right:80px"> ATD  <br > <asp:TextBox ID="txtatd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderatd" PopupButtonID="imgPopup" OnClientDateSelectionChanged="AppendTime" runat="server" TargetControlID="txtatd" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
              <label style="font-size:19px"> ATA * <br > <asp:TextBox ID="txtata" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
