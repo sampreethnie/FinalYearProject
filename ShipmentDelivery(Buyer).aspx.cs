@@ -199,31 +199,7 @@ namespace FinalYearProject
         }
         protected void GridViewBuyer_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                e.Row.Cells[2].Text = "BuyerID";
-                e.Row.Cells[3].Text = "ShipmentNumber";
-                e.Row.Cells[4].Text = "Creation Date";
-                e.Row.Cells[5].Text = "Customer Name";
-                e.Row.Cells[6].Text = "Number of Packages";
-                e.Row.Cells[7].Text = "HAWB";
-                e.Row.Cells[8].Text = "HAWB Date";
-                e.Row.Cells[9].Text = "MAWB";
-                e.Row.Cells[10].Text = "MAWB Date";
-                e.Row.Cells[11].Text = "Airline";
-                e.Row.Cells[12].Text = "Flight Number";
-                e.Row.Cells[13].Text = "ETD";
-                e.Row.Cells[14].Text = "ETA";
-                e.Row.Cells[15].Text = "ATD";
-                e.Row.Cells[16].Text = "ATA";
-                e.Row.Cells[17].Text = "Delivered";
-                e.Row.Cells[18].Text = "DeliveryDate";
-                e.Row.Cells[19].Text = "Received By";
-                e.Row.Cells[20].Text = "BuyerReceived";
-                e.Row.Cells[21].Text = "BuyerReceivedByName";
-                e.Row.Cells[22].Text = "BuyerDeliveryDate";
-
-            }
+           
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
@@ -266,7 +242,7 @@ namespace FinalYearProject
             txtatd.Text = row.Cells[15].Text;
             txtata.Text = row.Cells[16].Text;
             bool result = false;
-            if (row.Cells[17].Text == "Y")
+            if (row.Cells[17].Text == "Yes")
             {
                 result = true;
                 delivery.Checked = true;
@@ -281,12 +257,12 @@ namespace FinalYearProject
             txtdeliverydate.Text = row.Cells[18].Text;
             txtsellerreceivedby.Text = row.Cells[19].Text;
             bool result1 = false; ;
-            if(row.Cells[20].Text == "Y")
+            if(row.Cells[20].Text == "Yes")
             {
                 result1 = true;
                 received.Checked = true;
             }
-            if(row.Cells[20].Text=="N")
+            if(row.Cells[20].Text=="No")
             {
                 result1 = false;
                 received.Checked = false;
@@ -311,6 +287,97 @@ namespace FinalYearProject
 
 
 
+
+        }
+        protected void Updatebutton1_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(_ConnStr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("update ShipmentDeliveryBuyer set sellershipmentnumber=@sellershipmentnumber,sellercreationdate=@sellercreationdate,sellercustomer=@sellercustomer,sellernumberofpackages=@sellernumberofpackages,sellerhawb=@sellerhawb,sellerhawbdate=@sellerhawbdate,sellermawb=@sellermawb,sellermawbdate=@sellermawbdate,sellerairline=@sellerairline,sellerflightnumber=@sellerflightnumber,selleretd=@selleretd,sellereta=@sellereta,selleratd=@selleratd,sellerata=@sellerata,sellerdelivered=@sellerdelivered,sellerdeliverydate=@sellerdeliverydate,sellerreceivedbyname=@sellerreceivedbyname,buyerreceived=@buyerreceived,buyerreceivedbyname=@buyerreceivedbyname,buyerdeliverydate=@buyerdeliverydate where buyerid = @buyerid", con);
+            
+            cmd.Parameters.AddWithValue("@sellershipmentnumber", txtshipmentnumber.Text);
+            cmd.Parameters.AddWithValue("@sellercreationdate", Convert.ToDateTime(txtcreationdate.Text));
+            cmd.Parameters.AddWithValue("@sellercustomer", dropdowncustomer.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@sellernumberofpackages", txtnoofpackages.Text);
+            cmd.Parameters.AddWithValue("@sellerhawb", txthawb.Text);
+            cmd.Parameters.AddWithValue("@sellerhawbdate", Convert.ToDateTime(txthawbdate.Text));
+            cmd.Parameters.AddWithValue("@sellermawb", txtmawb.Text);
+            cmd.Parameters.AddWithValue("@sellermawbdate", Convert.ToDateTime(txtmawbdate.Text));
+            cmd.Parameters.AddWithValue("@sellerairline", txtairline.Text);
+            cmd.Parameters.AddWithValue("@sellerflightnumber", txtflightnumber.Text);
+            cmd.Parameters.AddWithValue("@selleretd", Convert.ToDateTime(txtetd.Text));
+            cmd.Parameters.AddWithValue("@sellereta", Convert.ToDateTime(txteta.Text));
+            cmd.Parameters.AddWithValue("@selleratd", Convert.ToDateTime(txtatd.Text));
+            cmd.Parameters.AddWithValue("@sellerata", Convert.ToDateTime(txtata.Text));
+            cmd.Parameters.AddWithValue("@sellerdelivered", delivery.Text);
+            cmd.Parameters.AddWithValue("@sellerdeliverydate", Convert.ToDateTime(txtdeliverydate.Text));
+            cmd.Parameters.AddWithValue("@sellerreceivedbyname", txtsellerreceivedby.Text);
+            cmd.Parameters.AddWithValue("@buyerreceived", received.Text);
+            cmd.Parameters.AddWithValue("@buyerreceivedbyname", txtbuyerreceivedbyname.Text);
+            cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
+            
+
+            cmd.ExecuteNonQuery();
+            GridViewBuyer.EditIndex = -1;
+            BindGridView();
+            Updatebutton.Visible = false;
+           
+
+        }
+        protected void Submitbutton_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(_ConnStr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("update ShipmentDeliveryBuyer set sellershipmentnumber=@sellershipmentnumber creationdate=@creationdate,customer_M_Company_Name=@customer_M_Company_Name,numberofpackages=@numberofpackages,hawb=@hawb,hawbdate=@hawbdate,mawb=@mawb,mawbdate=@mawbdate,airline=@airline,flightnumber=@flightnumber,etd=@etd,eta=@eta,atd=@atd,ata=@ata,delivered=@delivered,delivery=@delivery,receivedbyname=@receivedbyname where shipmentnumber=@shipmentnumber", con);
+            cmd.Parameters.AddWithValue("@buyerid", txtbuyerid.Text);
+            cmd.Parameters.AddWithValue("@sellershipmentnumber", txtshipmentnumber.Text);
+            cmd.Parameters.AddWithValue("@sellercreationdate", Convert.ToDateTime(txtcreationdate.Text));
+            cmd.Parameters.AddWithValue("@sellercustomer", dropdowncustomer.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@sellernumberofpackages", txtnoofpackages.Text);
+            cmd.Parameters.AddWithValue("@sellerhawb", txthawb.Text);
+            cmd.Parameters.AddWithValue("@sellerhawbdate", Convert.ToDateTime(txthawbdate.Text));
+            cmd.Parameters.AddWithValue("@sellermawb", txtmawb.Text);
+            cmd.Parameters.AddWithValue("@sellermawbdate", Convert.ToDateTime(txtmawbdate.Text));
+            cmd.Parameters.AddWithValue("@sellerairline", txtairline.Text);
+            cmd.Parameters.AddWithValue("@sellerflightnumber", txtflightnumber.Text);
+            cmd.Parameters.AddWithValue("@selleretd", Convert.ToDateTime(txtetd.Text));
+            cmd.Parameters.AddWithValue("@sellereta", Convert.ToDateTime(txteta.Text));
+            cmd.Parameters.AddWithValue("@selleratd", Convert.ToDateTime(txtatd.Text));
+            cmd.Parameters.AddWithValue("@sellerata", Convert.ToDateTime(txtata.Text));
+            cmd.Parameters.AddWithValue("@sellerdelivered", delivery);
+            cmd.Parameters.AddWithValue("@sellerdeliverydate", Convert.ToDateTime(txtdeliverydate.Text));
+            cmd.Parameters.AddWithValue("@sellerreceivedbyname", txtsellerreceivedby.Text);
+            cmd.Parameters.AddWithValue("@buyerreceived", received);
+            cmd.Parameters.AddWithValue("@buyerreceivedbyname", txtbuyerreceivedbyname.Text);
+            cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
+
+
+            cmd.ExecuteNonQuery();
+
+            BindGridView();
+
+
+
+
+            GridViewBuyer.SelectedRow.Cells[0].Enabled = false;
+            GridViewBuyer.SelectedRow.Cells[1].Enabled = false;
+
+
+
+            Updatebutton.Visible = false;
+
+
+
+
+
+
+        }
+        protected void Cancelbutton_Click(object sender, EventArgs e)
+        {
+            clear();
+
+            Addbutton.Visible = true;
+            Updatebutton.Visible = true;
 
         }
     }

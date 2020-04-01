@@ -92,7 +92,7 @@ namespace FinalYearProject
         #region[Update User record into database]
         public bool UpdateCurrency(CurrencyEntity user)
         {
-            String updateQuery = @"UPDATE [M_Currency] SET [M_Currency_Name] = @M_Currency_Name ,[M_Currency_Sname] = @M_Currency_Sname Where[M_Currency_Code] = @M_Currency_Code";
+            String updateQuery = @"UPDATE [M_Currency] SET [M_Currency_Name] = @M_Currency_Name ,[M_Currency_Sname] = @M_Currency_Sname Where [M_Currency_Code] = @M_Currency_Code";
             using (SqlConnection conn = new SqlConnection())
             {
                 conn.ConnectionString = _ConnStr;

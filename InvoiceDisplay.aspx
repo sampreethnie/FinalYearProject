@@ -323,7 +323,9 @@ CancelControlID="btnCancel" BackgroundCssClass="modalBackground">
 <td colspan="2" style=" height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Edit Invoice</td>
     
 </tr>
-
+    <tr>
+        <td> <asp:Label ID="lblchargeinvoice" runat="server" Visible="false"></asp:Label></td>
+    </tr>
 <tr>
 <td align="left" style="font-size:19px">
 InvoiceNumber:
@@ -361,7 +363,7 @@ Description:
             Is delivered?
 </td>
 <td>
-    <asp:CheckBox ID="Isdeliverededitpopup" runat="server" />
+    <asp:CheckBox ID="Isdeliverededitpopup"  runat="server" />
 </td>
         <tr>
             <td align="left" style="font-size:19px">Currency: </td>
@@ -399,7 +401,7 @@ Description:
                     <div class="panel-body">
                         <div>
                             <asp:Button ID="AddbuttonCharge" runat="server" Text="Add" style="width:80px" OnClick="AddbuttonCharge_Click" />
-                             <asp:GridView ID="gvChargeInvoice" runat="server" GridLines="None" AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
+                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" GridLines="None" AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -407,13 +409,13 @@ Description:
 <AlternatingRowStyle BackColor="White" />
 <Columns>
 
-    
+<asp:BoundField DataField="TD_INVOICE_SLNO" HeaderText="InvoiceSlno" Visible="false" />    
 <asp:BoundField DataField="TD_INVOICE_TMSLNO" HeaderText="Invoice Number" />
-<asp:BoundField DataField="TD_INVOICE_CHARGESLNO" HeaderText="Charge" />
+<asp:BoundField DataField="TD_INVOICE_DESCRIPTION" HeaderText="Description" />
 <asp:BoundField DataField="TD_INVOICE_BASIS" HeaderText="Charge Basis" />
 <asp:BoundField DataField="TD_INVOICE_QTY" HeaderText="Quantity" />
 <asp:BoundField DataField="TD_INVOICE_RATE" HeaderText="Unit Rate" />
-<asp:BoundField DataField="TD_INVOICE_CURRENCY" HeaderText="Currency" />
+<asp:BoundField DataField="M_Currency_Name" HeaderText="Currency" />
 <asp:BoundField DataField="TD_INVOICE_AMOUNTFC" HeaderText="Amount in Foreign Currency" />
 <asp:BoundField DataField="TD_INVOICE_EXCHRATE" HeaderText="ExchangeRate" />
 <asp:BoundField DataField="TD_INVOICE_AMOUNTBC" HeaderText="Amount in Base Currency" />
@@ -425,7 +427,7 @@ Description:
     
     <asp:TemplateField HeaderText="Edit">
 <ItemTemplate>
-<asp:ImageButton ID="imgbtn3" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" />
+<asp:ImageButton ID="imgbtnCharge" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" OnClick="ImagebuttonCharge_Click" />
     </ItemTemplate>
     </asp:TemplateField>
 
@@ -557,7 +559,7 @@ Quantity:
         
             <tr>
                 <td>
-                    <asp:Button ID="btnChargeAdd" runat="server" CommandName="Add" style="width:70px; margin-right:50px;margin-left:50px;height:40px" Text="Add" />
+                    <asp:Button ID="btnChargeAdd" runat="server" CommandName="Add" style="width:70px; margin-right:50px;margin-left:50px;height:40px" Text="Add" OnClick="btnChargeAdd_Click" />
                 </td>
                 <td>
                     <asp:Button ID="btnChargeCancel" runat="server" style="width:70px;height:40px" Text="Cancel" />
@@ -568,6 +570,7 @@ Quantity:
                 
                
             </asp:Panel>
+
             
           </div>
         

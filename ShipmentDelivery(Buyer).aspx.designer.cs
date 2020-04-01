@@ -31,6 +31,15 @@ namespace FinalYearProject {
         protected global::System.Web.UI.ScriptManager ScriptManager;
         
         /// <summary>
+        /// txtbuyerid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtbuyerid;
+        
+        /// <summary>
         /// dropdownshipmentnumber control.
         /// </summary>
         /// <remarks>
@@ -308,6 +317,33 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Addbutton;
+        
+        /// <summary>
+        /// Updatebutton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Updatebutton;
+        
+        /// <summary>
+        /// Submitbutton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Submitbutton;
+        
+        /// <summary>
+        /// Cancelbutton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Cancelbutton;
         
         /// <summary>
         /// lbltotalcount control.
