@@ -706,13 +706,13 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox TextBox10;
         
         /// <summary>
-        /// Button32 control.
+        /// Button20 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button32;
+        protected global::System.Web.UI.WebControls.Button Button20;
         
         /// <summary>
         /// Button3 control.
