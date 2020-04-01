@@ -692,7 +692,7 @@ Quantity:
         
             <tr>
                 <td>
-                    <asp:Button ID="Button85" runat="server" CommandName="Add" style="width:70px; margin-right:50px;margin-left:50px;height:40px" Text="Add" OnClick="btnChargeAdd_Click" />
+                    <asp:Button ID="Button86" runat="server" CommandName="Add" style="width:70px; margin-right:50px;margin-left:50px;height:40px" Text="Add" OnClick="btnChargeAdd_Click" />
                 </td>
                 <td>
                     <asp:Button ID="Button3" runat="server" style="width:70px;height:40px" Text="Cancel" />
