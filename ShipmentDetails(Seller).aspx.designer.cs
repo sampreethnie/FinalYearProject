@@ -40,6 +40,15 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txtshipmentnumber;
         
         /// <summary>
+        /// rfvshipmentnumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvshipmentnumber;
+        
+        /// <summary>
         /// txtcreationdate control.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace FinalYearProject {
         protected global::AjaxControlToolkit.CalendarExtender Calendarcreationdate;
         
         /// <summary>
+        /// rfvcreationdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvcreationdate;
+        
+        /// <summary>
         /// dropdowncustomer control.
         /// </summary>
         /// <remarks>
@@ -65,6 +83,15 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropdowncustomer;
+        
+        /// <summary>
+        /// rfvcustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvcustomer;
         
         /// <summary>
         /// txtnoofpackages control.
@@ -76,6 +103,51 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txtnoofpackages;
         
         /// <summary>
+        /// rfvnoofpackages control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvnoofpackages;
+        
+        /// <summary>
+        /// txtgrossweight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtgrossweight;
+        
+        /// <summary>
+        /// rfvgrossweight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvgrossweight;
+        
+        /// <summary>
+        /// txtchargeableweight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtchargeableweight;
+        
+        /// <summary>
+        /// rfvchargeableweight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvchargeableweight;
+        
+        /// <summary>
         /// txthawb control.
         /// </summary>
         /// <remarks>
@@ -83,6 +155,15 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txthawb;
+        
+        /// <summary>
+        /// rfvhawb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvhawb;
         
         /// <summary>
         /// txthawbdate control.
@@ -103,6 +184,15 @@ namespace FinalYearProject {
         protected global::AjaxControlToolkit.CalendarExtender Calendarhawbdate;
         
         /// <summary>
+        /// rfvhawbdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvhawbdate;
+        
+        /// <summary>
         /// txtmawb control.
         /// </summary>
         /// <remarks>
@@ -110,6 +200,15 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtmawb;
+        
+        /// <summary>
+        /// rfvmawb control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvmawb;
         
         /// <summary>
         /// txtmawbdate control.
@@ -130,6 +229,15 @@ namespace FinalYearProject {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtendermawbdate;
         
         /// <summary>
+        /// rfvmawbdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvmawbdate;
+        
+        /// <summary>
         /// txtairline control.
         /// </summary>
         /// <remarks>
@@ -139,6 +247,15 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txtairline;
         
         /// <summary>
+        /// rfvairline control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvairline;
+        
+        /// <summary>
         /// txtflightnumber control.
         /// </summary>
         /// <remarks>
@@ -146,6 +263,15 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtflightnumber;
+        
+        /// <summary>
+        /// rfvflightnumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvflightnumber;
         
         /// <summary>
         /// txtetd control.
@@ -166,6 +292,15 @@ namespace FinalYearProject {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderetd;
         
         /// <summary>
+        /// rfvetd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvetd;
+        
+        /// <summary>
         /// txteta control.
         /// </summary>
         /// <remarks>
@@ -182,6 +317,15 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtendereta;
+        
+        /// <summary>
+        /// rfveta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfveta;
         
         /// <summary>
         /// txtatd control.
@@ -256,6 +400,24 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txtreceivedby;
         
         /// <summary>
+        /// txtreceivermobilenumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtreceivermobilenumber;
+        
+        /// <summary>
+        /// txtreceivermailid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtreceivermailid;
+        
+        /// <summary>
         /// Addbutton control.
         /// </summary>
         /// <remarks>
@@ -292,6 +454,15 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.Button Cancelbutton;
         
         /// <summary>
+        /// btnmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnmail;
+        
+        /// <summary>
         /// lbltotalcount control.
         /// </summary>
         /// <remarks>
@@ -299,6 +470,33 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbltotalcount;
+        
+        /// <summary>
+        /// txtSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        
+        /// <summary>
+        /// btnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnSearch;
+        
+        /// <summary>
+        /// btnRefresh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnRefresh;
         
         /// <summary>
         /// GridViewSeller control.

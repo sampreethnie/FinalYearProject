@@ -37,13 +37,19 @@
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
     <a href="#" class="dropdown-toggle" class="top-menu pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" style="width:270px">
     <li>
-        <a href=""><i class="fa fa-fw fa-gear"></i> Settings</a>
+        <div style="text-align:left">
+        <a ><asp:Label ID="lblusername" style="width:30px;" runat="server"/></a>
+            </div>
+        <br />
+        <div style="text-align:left">
+        <a><asp:Label ID="lblcompanyname" style="width:30px" runat="server"></asp:Label></a>
+            </div>
       </li>
       <li class="divider"></li>
       <li>
-        <a href=""><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+        <a ><asp:Button ID="btnlogout" runat="server" style="width:70px;height:40px;color:black;background-color:orange;border-color:chartreuse;border-radius:inherit" Text="Logout" OnClick="btnlogout_Click" /></a>
       </li>
                  
 			    </ul>

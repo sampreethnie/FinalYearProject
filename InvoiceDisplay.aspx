@@ -180,7 +180,7 @@
                                                <div>
     ShipmentNumber : <asp:Label ID="Label1" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
        CustomerName :  <asp:Label ID="Label2" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
-        Date :  <asp:Label ID="Label3" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+        Date :  <asp:Label ID="Label3" runat="server" Text="Label" Visible="false" style="font-size:large"></asp:Label> <br />
         
 
        </div>
@@ -204,7 +204,7 @@
                                   <div id="collapseTwo" class="panel panel-collapse" role="tabpanel" aria-labelledby="headingTwo">
                                       <div class="panel-body">
                                           <div>
-                                              <asp:Button ID="Addbutton" runat="server" Text="Add3" style="width:80px" OnClick="Addbutton_Click" />
+                                              <asp:Button ID="Addbutton" runat="server" Text="Add" style="width:80px" OnClick="Addbutton_Click" />
                                               <asp:GridView ID="InvoiceGridView" runat="server" GridLines="None" AllowPaging="true" DataKeyNames="TM_INVOICE_Slno" OnRowDataBound="InvoiceDisplay_RowDataBound" AutoGenerateColumns="false">
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -273,7 +273,7 @@ Shipment Reference Number:
 Customer:
 </td>
 <td>
-<asp:DropDownList ID="Customer" runat="server" style="width:270px"></asp:DropDownList>
+<asp:DropDownList ID="Customer" runat="server" AutoPostBack="true" style="width:270px" OnSelectedIndexChanged="Customer_SelectedIndexChanged"></asp:DropDownList>
 </td>
 </tr>
 <tr>
@@ -347,7 +347,7 @@ Shipment Reference Number:
 Customer:
 </td>
 <td>
-<asp:DropDownList ID="Customereditpopup" runat="server" style="width:270px"></asp:DropDownList>
+<asp:DropDownList ID="Customereditdropdown" runat="server" style="width:270px" OnSelectedIndexChanged="Customereditdropdown_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
 </td>
 </tr>
 <tr>
@@ -432,7 +432,7 @@ Description:
     </asp:TemplateField>
 
 </Columns>
-                                              </asp:GridView> 
+ </asp:GridView> 
                         </div>
                     </div>
                 </div>
@@ -579,6 +579,9 @@ Quantity:
     
 </tr>
                     <tr>
+                        <td>
+                            <asp:Label ID="lblchargeedit" runat="server" Text="editcharge" Visible="false"></asp:Label>
+                        </td>
 <td align="left" style="font-size:19px">
 InvoiceNumber:
 </td>
@@ -591,7 +594,7 @@ InvoiceNumber:
 ChargeBasis :
 </td>
 <td>
-<asp:DropDownList ID="dropdowneditcharge" runat="server" AutoPostBack="true" OnSelectedIndexChanged="chargebasisdropdown_SelectedIndexChanged" style="width:270px" >
+<asp:DropDownList ID="dropdowneditcharge" runat="server" AutoPostBack="true" OnSelectedIndexChanged="chargebasiseditdropdown_SelectedIndexChanged" style="width:270px" >
     <asp:ListItem Text="GrWt" Value="G"></asp:ListItem>
     <asp:ListItem Text="ChWt" Value="C"></asp:ListItem>
     <asp:ListItem Text="Shipment" Value="S"></asp:ListItem>
@@ -612,7 +615,7 @@ Description:
 Quantity:
 </td>
 <td>
-<asp:TextBox ID="TextBox2" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px"/>
+<asp:TextBox ID="txteditquantity" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px"/>
 </td>
 </tr>
     <tr>
@@ -623,27 +626,27 @@ Quantity:
         <tr>
             <td align="left" style="font-size:19px">Currency: </td>
             <td>
-                <asp:DropDownList ID="DropDownList3" runat="server" style="width:270px" />
+                <asp:DropDownList ID="dropdowneditcurrency" runat="server" style="width:270px" />
             </td>
         </tr>
         <tr>
             <td align="left" style="font-size:19px">Rate </td>
             <td>
-                <asp:TextBox ID="TextBox3" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px" />
+                <asp:TextBox ID="txteditrate" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px" />
             </td>
         </tr>
         <tr>
             <td align="left" style="font-size:19px">Amount in Foreign Currency </td>
             <td>
                 
-                 <asp:TextBox ID="TextBox4" runat="server" onkeyup="BaseCurrencyCalculation();ForeignCurrencyCalculation();"  style="width:270px" />
+                 <asp:TextBox ID="txteditamountfc" runat="server" onkeyup="BaseCurrencyCalculation();ForeignCurrencyCalculation();"  style="width:270px" />
                 
             </td>
         </tr>
         <tr>
             <td align="left" style="font-size:19px">Exchange Rate </td>
             <td>
-                <asp:TextBox ID="TextBox5" runat="server" onkeyup="BaseCurrencyCalculation();" style="width:270px" />
+                <asp:TextBox ID="txteditexchangerate" runat="server" onkeyup="BaseCurrencyCalculation();" style="width:270px" />
                 
             </td>
         </tr>
@@ -651,51 +654,51 @@ Quantity:
             <td align="left" style="font-size:19px">Amount in Base Currency  </td>
             <td>
                 
-                <asp:TextBox ID="TextBox6" runat="server" onkeyup="BaseCurrencyCalculation();TaxandTotalamountCalculation();"  style="width:270px" />
+                <asp:TextBox ID="txteditamountbc" runat="server" onkeyup="BaseCurrencyCalculation();TaxandTotalamountCalculation();"  style="width:270px" />
             </td>
         </tr>
         
         <tr>
             <td align="left" style="font-size:19px">Taxable </td>
             <td>
-                <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="true" OnSelectedIndexChanged="radiotaxable_SelectedIndexChanged"  style="width:270px">
+                <asp:RadioButtonList ID="radioedittaxable" runat="server" AutoPostBack="true" OnSelectedIndexChanged="radiotaxableedit_SelectedIndexChanged"  style="width:270px">
                     <asp:ListItem Text="Yes" Value="Y"></asp:ListItem>
                     <asp:ListItem Text="No" Value="N"></asp:ListItem>
                     </asp:RadioButtonList>
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="Label4" runat="server" Text="TaxName"></asp:Label> </td>
+            <td align="left" style="font-size:19px"><asp:Label ID="lbledittaxname" runat="server" Text="TaxName"></asp:Label> </td>
             <td>
-                <asp:TextBox ID="TextBox7" runat="server" style="width:270px" />
+                <asp:TextBox ID="txtedittaxname" runat="server" style="width:270px" />
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="Label5" runat="server" Text="Tax Percentage"></asp:Label> </td>
+            <td align="left" style="font-size:19px"><asp:Label ID="lbltaxpercentage" runat="server" Text="Tax Percentage"></asp:Label> </td>
             <td>
-                <asp:TextBox ID="TextBox8" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+                <asp:TextBox ID="txtedittaxpercentage" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="Label6" runat="server" Text="TaxAmount"></asp:Label> </td>
+            <td align="left" style="font-size:19px"><asp:Label ID="lbledittaxamount" runat="server" Text="TaxAmount"></asp:Label> </td>
             <td>
-                <asp:TextBox ID="TextBox9" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+                <asp:TextBox ID="txtedittaxamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="Label7" runat="server" Text="Total Amount"></asp:Label> </td>
+            <td align="left" style="font-size:19px"><asp:Label ID="lbledittotalamount" runat="server" Text="Total Amount"></asp:Label> </td>
             <td>
-                <asp:TextBox ID="TextBox10" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+                <asp:TextBox ID="txtedittotalamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
                
             </td>
         </tr>
         
             <tr>
                 <td>
-                    <asp:Button ID="Button86" runat="server" CommandName="Add" style="width:70px; margin-right:50px;margin-left:50px;height:40px" Text="Add" OnClick="btnChargeAdd_Click" />
+                    <asp:Button ID="btnEdit" runat="server" CommandName="Save" style="width:70px; margin-right:50px;margin-left:50px;height:40px" Text="Update" OnClick="btnUpdateCharge_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="Button3" runat="server" style="width:70px;height:40px" Text="Cancel" />
+                    <asp:Button ID="btnEditCancel" runat="server" style="width:70px;height:40px" Text="Cancel" />
                 </td>
             </tr>
                    
@@ -704,7 +707,14 @@ Quantity:
                
             </asp:Panel>
 
+            <br />
+            <br />
+            <asp:Label ID="lbluploadfile" runat="server" Text="Upload File" style="font-size:10px"></asp:Label>
+            <br />
+            <asp:FileUpload ID="invoiceupload" runat="server" /> &nbsp;&nbsp; <asp:Button ID="btnUpload" runat="server" style="width:90px" OnClick="btnUpload_Click" Text="UploadFile" />
+            <br />
             
+            <asp:Label ID="lblMessage" runat="server" Font-Bold="true" style="font-size:30px"></asp:Label>
           </div>
         
     </form>

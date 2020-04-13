@@ -74,8 +74,7 @@
                                  <button type="button" class="btn btn-default">
                     <span data-bind="label">Seller</span>
                 </button>
-                                 <asp:Button ID="buyer" runat="server" Width="30px" Text="BUYER" />
-                                 <asp:Button ID="seller" runat="server" Width="30px" Text="SELLER" />
+                               
                                  </div>
         </div> 
             </nav>

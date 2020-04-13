@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShipmentDetails(Seller).aspx.cs" Inherits="FinalYearProject.ShipmentDetails_Seller_" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShipmentDetails(Seller).aspx.cs" EnableEventValidation = "false" Inherits="FinalYearProject.ShipmentDetails_Seller_" %>
 <%@Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <!DOCTYPE html>
 
@@ -102,73 +102,85 @@
             <div >
             
             
-            <label for="txtshipmentnumber" style="font-size:19px;margin-left:20px;margin-right:50px"> Shipment number <br> <asp:TextBox ID="txtshipmentnumber" Enabled="false"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
-           
-            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creationdate * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <label for="txtshipmentnumber" style="font-size:19px;margin-left:20px;margin-right:50px"> Shipment Number* <br> <asp:TextBox ID="txtshipmentnumber" Enabled="false"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
+           <asp:RequiredFieldValidator ID="rfvshipmentnumber" ControlToValidate="txtshipmentnumber" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarcreationdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtcreationdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-             
-            <label style="font-size:19px;margin-left:20px;margin-right:50px">Customer <br> <asp:DropDownList ID="dropdowncustomer" Height="27px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
-            
-          <label style="font-size:19px;margin-left:20px;margin-right:50px"> Number of packages <br> <asp:TextBox ID="txtnoofpackages" Width="145px"  runat="server"></asp:TextBox> </label>
-            
-             <label style="font-size:19px;margin-left:20px;margin-right:50px"> HAWB <br> <asp:TextBox ID="txthawb" Width="145px"  runat="server"></asp:TextBox> </label>
-            <br /> <br />
-            <label style="font-size:19px;margin-left:20px;margin-right:77px"> HAWB Date * <br > <asp:TextBox ID="txthawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+             <asp:RequiredFieldValidator ID="rfvcreationdate" ControlToValidate="txtcreationdate" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px">Customer* <br> <asp:DropDownList ID="dropdowncustomer" Height="30px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
+            <asp:RequiredFieldValidator ID="rfvcustomer" ControlToValidate="dropdowncustomer" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                <br /> <br />
+          <label style="font-size:19px;margin-left:20px;margin-right:35px"> Number of packages* <br> <asp:TextBox ID="txtnoofpackages" Width="145px"  runat="server"></asp:TextBox> </label>
+          <asp:RequiredFieldValidator ID="rfvnoofpackages" ControlToValidate="txtnoofpackages" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                 
+                 <label style="font-size:19px;margin-left:20px;margin-right:51px"> Gross Weight* <br> <asp:TextBox ID="txtgrossweight" runat="server" Width="145px"></asp:TextBox> </label>
+                <asp:RequiredFieldValidator ID="rfvgrossweight" ControlToValidate="txtgrossweight" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                <label style="font-size:19px;margin-left:20px;margin-right:50px"> Chargeable Weight* <br> <asp:TextBox ID="txtchargeableweight" runat="server" Width="145px"></asp:TextBox> </label>
+                <asp:RequiredFieldValidator ID="rfvchargeableweight" ControlToValidate="txtchargeableweight" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                <br /> <br />
+             <label style="font-size:19px;margin-left:20px;margin-right:66px"> HAWB* <br> <asp:TextBox ID="txthawb" Width="145px"  runat="server"></asp:TextBox> </label>
+            <asp:RequiredFieldValidator ID="rfvhawb" ControlToValidate="txthawb" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+            <label style="font-size:19px;margin-left:20px;margin-right:71px"> HAWB Date * <br > <asp:TextBox ID="txthawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarhawbdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txthawbdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-             
-            <label style="font-size:19px;margin-right:50px"> MAWB <br> <asp:TextBox ID="txtmawb" Width="145px" runat="server"></asp:TextBox> </label>
-           
+             <asp:RequiredFieldValidator ID="rfvhawbdate" ControlToValidate="txthawbdate" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+            <label style="font-size:19px;margin-right:50px"> MAWB* <br> <asp:TextBox ID="txtmawb" Width="145px" runat="server"></asp:TextBox> </label>
+           <asp:RequiredFieldValidator ID="rfvmawb" ControlToValidate="txtmawb" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+               <label style="font-size:19px;margin-left:20px;margin-right:66px"> MAWB Date * <br > <asp:TextBox ID="txtmawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
 
-            
-            
-
-            
-             
-            
-            <label style="font-size:19px;margin-left:20px;margin-right:66px"> MAWB Date * <br > <asp:TextBox ID="txtmawbdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtendermawbdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtmawbdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-             
-            <label style="font-size:19px;margin-left:20px;margin-right:73px"> Airline <br> <asp:TextBox ID="txtairline" Width="145px" runat="server"></asp:TextBox> </label>
-            
-            <label style="font-size:19px;margin-left:20px;margin-right:50px"> FlightNumber <br> <asp:TextBox ID="txtflightnumber" Width="145px" runat="server"></asp:TextBox> </label>
-            <br />
-                <br />
-            <label style="font-size:19px;margin-left:20px;margin-right:59px"> ETD * <br > <asp:TextBox ID="txtetd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+             <asp:RequiredFieldValidator ID="rfvmawbdate" ControlToValidate="txtmawbdate" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                <br /> <br />
+            <label style="font-size:19px;margin-left:20px;margin-right:66px"> Airline * <br> <asp:TextBox ID="txtairline" Width="145px" runat="server"></asp:TextBox> </label>
+            <asp:RequiredFieldValidator ID="rfvairline" ControlToValidate="txtairline" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px"> FlightNumber * <br> <asp:TextBox ID="txtflightnumber" Width="145px" runat="server"></asp:TextBox> </label>
+           <asp:RequiredFieldValidator ID="rfvflightnumber" ControlToValidate="txtflightnumber" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px"> ETD * <br > <asp:TextBox ID="txtetd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderetd" PopupButtonID="imgPopup" runat="server" TargetControlID="txtetd" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-             
+             <asp:RequiredFieldValidator ID="rfvetd" ControlToValidate="txtetd" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
              <label style="font-size:19px;margin-left:20px;margin-right:50px"> ETA * <br > <asp:TextBox ID="txteta" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtendereta" PopupButtonID="imgPopup" OnClientDateSelectionChanged="AppendTime" runat="server" TargetControlID="txteta" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-             
-             <label style="font-size:19px;margin-left:20px;margin-right:80px"> ATD  <br > <asp:TextBox ID="txtatd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+          <asp:RequiredFieldValidator ID="rfveta" ControlToValidate="txteta" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                 <br /> <br />  
+             <label style="font-size:19px;margin-left:20px;margin-right:86px"> ATD  <br > <asp:TextBox ID="txtatd" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderatd" PopupButtonID="imgPopup" OnClientDateSelectionChanged="AppendTime" runat="server" TargetControlID="txtatd" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
-             <label style="font-size:19px"> ATA * <br > <asp:TextBox ID="txtata" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+             <label style="font-size:19px;margin-right:40px"> ATA  <br > <asp:TextBox ID="txtata" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderata" PopupButtonID="imgPopup" OnClientDateSelectionChanged="AppendTime" runat="server" TargetControlID="txtata" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
-            <br /> <br /> <br /> <br />
+            
            
             
-            <asp:CheckBox ID ="delivery"  runat="server" style="margin-left:20px" />  <label style="font-size:19px;margin-left:13px;margin-right:50px">Delivered?</label>
+            <asp:CheckBox ID ="delivery"  runat="server" style="margin-left:40px" />  <label style="font-size:19px;margin-left:13px;margin-right:69px">Delivered?</label>
             
-            <label style="font-size:19px;margin-left:55px;margin-right:70px"> Delivery date * <br > <asp:TextBox ID="txtdeliverydate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <label style="font-size:19px;margin-left:41px;margin-right:70px"> Delivery date  <br > <asp:TextBox ID="txtdeliverydate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderdeliverydate" OnClientDateSelectionChanged="AppendTime" PopupButtonID="imgPopup" runat="server" TargetControlID="txtdeliverydate" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-             
-             <label style="font-size:19px"> ReceivedBy <br> <asp:TextBox ID="txtreceivedby" Width="145px" runat="server"></asp:TextBox> </label>
+            <br /><br /> <br /> <br />
+             <label style="font-size:19px;margin-left:19px;margin-right:58px"> Receiver Name <br> <asp:TextBox ID="txtreceivedby" Width="145px" runat="server"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:30px;margin-right:119px"> Receiver Mobile Number <br> <asp:TextBox ID="txtreceivermobilenumber" Width="145px" runat="server"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:129px"> Receiver Mail ID <br> <asp:TextBox ID="txtreceivermailid" Width="145px" runat="server"></asp:TextBox> </label>
             
              <br /> <br /> <br /> <br />  
            
-            <asp:Button ID="Addbutton" Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
-            <asp:Button ID="Updatebutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton_Click" />
-                 <asp:Button ID="Submitbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Submit" runat="server" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Submitbutton_Click" />
+            <asp:Button ID="Addbutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
+            <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton_Click" />
+                 <asp:Button ID="Submitbutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Submit" runat="server" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Submitbutton_Click" />
              
              <asp:Button ID="Cancelbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Cancel" runat="server" font-size="Medium" BackColor="#ccff33" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Cancelbutton_Click" />
-           <br />
+           <asp:Button ID="btnmail" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="SendMail" runat="server" font-size="Medium" BackColor="#ccff33" class="btn- btn-primary" Width="94px" Height="40px" OnClick="mailbutton_Click" />
+                <br />
                 <br />
                 <br />
 
                 <label style="font-size:17px">Total Count:</label>
                 <asp:Label ID="lbltotalcount" runat="server" Font-Bold="true" Font-Size="17px"></asp:Label>
-                <asp:GridView ID="GridViewSeller"  runat="server" AutoGenerateColumns="false" OnRowDataBound="GridViewSeller_RowDataBound" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="shipmentnumber" OnSelectedIndexChanged="GridViewSeller_SelectedIndexChanged" OnRowDeleting ="GridViewSeller_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
+                
+                 <asp:TextBox ID="txtSearch" CssClass="pull-right" Width="200px" placeholder="Search" runat="server" />
+                <asp:ImageButton ID="btnSearch" runat="server" CssClass="pull-right" style="margin-left:5px" width="20" Height="20" ImageUrl="/images/search.png" OnClick="Search" /> 
+
+                 <asp:ImageButton ID="btnRefresh" runat="server" CssClass="pull-right" width="20" Height="20" ImageUrl="/images/refresh.png" OnClick="Refresh" />
+                 
+                
+                <asp:GridView ID="GridViewSeller" OnPageIndexChanging="OnPageIndexChanging" runat="server" AutoGenerateColumns="false" OnRowDataBound="GridViewSeller_RowDataBound" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="shipmentnumber" OnSelectedIndexChanged="GridViewSeller_SelectedIndexChanged" OnRowDeleting ="GridViewSeller_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     
@@ -179,6 +191,8 @@
                         <asp:BoundField DataField="creationdate" HeaderText="CreationDate" />
                         <asp:BoundField DataField="customer_M_Company_Name" HeaderText="CustomerName" />
                         <asp:BoundField DataField="numberofpackages" HeaderText="NumberOfPackages" />
+                         <asp:BoundField DataField="grossweight" HeaderText="GrossWeight" />
+                        <asp:BoundField DataField="chargeableweight" HeaderText="ChargeableWeight" />
                         <asp:BoundField DataField="hawb" HeaderText="HAWB" />
                         <asp:BoundField DataField="hawbdate" HeaderText="HAWB Date" />
                         <asp:BoundField DataField="mawb" HeaderText="MAWB Date" />
@@ -192,6 +206,9 @@
                         <asp:BoundField DataField="delivered" HeaderText="Delivered" />
                         <asp:BoundField DataField="delivery" HeaderText="DeliveryDate" />
                         <asp:BoundField DataField="receivedbyname" HeaderText="ReceivedBy" />
+                        <asp:BoundField DataField="receivermobileno" HeaderText="ReceiverMobileNo" />
+                        <asp:BoundField DataField="receiveremailid" HeaderText="ReceiverEmail" />
+
                     </Columns>
                     
                     <EditRowStyle BackColor="#999999" />

@@ -39,9 +39,18 @@ namespace FinalYearProject
             //{
             //    this.BindGrid();
             //}
-            
+       lblusername.Text = "Username:" + Session["M_Subscriber_UserID"]  ;
+            SqlConnection con = new SqlConnection(_ConnStr);
+            con.Open();
+            string str = "select M_Company_Name from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+            SqlCommand com = new SqlCommand(str, con);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            lblcompanyname.Text = "CompanyName:"+ ds.Tables[0].Rows[0]["M_Company_Name"].ToString();
 
-            
+
+
         }
 
         public void LoadData()
@@ -314,6 +323,11 @@ namespace FinalYearProject
         {
 
             LoadData();
+        }
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
         }
     }
 }
