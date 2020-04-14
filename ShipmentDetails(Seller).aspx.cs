@@ -37,11 +37,30 @@ namespace FinalYearProject
                 dropdowncustomer.Items.Insert(0, new ListItem("--Select customer--", "0"));
                
                 BindGridView();
-                
+
+                lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
+                SqlConnection con1 = new SqlConnection(_ConnStr);
+                con1.Open();
+                string str = "select M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+                SqlCommand com1 = new SqlCommand(str, con1);
+                SqlDataAdapter da1 = new SqlDataAdapter(com1);
+                DataSet ds1 = new DataSet();
+                da1.Fill(ds1);
+                lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
+                //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
+                if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
                 {
+                    btnseller.Visible = false;
 
                 }
-            }}
+                else
+                {
+                    btnbuyer.Visible = false;
+                }
+
+
+            }
+        }
            
                void clear()
         {
@@ -113,8 +132,12 @@ namespace FinalYearProject
                     
                 }
             }
-        
 
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
+        }
         protected void Addbutton_Click(object sender, EventArgs e)
         {
             string adddetails = @"INSERT INTO [ShipmentDetailsSeller] ([creationdate],[customer_M_Company_Name],[numberofpackages],[grossweight],[chargeableweight],[hawb],[hawbdate],[mawb],[mawbdate],[airline],[flightnumber],[etd],[eta],[atd],[ata],[delivered],[delivery],[receivedbyname],[receivermobileno],[receiveremailid])

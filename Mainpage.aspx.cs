@@ -133,8 +133,8 @@ namespace FinalYearProject
                  
                  cmd.ExecuteNonQuery();
                 
-                 con.Close();
-
+                con.Close();
+                
             }
 
 
@@ -227,14 +227,11 @@ namespace FinalYearProject
 
 
             }
-            if(categorylist.SelectedValue == "b")
-            {
-                Session["buyer"] = true;
-            }
-            else
-            {
-                Session["buyer"] = false;
-            }
+            
+
+
+          
+
             con.Close();
         }
        protected void OnSelectedIndexChangedCountry(object sender, EventArgs e)

@@ -3,24 +3,28 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head>
     <title></title>
-    <meta charset="utf-8">  <meta name="viewport" content="width=device-width, initial-scale=1"> 
-    <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" /> 
-    <link type="text/css" rel="stylesheet" href="../css/fd-common.css" />
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="../css/fd-common.css" />
+
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
-     <script type="text/javascript" src="../js/bootstrap.min.js"></script>      
-      <style type="text/css">        
-          .modalBackground        
-          { 
-          background-color:black;           
-         filter:alpha(opacity=60);           
-          opacity:0.6;        
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    
+    
+    <style type="text/css">
+        .modalBackground
+        {
+            background-color:black;
+            filter:alpha(opacity=60);
+            opacity:0.6;
+        }
 
-          }
-
-    </style> 
-</head>
+    </style>
+    </head>
+     
 <body>
     <form id="form1" runat="server">
         <nav class="navbar1 navbar navbar-default" id="navbarone">
@@ -31,13 +35,21 @@
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
     <a href="#" class="dropdown-toggle" class="top-menu pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" style="width:270px">
     <li>
-        <a href=""><i class="fa fa-fw fa-gear"></i> Settings</a>
+        <div style="text-align:left">
+        <a ><asp:Label ID="lblusername" style="width:30px;" runat="server"/></a>
+            </div>
+        <br />
+        <div style="text-align:left">
+        <a><asp:Label ID="lblcompanyname" style="width:30px" runat="server"></asp:Label></a>
+            </div>
+        <br />
+        
       </li>
       <li class="divider"></li>
       <li>
-        <a href=""><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+        <a ><asp:Button ID="btnlogout" runat="server" style="width:70px;height:40px;color:black;background-color:orange;border-color:chartreuse;border-radius:inherit" Text="Logout" OnClick="btnlogout_Click" /></a>
       </li>
                  
 			    </ul>
@@ -54,7 +66,7 @@
                     <span data-bind="label">Master</span>&nbsp;<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" style="padding:0px; margin:0px; border-radius:0px;">
-                   <li><a href="Company.aspx" target="_self">Company</a></li>
+                    <li><a href="GeneralMasters/DummyMasterData.aspx" target="_self">Company</a></li>
                   <%--  <li><a href="GeneralMasters/AttributesList.aspx" target="fd_iframe">Attributes</a></li>--%>
                     <li><a href="Airport.aspx">Airports</a></li>
                     <li><a href="Commodity.aspx" >Commodity</a></li>
@@ -64,20 +76,21 @@
                     <li><a href="State.aspx">State</a></li>
                     <li><a href="Country.aspx">Country</a></li>
                     <li><a href="Currency.aspx">Currency</a></li>
+                    <li><a href="Charge.aspx">Charge Details</a></li>
                 </ul>
             </div>
                              <div class="btn-group" style="vertical-align:bottom;">
 
-    <button type="button" class="btn btn-default">
-                    <span data-bind="label">Buyer</span>
-                </button>
-                                 <button type="button" class="btn btn-default">
-                    <span data-bind="label">Seller</span>
-                </button>
+    
+                    <asp:Button ID="btnbuyer" class="btn btn-default" runat="server" Text="Buyer" style="width:100px;height:25px" />
+                
+                                 
+                    <asp:Button ID="btnseller" class="btn btn-default" runat="server" Text="Seller" style="width:100px;height:25px" />
+               
                                  </div>
         </div> 
+             
             </nav>
-  
 
          <nav class="navbar3 navbar navbar-dark bg-primary" style="height:20px;"id="navbarthree"> 
  

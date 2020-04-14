@@ -3,15 +3,16 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head>
     <title></title>
-      <meta charset="utf-8">
+    <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" />
 <link type="text/css" rel="stylesheet" href="../css/fd-common.css" />
 
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    
     
     <style type="text/css">
         .modalBackground
@@ -22,11 +23,11 @@
         }
 
     </style>
-</head>
+    </head>
+     
 <body>
     <form id="form1" runat="server">
-     
-     <nav class="navbar1 navbar navbar-default" id="navbarone">
+        <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">FreightDeals</a>
@@ -34,13 +35,21 @@
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
     <a href="#" class="dropdown-toggle" class="top-menu pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" style="width:270px">
     <li>
-        <a href=""><i class="fa fa-fw fa-gear"></i> Settings</a>
+        <div style="text-align:left">
+        <a ><asp:Label ID="lblusername" style="width:30px;" runat="server"/></a>
+            </div>
+        <br />
+        <div style="text-align:left">
+        <a><asp:Label ID="lblcompanyname" style="width:30px" runat="server"></asp:Label></a>
+            </div>
+        <br />
+        
       </li>
       <li class="divider"></li>
       <li>
-        <a href=""><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+        <a ><asp:Button ID="btnlogout" runat="server" style="width:70px;height:40px;color:black;background-color:orange;border-color:chartreuse;border-radius:inherit" Text="Logout" OnClick="btnlogout_Click" /></a>
       </li>
                  
 			    </ul>
@@ -48,7 +57,7 @@
 				</ul>
   </div>
 </nav>
-        <nav class="navbar2 navbar navbar-primary" id="navbartwo"> 
+       <nav class="navbar2 navbar navbar-primary" id="navbartwo"> 
         
   <div class="col-xs-12" style="padding: 10px 70px 10px 50px; background-color:SteelBlue ">
             <a href="#" class="btn btn-default" role="button">Home</a>
@@ -57,28 +66,30 @@
                     <span data-bind="label">Master</span>&nbsp;<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" style="padding:0px; margin:0px; border-radius:0px;">
-                    <li><a href="Company.aspx" target="_self">Company</a></li>
+                    <li><a href="GeneralMasters/DummyMasterData.aspx" target="_self">Company</a></li>
                   <%--  <li><a href="GeneralMasters/AttributesList.aspx" target="fd_iframe">Attributes</a></li>--%>
-                    <li><a href="Airport.aspx" target="_self">Airports</a></li>
-                    <li><a href="#" target="_self">Commodity</a></li>
-                    <li><a href="Carrier.aspx" target="_self">Carrier</a></li>
+                    <li><a href="Airport.aspx">Airports</a></li>
+                    <li><a href="Commodity.aspx" >Commodity</a></li>
+                    <li><a href="Carrier.aspx">Carrier</a></li>
 
-                    <li><a href="Package.aspx" target="_self">Package Types</a></li>
-                    <li><a href="State.aspx" target="_self">State</a></li>
-                    <li><a href="Country.aspx" target="_self">Country</a></li>
-                    <li><a href="Currency.aspx" target="_self">Currency</a></li>
+                    <li><a href="Package.aspx">Package Types</a></li>
+                    <li><a href="State.aspx">State</a></li>
+                    <li><a href="Country.aspx">Country</a></li>
+                    <li><a href="Currency.aspx">Currency</a></li>
+                    <li><a href="Charge.aspx">Charge Details</a></li>
                 </ul>
             </div>
                              <div class="btn-group" style="vertical-align:bottom;">
 
-    <button type="button" class="btn btn-default">
-                    <span data-bind="label">Buyer</span>
-                </button>
-                                 <button type="button" class="btn btn-default">
-                    <span data-bind="label">Seller</span>
-                </button>
+    
+                    <asp:Button ID="btnbuyer" class="btn btn-default" runat="server" Text="Buyer" style="width:100px;height:25px" />
+                
+                                 
+                    <asp:Button ID="btnseller" class="btn btn-default" runat="server" Text="Seller" style="width:100px;height:25px" />
+               
                                  </div>
         </div> 
+             
             </nav>
   
 

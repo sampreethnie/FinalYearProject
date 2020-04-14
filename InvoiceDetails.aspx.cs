@@ -26,6 +26,30 @@ namespace FinalYearProject
             {
                 LoadData();
             }
+            lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
+            SqlConnection con1 = new SqlConnection(_ConnStr);
+            con1.Open();
+            string str = "select M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+            SqlCommand com1 = new SqlCommand(str, con1);
+            SqlDataAdapter da1 = new SqlDataAdapter(com1);
+            DataSet ds1 = new DataSet();
+            da1.Fill(ds1);
+            lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
+            //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
+            if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
+            {
+                btnseller.Visible = false;
+
+            }
+            else
+            {
+                btnbuyer.Visible = false;
+            }
+        }
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
         }
         public void LoadData()
         {

@@ -26,9 +26,29 @@ namespace FinalYearProject
                 {
                     LoadData();
                 }
+            lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
+            SqlConnection con = new SqlConnection(_ConnStr);
+            con.Open();
+            string str = "select M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+            SqlCommand com = new SqlCommand(str, con);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            lblcompanyname.Text = "CompanyName:" + ds.Tables[0].Rows[0]["M_Company_Name"].ToString();
+            //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
+            if (ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
+            {
+                btnseller.Visible = false;
 
             }
-            public void LoadData()
+            else
+            {
+                btnbuyer.Visible = false;
+            }
+
+
+        }
+        public void LoadData()
             {
                 using (SqlConnection conn = new SqlConnection())
                 {
@@ -57,7 +77,12 @@ namespace FinalYearProject
                 txtcarriernameAddpopup.Text = String.Empty;
                 txtcarriershortnameAddpopup.Text = String.Empty;
             }
-            public bool AddNewCarrier(CarrierEntity carrier)
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
+        }
+        public bool AddNewCarrier(CarrierEntity carrier)
             {
                 String insertQuery = @"INSERT INTO [M_Carrier] ([M_Carrier_Name],[M_Carrier_Sname]) VALUES(@M_Carrier_Name, @M_Carrier_Sname)";
                 using (SqlConnection conn = new SqlConnection())

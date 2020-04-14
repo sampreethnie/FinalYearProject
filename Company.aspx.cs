@@ -108,9 +108,27 @@ namespace FinalYearProject
                dropdownstatefinal.Items.Insert(0, new ListItem("--Select State--", "0"));
 
                Session["buyer"] = false;
-               
-                   
-               }
+
+                lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
+                SqlConnection con1 = new SqlConnection(constr);
+                con1.Open();
+                string str1 = "select M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+                SqlCommand com1 = new SqlCommand(str1, con1);
+                SqlDataAdapter da1 = new SqlDataAdapter(com1);
+                DataSet ds1 = new DataSet();
+                da1.Fill(ds1);
+                lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
+                //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
+                if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
+                {
+                    btnseller.Visible = false;
+
+                }
+                else
+                {
+                    btnbuyer.Visible = false;
+                }
+            }
 
            }
 
@@ -142,16 +160,21 @@ namespace FinalYearProject
             txtmobile.ReadOnly = false;
             txtuserid.ReadOnly = false;
         }
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
+        }
 
         //protected void btnEdit(object sender,EventArgs e)
         //{
         //   // Response.Write(Session["M_Company_Slno"]);
-           
-            
-                
 
 
-            
+
+
+
+
 
 
         //    string updatequery = @"UPDATE [M_Company] set  [M_Company_Name] = @M_Company_Name , [M_Company_Addr1] = @M_Company_Addr1 where [M_Company_Slno] = M_Company_Slno" ;
@@ -182,16 +205,16 @@ namespace FinalYearProject
         //        conedit.Close();
         //    }    
         //    }
-            
-            //SqlConnection conedit = new SqlConnection(constr);
-            //conedit.Open();
-            //SqlCommand cmdedit = new SqlCommand("Update M_Company set M_Company_Name='" + txtcompanynamefinal.Text + "',M_Company_Addr1='" + txtaddress1final.Text + "',M_Company_Addr2='" + txtaddress2final.Text + "',M_Company_Landmark='" + txtlandmarkfinal.Text + "',M_Company_PAN='" + txtpanfinal.Text + "',M_Company_PIN='" + txtpinfinal.Text + "',M_Company_TAN='" + txttanfinal.Text + "',M_Company_URL='" + txtcompanyurlfinal.Text + "' where M_Company_Slno='" + "M_Company_Slno" + "'", conedit);
-            //cmdedit.CommandType = CommandType.Text;
-            //cmdedit.ExecuteNonQuery();
-            //conedit.Close();
 
-            
-            //string UpdateQuery = "Update M_Company set M_Company_Name='" + txtcompanynamefinal.Text + "',M_Company_Addr1='" + txtaddress1final.Text + "',M_Company_Addr2='" + txtaddress2final.Text + "',M_Company_Landmark='" + txtlandmarkfinal.Text + "',M_Company_PAN='" + txtpanfinal.Text + "',M_Company_PIN='" + txtpinfinal.Text + "',M_Company_TAN='" + txttanfinal.Text + "',M_Company_URL='" + txtcompanyurlfinal.Text + "' where M_Company_Slno='" + "M_Company_Slno" + "'";
-             
-           }
+        //SqlConnection conedit = new SqlConnection(constr);
+        //conedit.Open();
+        //SqlCommand cmdedit = new SqlCommand("Update M_Company set M_Company_Name='" + txtcompanynamefinal.Text + "',M_Company_Addr1='" + txtaddress1final.Text + "',M_Company_Addr2='" + txtaddress2final.Text + "',M_Company_Landmark='" + txtlandmarkfinal.Text + "',M_Company_PAN='" + txtpanfinal.Text + "',M_Company_PIN='" + txtpinfinal.Text + "',M_Company_TAN='" + txttanfinal.Text + "',M_Company_URL='" + txtcompanyurlfinal.Text + "' where M_Company_Slno='" + "M_Company_Slno" + "'", conedit);
+        //cmdedit.CommandType = CommandType.Text;
+        //cmdedit.ExecuteNonQuery();
+        //conedit.Close();
+
+
+        //string UpdateQuery = "Update M_Company set M_Company_Name='" + txtcompanynamefinal.Text + "',M_Company_Addr1='" + txtaddress1final.Text + "',M_Company_Addr2='" + txtaddress2final.Text + "',M_Company_Landmark='" + txtlandmarkfinal.Text + "',M_Company_PAN='" + txtpanfinal.Text + "',M_Company_PIN='" + txtpinfinal.Text + "',M_Company_TAN='" + txttanfinal.Text + "',M_Company_URL='" + txtcompanyurlfinal.Text + "' where M_Company_Slno='" + "M_Company_Slno" + "'";
+
+    }
     }

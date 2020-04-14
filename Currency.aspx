@@ -46,6 +46,8 @@
         <div style="text-align:left">
         <a><asp:Label ID="lblcompanyname" style="width:30px" runat="server"></asp:Label></a>
             </div>
+        <br />
+        
       </li>
       <li class="divider"></li>
       <li>
@@ -76,16 +78,17 @@
                     <li><a href="State.aspx">State</a></li>
                     <li><a href="Country.aspx">Country</a></li>
                     <li><a href="Currency.aspx">Currency</a></li>
+                    <li><a href="Charge.aspx">Charge Details</a></li>
                 </ul>
             </div>
                              <div class="btn-group" style="vertical-align:bottom;">
 
-    <button type="button" class="btn btn-default">
-                    <span data-bind="label">Buyer</span>
-                </button>
-                                 <button type="button" class="btn btn-default">
-                    <span data-bind="label">Seller</span>
-                </button>
+    
+                    <asp:Button ID="btnbuyer" class="btn btn-default" runat="server" Text="Buyer" style="width:100px;height:25px" />
+                
+                                 
+                    <asp:Button ID="btnseller" class="btn btn-default" runat="server" Text="Seller" style="width:100px;height:25px" />
+               
                                  </div>
         </div> 
              
