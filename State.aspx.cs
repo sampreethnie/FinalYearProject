@@ -64,12 +64,14 @@ namespace FinalYearProject
                 //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
                 if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
                 {
-                    btnseller.Visible = false;
+                    ButtonSeller.Visible = false;
+                    
 
                 }
                 else
                 {
-                    btnbuyer.Visible = false;
+                    ButtonBuyer.Visible = false;
+                    
                 }
 
             }

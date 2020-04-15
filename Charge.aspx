@@ -80,14 +80,39 @@
                     <li><a href="Charge.aspx">Charge Details</a></li>
                 </ul>
             </div>
-                             <div class="btn-group" style="vertical-align:bottom;">
+                              <div class="btn-group" style="vertical-align:bottom;">
 
     
-                    <asp:Button ID="btnbuyer" class="btn btn-default" runat="server" Text="Buyer" style="width:100px;height:25px" />
+                    
+                                 
+                                 <button type="button" id="ButtonBuyer" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+                                     Buyer
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <!-- here is the asp.net link button to make post back -->
+          
+    <li><a href="ShipmentDelivery(Buyer).aspx">Shipmentdelivery</a></li>
+    <li><a href="#">RFQ</a></li>
+   
+  </ul>
+                                 </div>
+       <div class="btn-group" style="vertical-align:bottom;">
                 
                                  
-                    <asp:Button ID="btnseller" class="btn btn-default" runat="server" Text="Seller" style="width:100px;height:25px" />
-               
+                    
+                <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <!-- here is the asp.net link button to make post back -->
+          
+    <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
+    <li><a href="#">SellerQuote</a></li>
+   
+  </ul>
                                  </div>
         </div> 
              
