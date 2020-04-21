@@ -53,12 +53,25 @@ namespace FinalYearProject
             {
                 
                 ButtonSeller.Visible = false;
+                btnAdd.Visible = false;
+                gvCurrency.Columns[4].Visible = false;
+                gvCurrency.Columns[5].Visible = false;
+               
+               
 
             }
-            else
+            else if(ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "s")
             {
                 
                 ButtonBuyer.Visible = false;
+                btnAdd.Visible = false;
+                gvCurrency.Columns[4].Visible = false;
+                gvCurrency.Columns[5].Visible = false;
+            }
+           else if(ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "a")
+            {
+                ButtonBuyer.Visible = false;
+                ButtonSeller.Visible = false;
             }
 
             //else

@@ -38,14 +38,27 @@ namespace FinalYearProject
             //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
             if (ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
             {
+
                 ButtonSeller.Visible = false;
-                
+                btnAdd.Visible = false;
+                gvCarrier.Columns[4].Visible = false;
+                gvCarrier.Columns[5].Visible = false;
+
+
 
             }
-            else
+            else if (ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "s")
+            {
+
+                ButtonBuyer.Visible = false;
+                btnAdd.Visible = false;
+                gvCarrier.Columns[4].Visible = false;
+                gvCarrier.Columns[5].Visible = false;
+            }
+            else if (ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "a")
             {
                 ButtonBuyer.Visible = false;
-               
+                ButtonSeller.Visible = false;
             }
 
 

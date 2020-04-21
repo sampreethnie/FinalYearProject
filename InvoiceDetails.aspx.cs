@@ -38,15 +38,20 @@ namespace FinalYearProject
             //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
             if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
             {
+
                 ButtonSeller.Visible = false;
                 
 
+
+
             }
-            else
+            else if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "s")
             {
+
                 ButtonBuyer.Visible = false;
                
             }
+            
         }
         protected void btnlogout_Click(object sender, EventArgs e)
         {

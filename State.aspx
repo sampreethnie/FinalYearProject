@@ -66,7 +66,7 @@
                     <span data-bind="label">Master</span>&nbsp;<span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu" style="padding:0px; margin:0px; border-radius:0px;">
-                    <li><a href="GeneralMasters/DummyMasterData.aspx" target="_self">Company</a></li>
+                    <li><a href="Company.aspx">Company</a></li>
                   <%--  <li><a href="GeneralMasters/AttributesList.aspx" target="fd_iframe">Attributes</a></li>--%>
                     <li><a href="Airport.aspx">Airports</a></li>
                     <li><a href="Commodity.aspx" >Commodity</a></li>
@@ -102,7 +102,8 @@
                                  
                     
                 <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
-    <span class="caret"></span>
+    Seller
+                    <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu" role="menu">
