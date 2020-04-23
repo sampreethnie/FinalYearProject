@@ -173,14 +173,14 @@
                
                  
                  
-                 <label style="font-size:19px;margin-left:14px;margin-right:38px"> Gross Weight(Kg)* <br> <asp:TextBox ID="txtgrossweight" runat="server"  Width="157px"></asp:TextBox> </label>
+                 <label style="font-size:19px;margin-left:14px;margin-right:38px"> Gross Weight(Kg)* <br> <asp:TextBox ID="txtgrossweight" onkeyup="WeightCalculation()" runat="server"  Width="157px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvgrossweight" ControlToValidate="txtgrossweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
                 <br /> <br />
-                <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight"  runat="server"  Width="145px"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight" onkeyup="WeightCalculation()"  runat="server"  Width="145px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvvolumetricweight" ControlToValidate="txtvolumetricweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
-                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight"  runat="server"  Width="142px"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight" onkeyup="WeightCalculation()"  runat="server"  Width="142px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvchargeableweight" ControlToValidate="txtchargeableweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
              <label style="font-size:19px;margin-left:20px;margin-right:51px"> PickupAddress* <br> <asp:TextBox ID="txtpickupaddress" Width="158px"  runat="server"></asp:TextBox> </label>
@@ -278,7 +278,7 @@
                  
 
         </div>
-        <%--<script type="text/javascript">
+        <script type="text/javascript">
    
     function WeightCalculation()
     {
@@ -294,7 +294,7 @@
         if (_txt2.value >= _txt1.value)
             _txt3.value = parseInt(t2);
     }
-        </script>--%>
+        </script>
     </form>
 </body>
 </html>
