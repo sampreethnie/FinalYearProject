@@ -92,7 +92,7 @@
     <!-- here is the asp.net link button to make post back -->
           
     <li><a href="ShipmentDelivery(Buyer).aspx">Shipmentdelivery</a></li>
-    <li><a href="#">RFQ</a></li>
+    <li><a href="RFQ.aspx">RFQ</a></li>
    
   </ul>
                                  </div>

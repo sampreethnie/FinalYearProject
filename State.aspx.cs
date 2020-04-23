@@ -55,7 +55,7 @@ namespace FinalYearProject
                 lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
                 SqlConnection con1 = new SqlConnection(_ConnStr);
                 con1.Open();
-                string str = "select M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+                string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
                 SqlCommand com1 = new SqlCommand(str, con1);
                 SqlDataAdapter da1 = new SqlDataAdapter(com1);
                 DataSet ds1 = new DataSet();

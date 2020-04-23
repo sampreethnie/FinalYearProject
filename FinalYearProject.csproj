@@ -175,6 +175,7 @@
     <Content Include="InvoiceDetails.aspx" />
     <Content Include="InvoiceDisplay.aspx" />
     <Content Include="MasterPage.Master" />
+    <Content Include="RFQ.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Mainpage.aspx" />
@@ -369,6 +370,13 @@
       <DependentUpon>Package.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RFQ.aspx.cs">
+      <DependentUpon>RFQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RFQ.aspx.designer.cs">
+      <DependentUpon>RFQ.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ShipmentDelivery%28Buyer%29.aspx.cs">
       <DependentUpon>ShipmentDelivery%28Buyer%29.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

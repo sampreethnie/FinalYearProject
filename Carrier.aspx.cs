@@ -29,7 +29,7 @@ namespace FinalYearProject
             lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
-            string str = "select M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+            string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
             SqlCommand com = new SqlCommand(str, con);
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();

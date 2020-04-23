@@ -41,7 +41,7 @@ namespace FinalYearProject
                 SqlConnection con = new SqlConnection(constr);
 
 
-                string str = "select M_Company_BuyerSellerFlag,M_Company_Name, M_Company_Addr1,M_Company_Addr2,M_Company_Landmark,M_Company_PIN,M_Company_City,M_Company_TAN,M_Company_PAN,M_Company_URL,M_Company_MCountrySlno,M_Company_MStateSlno,M_Company_Currency,M_Company_City,M_Subscriber_ContactName,M_Subscriber_MobileNo,M_Subscriber_UserID from M_Company,M_Subscriber where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber_MCompanySlno = M_Company_Slno";
+                string str = "select M_Company_Slno,M_Company_BuyerSellerFlag,M_Company_Name, M_Company_Addr1,M_Company_Addr2,M_Company_Landmark,M_Company_PIN,M_Company_City,M_Company_TAN,M_Company_PAN,M_Company_URL,M_Company_MCountrySlno,M_Company_MStateSlno,M_Company_Currency,M_Company_City,M_Subscriber_ContactName,M_Subscriber_MobileNo,M_Subscriber_UserID from M_Company,M_Subscriber where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber_MCompanySlno = M_Company_Slno";
                 SqlCommand com = new SqlCommand(str, con);
 
 

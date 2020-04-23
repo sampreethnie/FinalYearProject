@@ -136,7 +136,7 @@ namespace FinalYearProject
                 con.Close();
                 
             }
-
+            Session["password"] = txtpassword1.Text;
 
            
            // con.Open();
