@@ -155,21 +155,26 @@ private void BindGridView()
 
 }
 
-//protected void GridViewSeller_RowDataBound(object sender, GridViewRowEventArgs e)
-//{
+        //protected void GridViewRfq_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
 
-    
+        //    if (e.Row.RowType == DataControlRowType.DataRow)
+        //    {
+        //        GridViewRfq.SelectedRow.Cells[0].Enabled = false;
+        //          GridViewRfq.SelectedRow.Cells[1].Enabled = false;
 
-
-
-
-
-
-
-//    }
+        //    }
 
 
-protected void btnlogout_Click(object sender, EventArgs e)
+
+
+
+
+
+        //}
+
+
+        protected void btnlogout_Click(object sender, EventArgs e)
 {
     Session["M_Subscriber_UserID"] = null;
     Response.Redirect("Mainpage.aspx");
@@ -219,27 +224,7 @@ protected void Addbutton_Click(object sender, EventArgs e)
 
     }
 }
-//protected void mailbutton_Click(object sender, EventArgs e)
-//{
-//    StringWriter sw = new StringWriter();
-//    HtmlTextWriter ht = new HtmlTextWriter(sw);
-//    GridViewSeller.RenderControl(ht);
-//    MailMessage mm = new MailMessage("sampreeth1998@gmail.com", txtreceivermailid.Text);
-//    mm.Body = "<h1> Gridview Details </h1> <hr/>" + sw.ToString();
-//    mm.IsBodyHtml = true;
-//    mm.Subject = "gridviewdata";
-//    SmtpClient smtp = new SmtpClient();
-//    smtp.Host = "smtp.gmail.com";
-//    smtp.Port = 587;
-//    smtp.EnableSsl = true;
-//    System.Net.NetworkCredential nc = new System.Net.NetworkCredential("sampreeth1998@gmail.com", "sampreet");
-//    smtp.Credentials = nc;
-//    smtp.Send(mm);
-//}
-//public override void VerifyRenderingInServerForm(Control control)
-//{
 
-//}
 
 
 
@@ -290,39 +275,52 @@ protected void GridViewRfq_RowDeleting(object sender, GridViewDeleteEventArgs e)
 
 
 }
-//protected void Updatebutton_Click(object sender, EventArgs e)
-//{
-//    SqlConnection con = new SqlConnection(_ConnStr);
-//    con.Open();
-//    SqlCommand cmd = new SqlCommand("update ShipmentDetailsSeller set creationdate=@creationdate,customer_M_Company_Name=@customer_M_Company_Name,numberofpackages=@numberofpackages,hawb=@hawb,hawbdate=@hawbdate,mawb=@mawb,mawbdate=@mawbdate,airline=@airline,flightnumber=@flightnumber,etd=@etd,eta=@eta,atd=@atd,ata=@ata,delivered=@delivered,delivery=@delivery,receivedbyname=@receivedbyname,receivermobileno=@receivermobileno,receiveremailid=@receiveremailid where shipmentnumber=@shipmentnumber", con);
-//    cmd.Parameters.AddWithValue("@shipmentnumber", txtshipmentnumber.Text);
-//    cmd.Parameters.AddWithValue("@creationdate", Convert.ToDateTime(txtcreationdate.Text));
-//    cmd.Parameters.AddWithValue("@customer_M_Company_Name", dropdowncustomer.SelectedItem.Text);
-//    cmd.Parameters.AddWithValue("@numberofpackages", txtnoofpackages.Text);
-//    cmd.Parameters.AddWithValue("@grossweight", txtgrossweight.Text);
-//    cmd.Parameters.AddWithValue("@chargeableweight", txtchargeableweight.Text);
-//    cmd.Parameters.AddWithValue("@hawb", txthawb.Text);
-//    cmd.Parameters.AddWithValue("@hawbdate", Convert.ToDateTime(txthawbdate.Text));
-//    cmd.Parameters.AddWithValue("@mawb", txtmawb.Text);
-//    cmd.Parameters.AddWithValue("@mawbdate", Convert.ToDateTime(txtmawbdate.Text));
-//    cmd.Parameters.AddWithValue("@airline", txtairline.Text);
-//    cmd.Parameters.AddWithValue("@flightnumber", txtflightnumber.Text);
-//    cmd.Parameters.AddWithValue("@etd", Convert.ToDateTime(txtetd.Text));
-//    cmd.Parameters.AddWithValue("@eta", Convert.ToDateTime(txteta.Text));
-//    cmd.Parameters.AddWithValue("@atd", Convert.ToDateTime(txtatd.Text));
-//    cmd.Parameters.AddWithValue("@ata", Convert.ToDateTime(txtata.Text));
-//    cmd.Parameters.AddWithValue("@delivered", delivery.Text);
-//    cmd.Parameters.AddWithValue("@delivery", Convert.ToDateTime(txtdeliverydate.Text));
-//    cmd.Parameters.AddWithValue("@receivedbyname", txtreceivedby.Text);
-//    cmd.Parameters.AddWithValue("@receivermobileno", txtreceivermobilenumber.Text);
-//    cmd.Parameters.AddWithValue("@receiveremailid", txtreceivermailid.Text);
-//    cmd.ExecuteNonQuery();
-//    GridViewSeller.EditIndex = -1;
-//    BindGridView();
-//    Updatebutton.Visible = false;
+        protected void Updatebutton_Click(object sender, EventArgs e)
+        {
 
 
-//}
+            string updaterfq = @"update [RFQ] set [RFQ_Number]=@RFQ_Number,[RFQ_Company]=@RFQ_Company,[RFQ_CreationDate]=@RFQ_CreationDate,[RFQ_OriginCountry]=@RFQ_OriginCountry,[RFQ_DestinationCountry]=@RFQ_DestinationCountry,[RFQ_OriginAirport]=@RFQ_OriginAirport,[RFQ_DestinationAirport]=@RFQ_DestinationAirport,[RFQ_NumberofPackages]=@RFQ_NumberofPackages,[RFQ_TotalGrwt]=@RFQ_TotalGrwt,[RFQ_TotalVolwt]=@RFQ_TotalVolwt,[RFQ_TotalChwt]=@RFQ_TotalChwt,[RFQ_PickupAddress]=@RFQ_PickupAddress,[RFQ_DeliveryAddress]=@RFQ_DeliveryAddress,[RFQ_PickupDate]=@RFQ_PickupDate,[RFQ_ReqTT]=@RFQ_ReqTT,[RFQ_QuoteDueBy]=@RFQ_QuoteDueBy,[RFQ_Commodity]=@RFQ_Commodity,[RFQ_HandlingInfo]=@RFQ_HandlingInfo,[RFQ_Timestamp]=@RFQ_Timestamp where [RFQ_Slno] = @RFQ_Slno";
+            using (SqlConnection con = new SqlConnection(_ConnStr))
+            {
+                con.ConnectionString = _ConnStr;
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = updaterfq;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@RFQ_Slno", SqlDbType.Int);
+                cmd.Parameters.AddWithValue("@RFQ_Number", txtrfqnumber.Text);
+                cmd.Parameters.AddWithValue("@RFQ_Company", Session["CompanySlno"]);
+                cmd.Parameters.AddWithValue("@RFQ_CreationDate", Convert.ToDateTime(txtcreationdate.Text));
+                cmd.Parameters.AddWithValue("@RFQ_OriginCountry", dropdownorigincountry.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@RFQ_DestinationCountry", dropdowndestinationcountry.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@RFQ_OriginAirport", dropdownoriginairport.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@RFQ_DestinationAirport", dropdowndestinationairport.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@RFQ_NumberofPackages", txtnoofpackages.Text);
+                cmd.Parameters.AddWithValue("@RFQ_TotalGrwt", txtgrossweight.Text);
+                cmd.Parameters.AddWithValue("@RFQ_TotalVolwt", txtvolumetricweight.Text);
+                cmd.Parameters.AddWithValue("@RFQ_TotalChwt", txtchargeableweight.Text);
+                cmd.Parameters.AddWithValue("@RFQ_PickupAddress", txtpickupaddress.Text);
+                cmd.Parameters.AddWithValue("@RFQ_DeliveryAddress", txtdeliveryaddress.Text);
+                cmd.Parameters.AddWithValue("@RFQ_PickupDate", Convert.ToDateTime(txtpickupdate.Text));
+                cmd.Parameters.AddWithValue("@RFQ_ReqTT", txttransittime.Text);
+
+                cmd.Parameters.AddWithValue("@RFQ_QuoteDueBy", Convert.ToDateTime(txtquotedueby.Text));
+                cmd.Parameters.AddWithValue("@RFQ_Commodity", dropdowncommodity.SelectedItem.Text);
+                cmd.Parameters.AddWithValue("@RFQ_HandlingInfo", txthandlinginfo.Text);
+
+                cmd.Parameters.AddWithValue("@RFQ_Timestamp", DateTime.Now);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                BindGridView();
+
+                con.Close();
+                //cmd.ExecuteNonQuery();
+                //GridViewRfq.EditIndex = -1;
+                //BindGridView();
+                Updatebutton.Visible = false;
+                
+
+            }
+        }
 //protected void Submitbutton_Click(object sender, EventArgs e)
 //{
 //    SqlConnection con = new SqlConnection(_ConnStr);
@@ -374,6 +372,8 @@ protected void Cancelbutton_Click(object sender, EventArgs e)
     clear();
 
     Addbutton.Visible = true;
+            Updatebutton.Visible = true;
+
 
 
 }
@@ -397,6 +397,7 @@ protected void Cancelbutton_Click(object sender, EventArgs e)
                 msg.IsBodyHtml = true;
 
                 msg.Body = "Please find herewith the details of RFQ"+ "<br/>"+
+                    "Buyer Name:"+Session["M_Subscriber_UserID"].ToString()+"<br/>"+
                     "RFQ Number:" + txtrfqnumber.Text + "<br/>"+
                            "Creation Date:" + txtcreationdate.Text + "<br/>"+
                             "Origin Country:"+ dropdownorigincountry.SelectedItem.Text + "<br/>"+
@@ -421,72 +422,67 @@ protected void Cancelbutton_Click(object sender, EventArgs e)
                 smtp.EnableSsl = true;
                 smtp.Send(msg);
             }
+            GridViewRfq.SelectedRow.Cells[0].Enabled = false ;
+            GridViewRfq.SelectedRow.Cells[1].Enabled = false;
 
-           
-          
+
+            
+
+
+
+            Updatebutton.Visible = false;
+
 
 
         }
-        //protected void Search(object sender, ImageClickEventArgs e)
-        //{
-        //    this.BindGrid();
-        //}
-        //private void BindGrid()
-        //{
-        //    String constr = ConfigurationManager.ConnectionStrings["CrudConnection"].ConnectionString;
-        //    using (SqlConnection con = new SqlConnection(constr))
-        //    {
-        //        using (SqlCommand cmd = new SqlCommand())
-        //        {
-        //            cmd.CommandText = "SELECT shipmentnumber,creationdate,customer_M_Company_Name,numberofpackages,grossweight,chargeableweight,hawb,hawbdate,mawb,mawbdate,airline,flightnumber,etd,eta,atd,ata,delivered,delivery,receivedbyname,receivermobileno,receiveremailid FROM ShipmentDetailsSeller WHERE shipmentnumber LIKE '%'+@shipmentnumber+'%' OR customer_M_Company_Name LIKE '%'+@customer_M_Company_Name+'%' OR numberofpackages LIKE '%'+@numberofpackages+'%' OR hawb LIKE '%'+@hawb+'%' OR mawb LIKE '%'+@mawb+'%' OR airline LIKE '%'+@airline+'%' OR flightnumber LIKE '%'+@flightnumber+'%' OR delivered LIKE '%'+@delivered+'%' OR receivedbyname LIKE '%'+@receivedbyname+'%' OR receivermobileno LIKE '%'+@receivermobileno+'%' OR receiveremailid LIKE '%'+@receiveremailid+'%' ";
-        //            cmd.Connection = con;
-        //            cmd.Parameters.AddWithValue("@shipmentnumber", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@customer_M_Company_Name", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@numberofpackages", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@grossweight", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@chargeableweight", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@hawb", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@mawb", txtSearch.Text.Trim());
+        protected void Search(object sender, ImageClickEventArgs e)
+        {
+            this.BindGrid();
+        }
+        private void BindGrid()
+        {
+            String constr = ConfigurationManager.ConnectionStrings["CrudConnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select RFQ_Slno,RFQ_Number,RFQ_Company,RFQ_CreationDate,RFQ_OriginCountry,RFQ_DestinationCountry,RFQ_OriginAirport,RFQ_DestinationAirport,RFQ_NumberofPackages,RFQ_TotalGrwt,RFQ_TotalVolwt,RFQ_TotalChwt,RFQ_PickupAddress,RFQ_DeliveryAddress,RFQ_PickupDate,RFQ_ReqTT,RFQ_QuoteDueBy,RFQ_Commodity,RFQ_HandlingInfo,RFQ_UserID,RFQ_Timestamp from RFQ WHERE RFQ_Number LIKE '%'+@RFQ_Number+'%' AND RFQ_UserID = '" + Session["M_Subscriber_UserID"].ToString() + "' ";
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("@RFQ_Number", txtSearch.Text.Trim());
 
-        //            cmd.Parameters.AddWithValue("@airline", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@flightnumber", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@delivered", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@receivedbyname", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@receivermobileno", txtSearch.Text.Trim());
-        //            cmd.Parameters.AddWithValue("@receiveremailid", txtSearch.Text.Trim());
 
-        //            DataTable dt = new DataTable();
-        //            using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-        //            {
-        //                sda.Fill(dt);
-        //                GridViewSeller.DataSource = dt;
-        //                GridViewSeller.DataBind();
+                    DataTable dt = new DataTable();
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        sda.Fill(dt);
+                        GridViewRfq.DataSource = dt;
+                        GridViewRfq.DataBind();
 
-        //            }
-        //        }
-        //    }
-        //}
-        //protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
-        //{
-        //    GridViewSeller.PageIndex = e.NewPageIndex;
-        //    this.BindGrid();
-        //}
-        //protected void Refresh(object sender, ImageClickEventArgs e)
-        //{
-        //    using (SqlConnection conn = new SqlConnection())
-        //    {
-        //        conn.ConnectionString = _ConnStr;
-        //        SqlCommand cmd = conn.CreateCommand();
-        //        cmd.CommandText = "select * from ShipmentDetailsSeller order by shipmentnumber";
-        //        cmd.CommandType = System.Data.CommandType.Text;
-        //        DataTable dTable = new DataTable();
-        //        if (conn.State == ConnectionState.Closed) conn.Open();
-        //        SqlDataReader dReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-        //        dTable.Load(dReader);
-        //        GridViewSeller.DataSource = dTable;
-        //        GridViewSeller.DataBind();
-        //    }
+                    }
+                }
+            }
+        }
+        protected void OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewRfq.PageIndex = e.NewPageIndex;
+            this.BindGrid();
+        }
+        protected void Refresh(object sender, ImageClickEventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection())
+            {
+                conn.ConnectionString = _ConnStr;
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = "select * from RFQ where RFQ_UserID = '" + Session["M_Subscriber_UserID"].ToString() + "' order by RFQ_Number ";
+                cmd.CommandType = System.Data.CommandType.Text;
+                DataTable dTable = new DataTable();
+                if (conn.State == ConnectionState.Closed) conn.Open();
+                SqlDataReader dReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                dTable.Load(dReader);
+                GridViewRfq.DataSource = dTable;
+                GridViewRfq.DataBind();
+            }
 
-        //}
+        }
     }
 }

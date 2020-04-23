@@ -23,6 +23,14 @@
             sender.get_element().value = selectedDate.format("dd/MM/yyyy") + " " + now.format("hh:mm tt");
         }
     </script>
+    <script type="text/javascript">
+    function selectMe(obj)
+        {
+        obj.style.backgroundColor="beige";
+        obj.style.disabled=true;
+        obj.style.cursor='default';
+        }
+</script>
    
     
     <style type="text/css">
@@ -143,7 +151,7 @@
             
             <div >
             
-            
+            <asp:label ID="lblrfqslno" runat="server" Visible="false">Slno</asp:label>
             <label for="txtrfq" style="font-size:19px;margin-left:20px;margin-right:50px"> RFQ Number* <br> <asp:TextBox ID="txtrfqnumber"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
            <asp:RequiredFieldValidator ID="rfvrfqnumber" ControlToValidate="txtrfqnumber" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
             <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
@@ -206,9 +214,8 @@
              <br /> <br /> <br /> <br />  
            
             <asp:Button ID="Addbutton" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click"  />
-            <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px"  />
-                 <asp:Button ID="Submitbutton" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Submit" runat="server" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px"  />
-             <asp:Button ID="Mailbutton" runat="server" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="SendMail" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Mailbutton_Click" />
+            <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton_Click"  />
+             <asp:Button ID="Mailbutton" runat="server" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px; width:100px;  font-family:'Linux Libertine G'" Text="Release" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Mailbutton_Click" />
              <asp:Button ID="Cancelbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Cancel" runat="server" font-size="Medium" BackColor="#ccff33" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Cancelbutton_Click"  />
            
                 <br />
@@ -219,9 +226,9 @@
                 <asp:Label ID="lbltotalcount" runat="server" Font-Bold="true" Font-Size="17px"></asp:Label>
                 
                  <asp:TextBox ID="txtSearch" CssClass="pull-right" Width="200px" placeholder="Search" runat="server" />
-                <asp:ImageButton ID="btnSearch" runat="server" CssClass="pull-right" style="margin-left:5px" width="20" Height="20" ImageUrl="/images/search.png"  /> 
+                <asp:ImageButton ID="btnSearch" runat="server" CssClass="pull-right" style="margin-left:5px" width="20" Height="20" ImageUrl="/images/search.png" OnClick="Search"  /> 
 
-                 <asp:ImageButton ID="btnRefresh" runat="server" CssClass="pull-right" width="20" Height="20" ImageUrl="/images/refresh.png"  />
+                 <asp:ImageButton ID="btnRefresh" runat="server" CssClass="pull-right" width="20" Height="20" ImageUrl="/images/refresh.png" OnClick="Refresh"  />
                  
                 
                 <asp:GridView ID="GridViewRfq"  runat="server" AutoGenerateColumns="false"   RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="RFQ_Slno" OnSelectedIndexChanged="GridViewRfq_SelectedIndexChanged" OnRowDeleting ="GridViewRfq_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >

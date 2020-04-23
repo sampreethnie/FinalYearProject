@@ -85,6 +85,15 @@ namespace FinalYearProject {
         protected global::System.Web.UI.HtmlControls.HtmlButton ButtonSeller;
         
         /// <summary>
+        /// lblrfqslno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblrfqslno;
+        
+        /// <summary>
         /// txtrfqnumber control.
         /// </summary>
         /// <remarks>
@@ -425,15 +434,6 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Updatebutton;
-        
-        /// <summary>
-        /// Submitbutton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Submitbutton;
         
         /// <summary>
         /// Mailbutton control.
