@@ -176,6 +176,7 @@
     <Content Include="InvoiceDisplay.aspx" />
     <Content Include="MasterPage.Master" />
     <Content Include="RFQ.aspx" />
+    <Content Include="SQ.aspx" />
     <Content Include="WebForm1.aspx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Mainpage.aspx" />
@@ -404,6 +405,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SQ.aspx.cs">
+      <DependentUpon>SQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SQ.aspx.designer.cs">
+      <DependentUpon>SQ.aspx</DependentUpon>
     </Compile>
     <Compile Include="SQLHelper.cs" />
     <Compile Include="Startup.cs" />

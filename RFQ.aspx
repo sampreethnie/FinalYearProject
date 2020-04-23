@@ -180,7 +180,7 @@
                 <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight" onkeyup="WeightCalculation()"  runat="server"  Width="145px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvvolumetricweight" ControlToValidate="txtvolumetricweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
-                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight" onkeyup="WeightCalculation()"  runat="server"  Width="142px"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight" onkeyup="WeightCalculation()"  runat="server" ReadOnly="true"  Width="142px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvchargeableweight" ControlToValidate="txtchargeableweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
              <label style="font-size:19px;margin-left:20px;margin-right:51px"> PickupAddress* <br> <asp:TextBox ID="txtpickupaddress" Width="158px"  runat="server"></asp:TextBox> </label>
