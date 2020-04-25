@@ -141,8 +141,8 @@ namespace FinalYearProject
         }
         protected void Addbutton_Click(object sender, EventArgs e)
         {
-            string adddetails = @"INSERT INTO [ShipmentDeliveryBuyer] ([sellershipmentnumber],[sellercreationdate],[sellercustomer],[sellernumberofpackages],[sellerhawb],[sellerhawbdate],[sellermawb],[sellermawbdate],[sellerairline],[sellerflightnumber],[selleretd],[sellereta],[selleratd],[sellerata],[sellerdelivered],[sellerdeliverydate],[sellerreceivedbyname],[buyerreceived],[buyerreceivedbyname],[buyerdeliverydate])
-            VALUES(@sellershipmentnumber,@sellercreationdate,@sellercustomer,@sellernumberofpackages,@sellerhawb,@sellerhawbdate,@sellermawb,@sellermawbdate,@sellerairline,@sellerflightnumber,@selleretd,@sellereta,@selleratd,@sellerata,@sellerdelivered,@sellerdeliverydate,@sellerreceivedbyname,@buyerreceived,@buyerreceivedbyname,@buyerdeliverydate)";
+            string adddetails = @"INSERT INTO [ShipmentDeliveryBuyer] ([sellershipmentnumber],[sellercreationdate],[sellercustomer],[sellernumberofpackages],[sellerhawb],[sellerhawbdate],[sellermawb],[sellermawbdate],[sellerairline],[sellerflightnumber],[selleretd],[sellereta],[selleratd],[sellerata],[sellerdelivered],[sellerdeliverydate],[sellerreceivedbyname],[buyerreceived],[buyerreceivedbyname],[buyerdeliverydate],[BuyerUserID],[BuyerTimestamp])
+            VALUES(@sellershipmentnumber,@sellercreationdate,@sellercustomer,@sellernumberofpackages,@sellerhawb,@sellerhawbdate,@sellermawb,@sellermawbdate,@sellerairline,@sellerflightnumber,@selleretd,@sellereta,@selleratd,@sellerata,@sellerdelivered,@sellerdeliverydate,@sellerreceivedbyname,@buyerreceived,@buyerreceivedbyname,@buyerdeliverydate,@BuyerUserID,@Buyer_Timestamp)";
             string receivedchecking = received.Checked ? "Y" : "N";
             string deliverychecking = delivery.Checked ? "Y" : "N";
             using (SqlConnection con = new SqlConnection(_ConnStr))
@@ -172,6 +172,8 @@ namespace FinalYearProject
                 cmd.Parameters.AddWithValue("@buyerreceived", receivedchecking);
                 cmd.Parameters.AddWithValue("@buyerreceivedbyname", txtbuyerreceivedbyname.Text);
                 cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
+                cmd.Parameters.AddWithValue("@Buyer_UserID", Session["M_Subscriber_UserID"]);
+                cmd.Parameters.AddWithValue("@Buyer_Timestamp", DateTime.Now);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 BindGridView();

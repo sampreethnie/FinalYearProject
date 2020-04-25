@@ -275,7 +275,7 @@ protected void GridViewRfq_RowDeleting(object sender, GridViewDeleteEventArgs e)
 
 
 }
-        protected void Updatebutton_Click(object sender, EventArgs e)
+        protected void Updatebuttonrfq_Click(object sender, EventArgs e)
         {
 
 
@@ -310,9 +310,11 @@ protected void GridViewRfq_RowDeleting(object sender, GridViewDeleteEventArgs e)
                 cmd.Parameters.AddWithValue("@RFQ_Timestamp", DateTime.Now);
                 con.Open();
                 cmd.ExecuteNonQuery();
+                GridViewRfq.EditIndex = -1;
+
                 BindGridView();
 
-                con.Close();
+                
                 //cmd.ExecuteNonQuery();
                 //GridViewRfq.EditIndex = -1;
                 //BindGridView();
@@ -397,7 +399,8 @@ protected void Cancelbutton_Click(object sender, EventArgs e)
                 msg.IsBodyHtml = true;
 
                 msg.Body = "Please find herewith the details of RFQ"+ "<br/>"+
-                    "Buyer Name:"+Session["M_Subscriber_UserID"].ToString()+"<br/>"+
+                    "Buyer UserName:"+Session["M_Subscriber_UserID"].ToString()+"<br/>"+
+                    "Buyer CompanyName:"+lblcompanyname.Text +"<br/>"+
                     "RFQ Number:" + txtrfqnumber.Text + "<br/>"+
                            "Creation Date:" + txtcreationdate.Text + "<br/>"+
                             "Origin Country:"+ dropdownorigincountry.SelectedItem.Text + "<br/>"+

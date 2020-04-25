@@ -100,8 +100,12 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-    <li><a href="ShipmentDelivery(Buyer).aspx">Shipmentdelivery</a></li>
-    <li><a href="#">RFQ</a></li>
+    <li><a href="RFQ.aspx">RFQ</a></li>
+    
+    <li><a href="#">Quote Negotiation(Buyer)</a></li>
+     <li><a href="#">Orders(Buyer)</a></li>
+      <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
+      <li><a href="#">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -117,8 +121,12 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-    <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
-    <li><a href="#">SellerQuote</a></li>
+    <li><a href="SQ.aspx">SellerQuote</a></li>
+      <li><a href="#">Quote Negotiation(Seller)</a></li>
+      <li><a href="#">Orders(Seller)</a></li>
+
+      <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
+      <li><a href="InvoiceDetails.aspx">Invoice</a></li>
    
   </ul>
                                  </div>

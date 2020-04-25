@@ -108,8 +108,12 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-    <li><a href="ShipmentDelivery(Buyer).aspx">Shipmentdelivery</a></li>
-    <li><a href="#">RFQ</a></li>
+    <li><a href="RFQ.aspx">RFQ</a></li>
+    
+    <li><a href="#">Quote Negotiation(Buyer)</a></li>
+     <li><a href="#">Orders(Buyer)</a></li>
+      <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
+      <li><a href="#">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -125,8 +129,12 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-    <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
-    <li><a href="#">SellerQuote</a></li>
+    <li><a href="SQ.aspx">SellerQuote</a></li>
+      <li><a href="#">Quote Negotiation(Seller)</a></li>
+      <li><a href="#">Orders(Seller)</a></li>
+
+      <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
+      <li><a href="InvoiceDetails.aspx">Invoice</a></li>
    
   </ul>
                                  </div>
@@ -142,22 +150,23 @@
             
             <div >
             
-            
-            <label for="txtshipmentnumber" style="font-size:19px;margin-left:20px;margin-right:50px"> Shipment Number* <br> <asp:TextBox ID="txtshipmentnumber" Enabled="false"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px">Select RFQ Number* <br> <asp:DropDownList ID="dropdownrfq" Height="30px"  Width="160px" runat="server" OnSelectedIndexChanged="dropdownrfq_SelectedIndexChanged" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
+           <br /> <br />
+                 <label for="txtshipmentnumber" style="font-size:19px;margin-left:20px;margin-right:50px"> Shipment Number* <br> <asp:TextBox ID="txtshipmentnumber" Enabled="false"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
            <asp:RequiredFieldValidator ID="rfvshipmentnumber" ControlToValidate="txtshipmentnumber" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Enabled="false" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarcreationdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtcreationdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              <asp:RequiredFieldValidator ID="rfvcreationdate" ControlToValidate="txtcreationdate" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-            <label style="font-size:19px;margin-left:20px;margin-right:50px">Customer* <br> <asp:DropDownList ID="dropdowncustomer" Height="30px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px">Customer* <br> <asp:DropDownList ID="dropdowncustomer" Enabled="false" Height="30px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
             <asp:RequiredFieldValidator ID="rfvcustomer" ControlToValidate="dropdowncustomer" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 <br /> <br />
-          <label style="font-size:19px;margin-left:20px;margin-right:35px"> Number of packages* <br> <asp:TextBox ID="txtnoofpackages" Width="145px"  runat="server"></asp:TextBox> </label>
+          <label style="font-size:19px;margin-left:20px;margin-right:35px"> Number of packages* <br> <asp:TextBox ID="txtnoofpackages" ReadOnly="true" Width="145px"  runat="server"></asp:TextBox> </label>
           <asp:RequiredFieldValidator ID="rfvnoofpackages" ControlToValidate="txtnoofpackages" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                  
-                 <label style="font-size:19px;margin-left:20px;margin-right:51px"> Gross Weight* <br> <asp:TextBox ID="txtgrossweight" runat="server" Width="145px"></asp:TextBox> </label>
+                 <label style="font-size:19px;margin-left:20px;margin-right:51px"> Gross Weight* <br> <asp:TextBox ID="txtgrossweight" ReadOnly="true" runat="server" Width="145px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvgrossweight" ControlToValidate="txtgrossweight" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-                <label style="font-size:19px;margin-left:20px;margin-right:50px"> Chargeable Weight* <br> <asp:TextBox ID="txtchargeableweight" runat="server" Width="145px"></asp:TextBox> </label>
-                <asp:RequiredFieldValidator ID="rfvchargeableweight" ControlToValidate="txtchargeableweight" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
+                <label style="font-size:19px;margin-left:20px;margin-right:50px"> Chargeable Weight* <br> <asp:TextBox ID="txtchargeableweight" ReadOnly="true" runat="server" Width="145px"></asp:TextBox> </label>
+                <asp:RequiredFieldValidator ID="rfvchargeableweight" ControlToValidate="txtchargeableweight" ValidationGroup="addshipmentdetailsseller"  SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 <br /> <br />
              <label style="font-size:19px;margin-left:20px;margin-right:66px"> HAWB* <br> <asp:TextBox ID="txthawb" Width="145px"  runat="server"></asp:TextBox> </label>
             <asp:RequiredFieldValidator ID="rfvhawb" ControlToValidate="txthawb" ValidationGroup="addshipmentdetailsseller" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
@@ -202,12 +211,12 @@
             
              <br /> <br /> <br /> <br />  
            
-            <asp:Button ID="Addbutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
+            <asp:Button ID="Addbutton"  Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
             <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton_Click" />
                  <asp:Button ID="Submitbutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Submit" runat="server" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Submitbutton_Click" />
              
              <asp:Button ID="Cancelbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Cancel" runat="server" font-size="Medium" BackColor="#ccff33" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Cancelbutton_Click" />
-           <asp:Button ID="btnmail" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="SendMail" runat="server" font-size="Medium" BackColor="#ccff33" class="btn- btn-primary" Width="94px" Height="40px" OnClick="mailbutton_Click" />
+           
                 <br />
                 <br />
                 <br />
@@ -249,7 +258,8 @@
                         <asp:BoundField DataField="receivedbyname" HeaderText="ReceivedBy" />
                         <asp:BoundField DataField="receivermobileno" HeaderText="ReceiverMobileNo" />
                         <asp:BoundField DataField="receiveremailid" HeaderText="ReceiverEmail" />
-
+                        <asp:BoundField DataField="userid" HeaderText="UserID" Visible="false" />
+                        <asp:BoundField DataField="SellerTimestamp" HeaderText="Timestamp" Visible="false" />
                     </Columns>
                     
                     <EditRowStyle BackColor="#999999" />

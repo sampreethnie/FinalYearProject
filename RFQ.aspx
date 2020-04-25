@@ -23,14 +23,7 @@
             sender.get_element().value = selectedDate.format("dd/MM/yyyy") + " " + now.format("hh:mm tt");
         }
     </script>
-    <script type="text/javascript">
-    function selectMe(obj)
-        {
-        obj.style.backgroundColor="beige";
-        obj.style.disabled=true;
-        obj.style.cursor='default';
-        }
-</script>
+    
    
     
     <style type="text/css">
@@ -117,8 +110,12 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-    <li><a href="ShipmentDelivery(Buyer).aspx">Shipmentdelivery</a></li>
     <li><a href="RFQ.aspx">RFQ</a></li>
+    
+    <li><a href="#">Quote Negotiation(Buyer)</a></li>
+     <li><a href="#">Orders(Buyer)</a></li>
+      <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
+      <li><a href="#">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -134,8 +131,12 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-    <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
-    <li><a href="#">SellerQuote</a></li>
+     <li><a href="SQ.aspx">SellerQuote</a></li>
+      <li><a href="#">Quote Negotiation(Seller)</a></li>
+      <li><a href="#">Orders(Seller)</a></li>
+
+      <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
+      <li><a href="InvoiceDetails.aspx">Invoice</a></li>
    
   </ul>
                                  </div>
@@ -180,7 +181,7 @@
                 <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight" onkeyup="WeightCalculation()"  runat="server"  Width="145px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvvolumetricweight" ControlToValidate="txtvolumetricweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
-                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight" onkeyup="WeightCalculation()"  runat="server" ReadOnly="true"  Width="142px"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight"   runat="server"  Width="142px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvchargeableweight" ControlToValidate="txtchargeableweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
              <label style="font-size:19px;margin-left:20px;margin-right:51px"> PickupAddress* <br> <asp:TextBox ID="txtpickupaddress" Width="158px"  runat="server"></asp:TextBox> </label>
@@ -214,7 +215,7 @@
              <br /> <br /> <br /> <br />  
            
             <asp:Button ID="Addbutton" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click"  />
-            <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton_Click"  />
+            <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebuttonrfq_Click"  />
              <asp:Button ID="Mailbutton" runat="server" CausesValidation="true" ValidationGroup="addrfq" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px; width:100px;  font-family:'Linux Libertine G'" Text="Release" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Mailbutton_Click" />
              <asp:Button ID="Cancelbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Cancel" runat="server" font-size="Medium" BackColor="#ccff33" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Cancelbutton_Click"  />
            
@@ -278,7 +279,7 @@
                  
 
         </div>
-        <script type="text/javascript">
+        <%--<script type="text/javascript">
    
     function WeightCalculation()
     {
@@ -294,7 +295,7 @@
         if (_txt2.value >= _txt1.value)
             _txt3.value = parseInt(t2);
     }
-        </script>
+        </script>--%>
     </form>
 </body>
 </html>
