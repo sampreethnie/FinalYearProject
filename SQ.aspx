@@ -154,7 +154,7 @@
             
                 <label style="font-size:19px;margin-left:20px;margin-right:50px">Select your RFQ Number <br> <asp:DropDownList ID="dropdownrfq" OnSelectedIndexChanged="dropdownrfq_SelectedIndexChanged" Height="29px"  Width="160px" runat="server" CssClass="form-control"  AutoPostBack="true" ></asp:DropDownList></label>
            <br /><br />     
-                <asp:label ID="lblrfqslno" runat="server" Visible="false">Slno</asp:label>
+               <asp:TextBox ID="txtsqlslno"  CssClass="form-control" Width="145px" runat="server" Visible="false"></asp:TextBox>
             <label for="txtrfq" style="font-size:19px;margin-left:20px;margin-right:50px"> RFQ Number* <br> <asp:TextBox ID="txtrfqnumber"  CssClass="form-control" Width="145px" runat="server" ReadOnly="true" ></asp:TextBox> </label>
            <asp:RequiredFieldValidator ID="rfvrfqnumber" ControlToValidate="txtrfqnumber" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
             <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ReadOnly="true"  ></asp:TextBox> </label>
@@ -244,7 +244,7 @@
                     <Columns>
                         <asp:CommandField HeaderText="Select"  ShowSelectButton="true" />
                         <asp:CommandField HeaderText="Delete" ShowDeleteButton="true" />
-                        <asp:BoundField DataField="SQ_Slno" HeaderText="SQSlno" Visible="false" />
+                        <asp:BoundField DataField="SQ_Slno" HeaderText="SQSlno"   />
                         <asp:BoundField DataField="SQ_RFQ_Number" HeaderText="RFQ Number" />
                         <asp:BoundField DataField="SQ_Company" HeaderText="SellerCompanyname" Visible="false" />
                        <asp:BoundField DataField="SQ_RFQ_CreationDate" HeaderText="CreationDate" />

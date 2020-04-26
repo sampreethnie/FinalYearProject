@@ -205,7 +205,9 @@ namespace FinalYearProject
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = addsq;
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@SQ_RFQ_Number", txtrfqnumber.Text);
+               
+                cmd.Parameters.AddWithValue("@SQ_Slno",txtsqlslno.Text);
+                cmd.Parameters.AddWithValue("@SQ_RFQ_Number",txtrfqnumber.Text);
                 
                 cmd.Parameters.AddWithValue("@SQ_Company", Session["CompanySlnosq"]);
                 cmd.Parameters.AddWithValue("@SQ_RFQ_CreationDate", Convert.ToDateTime(txtcreationdate.Text));
@@ -261,7 +263,7 @@ namespace FinalYearProject
         protected void GridViewSq_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = GridViewSq.SelectedRow;
-
+            txtsqlslno.Text = row.Cells[2].Text;
             txtrfqnumber.Text = row.Cells[3].Text;
             txtcreationdate.Text = row.Cells[5].Text;
             dropdownorigincountry.SelectedItem.Text = row.Cells[6].Text;
@@ -306,16 +308,18 @@ namespace FinalYearProject
         {
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
-            SqlCommand cmd = new SqlCommand("update SQ set SQ_OfferPrice = @SQ_OfferPrice where SQ_Slno = @SQ_Slno",con);
-            cmd.Parameters.AddWithValue("@SQ_Slno", SqlDbType.Int);
+           
+            SqlCommand cmd = new SqlCommand("update SQ set SQ_OfferPrice=@SQ_OfferPrice where SQ_Slno=@SQ_Slno",con);
+            cmd.Parameters.AddWithValue("@SQ_Slno",txtsqlslno.Text);
 
-             cmd.Parameters.AddWithValue("@SQ_OfferPrice", txtofferprice.Text);
+             cmd.Parameters.AddWithValue("@SQ_OfferPrice",txtofferprice.Text);
 
               
 
            
             cmd.ExecuteNonQuery();
                 GridViewSq.EditIndex = -1;
+            
                 BindGridView();
             Updatebutton.Visible = false;
 

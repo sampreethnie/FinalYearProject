@@ -174,14 +174,14 @@
                
                  
                  
-                 <label style="font-size:19px;margin-left:14px;margin-right:38px"> Gross Weight(Kg)* <br> <asp:TextBox ID="txtgrossweight" onkeyup="WeightCalculation()" runat="server"  Width="157px"></asp:TextBox> </label>
+                 <label style="font-size:19px;margin-left:14px;margin-right:38px"> Gross Weight(Kg)* <br> <asp:TextBox ID="txtgrossweight"  runat="server" onkeyup="WeightCalculation()"  Width="157px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvgrossweight" ControlToValidate="txtgrossweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
                 <br /> <br />
-                <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight" onkeyup="WeightCalculation()"  runat="server"  Width="145px"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight"   runat="server" onkeyup="WeightCalculation()"  Width="145px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvvolumetricweight" ControlToValidate="txtvolumetricweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
-                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight"   runat="server"  Width="142px"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight" runat="server" onkeyup="WeightCalculation()"  Width="142px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvchargeableweight" ControlToValidate="txtchargeableweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
              <label style="font-size:19px;margin-left:20px;margin-right:51px"> PickupAddress* <br> <asp:TextBox ID="txtpickupaddress" Width="158px"  runat="server"></asp:TextBox> </label>
@@ -232,14 +232,14 @@
                  <asp:ImageButton ID="btnRefresh" runat="server" CssClass="pull-right" width="20" Height="20" ImageUrl="/images/refresh.png" OnClick="Refresh"  />
                  
                 
-                <asp:GridView ID="GridViewRfq"  runat="server" AutoGenerateColumns="false"   RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="RFQ_Slno" OnSelectedIndexChanged="GridViewRfq_SelectedIndexChanged" OnRowDeleting ="GridViewRfq_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
+                <asp:GridView ID="GridViewRfq"  runat="server" AutoGenerateColumns="false"  RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="RFQ_Slno" OnSelectedIndexChanged="GridViewRfq_SelectedIndexChanged" OnRowDeleting ="GridViewRfq_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     
                     <Columns>
                         <asp:CommandField HeaderText="Select"  ShowSelectButton="true" />
                         <asp:CommandField HeaderText="Delete" ShowDeleteButton="true" />
-                        <asp:BoundField DataField="RFQ_Slno" HeaderText="RfqSlno" Visible="false" />
+                        <asp:BoundField DataField="RFQ_Slno" HeaderText="RfqSlno"  />
                         <asp:BoundField DataField="RFQ_Number" HeaderText="RFQ Number" />
                         <asp:BoundField DataField="RFQ_Company" HeaderText="BuyerCompanyname" Visible="false" />
                        <asp:BoundField DataField="RFQ_CreationDate" HeaderText="CreationDate" />
@@ -260,7 +260,7 @@
                         <asp:BoundField DataField="RFQ_HandlingInfo" HeaderText="Handling Info" />
                         <asp:BoundField DataField="RFQ_UserID" HeaderText="UserID" Visible="false" />
                         <asp:BoundField DataField="RFQ_Timestamp" HeaderText="Timestamp" Visible="false" />
-
+                        
                     </Columns>
                     
                     <EditRowStyle BackColor="#999999" />
@@ -279,7 +279,7 @@
                  
 
         </div>
-        <%--<script type="text/javascript">
+        <script type="text/javascript">
    
     function WeightCalculation()
     {
@@ -295,7 +295,7 @@
         if (_txt2.value >= _txt1.value)
             _txt3.value = parseInt(t2);
     }
-        </script>--%>
+        </script>
     </form>
 </body>
 </html>
