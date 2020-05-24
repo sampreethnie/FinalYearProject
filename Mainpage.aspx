@@ -8,7 +8,7 @@
     <script type="text/javascript" >
         function Validate()
         {
-            var EmailID = document.getElementById('txtEmail');
+            ////var EmailID = document.getElementById('txtEmail');
             var Password = document.getElementById('txtPassword');
             if((EmailID.value=='') || (Password.value==''))
             {
@@ -218,7 +218,7 @@
                                       </div>
                                   </div>
                              <br />
-                        <asp:Button ID="submitbutton1" runat="server" CssClass="btn btn-primary" Text="Submit" OnClick="btnSubmit" CausesValidation="true" ValidationGroup="registrationform" />
+                        <asp:Button ID="submitbutton1" runat="server" CssClass="btn btn-primary" Text="Submit"  OnClick="btnSubmit" CausesValidation="true" ValidationGroup="registrationform" />
                         <asp:Button ID="resetbutton" runat="server" CssClass="btn btn-danger" Text="Reset" />
                         <asp:Button ID="cancelbutton" runat="server" data-dismiss="modal" CssClass="btn btn-default" Text="Cancel" />
 

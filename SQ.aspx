@@ -109,10 +109,8 @@
   </button>
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
-    <li><a href="RFQ.aspx">RFQ</a></li>
-    
-    <li><a href="#">Quote Negotiation(Buyer)</a></li>
-     <li><a href="#">Orders(Buyer)</a></li>
+     <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+     <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="#">Invoice Verification </a></li>
    
@@ -131,8 +129,8 @@
     <!-- here is the asp.net link button to make post back -->
           
     <li><a href="SQ.aspx">SellerQuote</a></li>
-      <li><a href="#">Quote Negotiation(Seller)</a></li>
-      <li><a href="#">Orders(Seller)</a></li>
+      <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
+      <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
@@ -212,6 +210,7 @@
                  <label style="font-size:19px;margin-left:20px;margin-right:59px"> Buyer Name <br> <asp:TextBox ID="txtbuyername" Width="145px" ReadOnly="true" runat="server" ></asp:TextBox> </label>
                   <label style="font-size:19px;margin-left:20px;margin-right:59px"> Buyer Currency <br> <asp:TextBox ID="txtbuyercurrency" Width="145px" ReadOnly="true"  runat="server"></asp:TextBox> </label>
                 <br /> <br />
+                <label style="font-size:19px;margin-left:20px;margin-right:59px"> Expected Price * <br> <asp:TextBox ID="txtexpectedprice" Width="145px" ReadOnly="true"  runat="server"></asp:TextBox> </label>
                  <label style="font-size:19px;margin-left:20px;margin-right:59px"> Offer Price * <br> <asp:TextBox ID="txtofferprice" Width="145px"  runat="server"></asp:TextBox> </label>
                                 <asp:RequiredFieldValidator ID="rfvofferprice" ControlToValidate="txtofferprice" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
 
@@ -231,13 +230,12 @@
                 <label style="font-size:17px">Total Count:</label>
                 <asp:Label ID="lbltotalcount" runat="server" Font-Bold="true" Font-Size="17px"></asp:Label>
                 
-                 <asp:TextBox ID="txtSearch" CssClass="pull-right" Width="200px" placeholder="Search" runat="server" />
-                <asp:ImageButton ID="btnSearch" runat="server" CssClass="pull-right" style="margin-left:5px" width="20" Height="20" ImageUrl="/images/search.png"   /> 
+                
 
-                 <asp:ImageButton ID="btnRefresh" runat="server" CssClass="pull-right" width="20" Height="20" ImageUrl="/images/refresh.png"   />
+                 
                  
                 
-                <asp:GridView ID="GridViewSq"  runat="server" AutoGenerateColumns="false" OnRowDeleting ="GridViewSq_RowDeleting"   RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" OnSelectedIndexChanged="GridViewSq_SelectedIndexChanged"  DataKeyNames="SQ_Slno"  CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
+                <asp:GridView ID="GridViewSq"  runat="server" AutoGenerateColumns="false" OnRowDeleting ="GridViewSq_RowDeleting" OnRowDataBound="GridViewSq_RowDataBound"   RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" OnSelectedIndexChanged="GridViewSq_SelectedIndexChanged"  DataKeyNames="SQ_Slno"  CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     
@@ -263,11 +261,18 @@
                         <asp:BoundField DataField="SQ_RFQ_QuoteDueBy" HeaderText="Quote DueBy" />
                         <asp:BoundField DataField="SQ_RFQ_Commodity" HeaderText="Commodity" />
                         <asp:BoundField DataField="SQ_RFQ_HandlingInfo" HeaderText="Handling Info" />
-                        <asp:BoundField DataField="SQ_UserID" HeaderText="UserID" Visible="false" />
-                        <asp:BoundField DataField="SQ_OfferPrice" HeaderText="OfferPrice" />
-                        <asp:BoundField DataField="SQ_Timestamp" HeaderText="Timestamp" Visible="false" />
                         <asp:BoundField DataField="SQ_RFQ_Company" HeaderText="BuyerCompanyName" />
                         <asp:BoundField DataField="SQ_BuyerCurrency" HeaderText="BuyerCurrency" />
+                        <asp:BoundField DataField="SQ_UserID" HeaderText="UserID" Visible="false" />
+                        
+                        <asp:BoundField DataField="SQ_OfferPrice" HeaderText="OfferPrice" />
+                        <asp:BoundField DataField="SQ_RFQ_ExpectedPrice" HeaderText="ExpectedPrice" />
+                        <asp:BoundField DataField="SQ_Timestamp" HeaderText="Timestamp" Visible="false" />
+                        
+                        <asp:BoundField DataField="SQ_Submit" HeaderText="Submitted?" />
+                        <asp:BoundField DataField="SQ_OrderStatus" HeaderText="Order Status"   />
+                        <asp:BoundField DataField="M_Company_Name" HeaderText="Seller Company Name" />
+                        <asp:BoundField DataField="M_Currency_Name" HeaderText="Seller Currency Name" />
                     </Columns>
                     
                     <EditRowStyle BackColor="#999999" />

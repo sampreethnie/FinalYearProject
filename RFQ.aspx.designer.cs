@@ -418,6 +418,24 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txthandlinginfo;
         
         /// <summary>
+        /// txtexpectedprice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtexpectedprice;
+        
+        /// <summary>
+        /// rfvexpectedprice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvexpectedprice;
+        
+        /// <summary>
         /// Addbutton control.
         /// </summary>
         /// <remarks>

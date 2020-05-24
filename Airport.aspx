@@ -95,8 +95,8 @@
     
     <li><a href="RFQ.aspx">RFQ</a></li>
     
-    <li><a href="#">Quote Negotiation(Buyer)</a></li>
-     <li><a href="#">Orders(Buyer)</a></li>
+    <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+     <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="#">Invoice Verification </a></li>
    
@@ -117,8 +117,8 @@
           
     
     <li><a href="SQ.aspx">SellerQuote</a></li>
-      <li><a href="#">Quote Negotiation(Seller)</a></li>
-      <li><a href="#">Orders(Seller)</a></li>
+      <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
+      <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>

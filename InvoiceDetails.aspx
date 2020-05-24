@@ -102,11 +102,10 @@
           
     <li><a href="RFQ.aspx">RFQ</a></li>
     
-    <li><a href="#">Quote Negotiation(Buyer)</a></li>
-     <li><a href="#">Orders(Buyer)</a></li>
+      <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+     <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="#">Invoice Verification </a></li>
-   
   </ul>
                                  </div>
        <div class="btn-group" style="vertical-align:bottom;">
@@ -122,8 +121,8 @@
     <!-- here is the asp.net link button to make post back -->
           
     <li><a href="SQ.aspx">SellerQuote</a></li>
-      <li><a href="#">Quote Negotiation(Seller)</a></li>
-      <li><a href="#">Orders(Seller)</a></li>
+      <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
+      <li><a href="Orders(Seller)">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
@@ -155,15 +154,21 @@
              
         <!- GridView Code to show invoice details -->
        <%-- <div class="table-responsive col-xs-12 nopadding table-shadow">--%>
-        <asp:GridView ID="gvInvoiceDetails" runat="server" AutoGenerateColumns="false"   Width="100%" DataKeyNames="shipmentnumber" EmptyDataText="No records found!!" AllowPaging="true" CellPadding="4" ForeColor="#333333" GridLines="None">
+        <asp:GridView ID="gvInvoiceDetails" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvInvoiceDetails_RowDataBound"   Width="100%"  EmptyDataText="No records found!!" Height="70px"   AllowPaging="true" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
+                <asp:BoundField HeaderText="RFQ Number"  DataField="ShipmentRFQ_Number" />
                 <asp:BoundField HeaderText="ShipmentNumber" DataField="shipmentnumber" InsertVisible="false" ReadOnly="true" SortExpression="shipmentnumber"  />
                 <asp:BoundField HeaderText="CreationDate" DataField="creationdate" />
                 <asp:BoundField HeaderText="Customer" DataField="customer_M_Company_Name" SortExpression="customer_M_Company_Name" />
-                <asp:BoundField HeaderText="Delivered" DataField="delivered"  />
+                <asp:BoundField HeaderText="Customer Currency" DataField="M_Currency_Name"  />
+                <asp:BoundField DataField="RFQ_OriginCountry" HeaderText="Origin Country" />
+                <asp:BoundField DataField="RFQ_OriginAirport" HeaderText="Origin Airport" />
+                <asp:BoundField DataField="RFQ_DestinationCountry" HeaderText="Destination Country" />
+                <asp:BoundField DataField="RFQ_DestinationAirport" HeaderText="Destination Airport" />
+                <asp:BoundField HeaderText="Delivered" DataField="sellerdelivered"  />
                 <asp:BoundField HeaderText="Received" DataField="buyerreceived" />
-                <asp:HyperLinkField Text="View" DataNavigateUrlFields="shipmentnumber,customer_M_Company_Name,creationdate" DataNavigateUrlFormatString="InvoiceDisplay.aspx?shipmentnumber={0}&customer_M_Company_Name={1}&creationdate{2:d}" />
+                <asp:HyperLinkField Text="View" DataNavigateUrlFields="shipmentnumber,ShipmentRFQ_Number,customer_M_Company_Name,RFQ_OriginCountry,RFQ_OriginAirport,RFQ_DestinationCountry,RFQ_DestinationAirport,RFQ_TotalGrwt,RFQ_TotalChwt,RFQ_NumberofPackages,sellerdelivered,buyerreceived,M_Currency_Name,creationdate" DataNavigateUrlFormatString="InvoiceDisplay.aspx?shipmentnumber={0}&ShipmentRFQ_Number={1}&customer_M_Company_Name={2}&RFQ_OriginCountry={3}&RFQ_OriginAirport={4}&RFQ_DestinationCountry={5}&RFQ_DestinationAirport={6}&RFQ_TotalGrwt={7}&RFQ_TotalChwt={8}&RFQ_NumberofPackages={9}&sellerdelivered={10}&buyerreceived={11}&M_Currency_Name={12}&creationdate={13:d}" />
              
               
             </Columns>

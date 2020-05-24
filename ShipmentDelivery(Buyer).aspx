@@ -111,8 +111,8 @@
           
     <li><a href="RFQ.aspx">RFQ</a></li>
     
-    <li><a href="#">Quote Negotiation(Buyer)</a></li>
-     <li><a href="#">Orders(Buyer)</a></li>
+     <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+     <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="#">Invoice Verification </a></li>
    
@@ -131,8 +131,8 @@
     <!-- here is the asp.net link button to make post back -->
           
      <li><a href="SQ.aspx">SellerQuote</a></li>
-      <li><a href="#">Quote Negotiation(Seller)</a></li>
-      <li><a href="#">Orders(Seller)</a></li>
+      <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
+      <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
@@ -215,13 +215,13 @@
             <label style="font-size:19px;margin-left:62px"> ReceivedBy Buyer <br> <asp:TextBox ID="txtbuyerreceivedbyname" Width="145px" runat="server"></asp:TextBox> </label>
             <label style="font-size:19px;margin-left:65px;margin-right:40px"> Delivery date Buyer * <br > <asp:TextBox ID="txtbuyerdeliverydatetime" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderdeliverydatetime" OnClientDateSelectionChanged="AppendTime" PopupButtonID="imgPopup" runat="server" TargetControlID="txtbuyerdeliverydatetime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-            <label style="font-size:19px;margin-left:20px"> Seller Mail <br> <asp:TextBox ID="txtsellermail" Width="145px" ReadOnly="true" runat="server"></asp:TextBox> </label>
+            <%--<label style="font-size:19px;margin-left:20px"> Seller Mail <br> <asp:TextBox ID="txtsellermail" Width="145px" ReadOnly="true" runat="server"></asp:TextBox> </label>--%>
             <br />
             <br />
              <asp:Button ID="Addbutton" Style="margin-left:20px;margin-right:80px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
-            <asp:Button ID="Updatebutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton1_Click" />
-            <asp:Button ID="Submitbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Submit" runat="server" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Submitbutton_Click" />
-             
+            <asp:Button ID="Updatebutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="UpdatebuttonBuyer_Click" />
+            <asp:Button ID="Mailbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Release" runat="server" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Mailbutton_Click" />
+
              <asp:Button ID="Cancelbutton" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Cancel" runat="server" font-size="Medium" BackColor="#ccff33" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Cancelbutton_Click" />
              <br />
             <br />
@@ -255,8 +255,9 @@
                         <asp:BoundField DataField="buyerreceived" HeaderText="BuyerReceived" />
                         <asp:BoundField DataField="buyerreceivedbyname" HeaderText="BuyerReceivedName" />
                         <asp:BoundField DataField="buyerdeliverydate" HeaderText="BuyerDeliveryDate" />
-                        <asp:BoundField DataField="BuyerUserID" HeaderText="Userid" Visible="false" />
+                        <asp:BoundField DataField="BuyerUserID" HeaderText="Userid" Visible="false"  />
                         <asp:BoundField DataField="BuyerTimestamp" HeaderText="timestamp" Visible="false" />
+                        <asp:BoundField DataField="ShipmentDeliveryBuyer_Submit" HeaderText="Submit" />
                     </Columns>
                     
                     <EditRowStyle BackColor="#999999" />

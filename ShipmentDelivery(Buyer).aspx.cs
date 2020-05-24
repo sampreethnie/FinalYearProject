@@ -73,6 +73,7 @@ namespace FinalYearProject
                     ButtonBuyer.Visible = false;
                     
                 }
+                
 
             }
         }
@@ -128,7 +129,7 @@ namespace FinalYearProject
 
                 }
 
-                txtsellermail.Text = sdr[17].ToString();
+                //txtsellermail.Text = sdr[17].ToString();
 
 
 
@@ -144,8 +145,8 @@ namespace FinalYearProject
         }
         protected void Addbutton_Click(object sender, EventArgs e)
         {
-            string adddetails = @"INSERT INTO [ShipmentDeliveryBuyer] ([sellershipmentnumber],[sellercreationdate],[sellercustomer],[sellernumberofpackages],[sellerhawb],[sellerhawbdate],[sellermawb],[sellermawbdate],[sellerairline],[sellerflightnumber],[selleretd],[sellereta],[selleratd],[sellerata],[sellerdelivered],[sellerdeliverydate],[sellerreceivedbyname],[buyerreceived],[buyerreceivedbyname],[buyerdeliverydate],[BuyerUserID],[BuyerTimestamp])
-            VALUES(@sellershipmentnumber,@sellercreationdate,@sellercustomer,@sellernumberofpackages,@sellerhawb,@sellerhawbdate,@sellermawb,@sellermawbdate,@sellerairline,@sellerflightnumber,@selleretd,@sellereta,@selleratd,@sellerata,@sellerdelivered,@sellerdeliverydate,@sellerreceivedbyname,@buyerreceived,@buyerreceivedbyname,@buyerdeliverydate,@BuyerUserID,@BuyerTimestamp)";
+            string adddetails = @"INSERT INTO [ShipmentDeliveryBuyer] ([sellershipmentnumber],[sellercreationdate],[sellercustomer],[sellernumberofpackages],[sellerhawb],[sellerhawbdate],[sellermawb],[sellermawbdate],[sellerairline],[sellerflightnumber],[selleretd],[sellereta],[selleratd],[sellerata],[sellerdelivered],[sellerdeliverydate],[sellerreceivedbyname],[buyerreceived],[buyerreceivedbyname],[buyerdeliverydate],[BuyerUserID],[BuyerTimestamp],[ShipmentDeliveryBuyer_Submit])
+            VALUES(@sellershipmentnumber,@sellercreationdate,@sellercustomer,@sellernumberofpackages,@sellerhawb,@sellerhawbdate,@sellermawb,@sellermawbdate,@sellerairline,@sellerflightnumber,@selleretd,@sellereta,@selleratd,@sellerata,@sellerdelivered,@sellerdeliverydate,@sellerreceivedbyname,@buyerreceived,@buyerreceivedbyname,@buyerdeliverydate,@BuyerUserID,@BuyerTimestamp,'N')";
             string receivedchecking = received.Checked ? "Y" : "N";
             string deliverychecking = delivery.Checked ? "Y" : "N";
             using (SqlConnection con = new SqlConnection(_ConnStr))
@@ -188,6 +189,61 @@ namespace FinalYearProject
               
             }
         }
+
+        protected void UpdatebuttonBuyer_Click(object sender, EventArgs e)
+        {
+            string updatebuyer = @"update [ShipmentDeliveryBuyer] set [sellerdeliverydate]=@sellerdeliverydate,[sellerreceivedbyname]=@sellerreceivedbyname,[buyerreceived]=@buyerreceived,[buyerreceivedbyname]=@buyerreceivedbyname,[buyerdeliverydate]=@buyerdeliverydate where [buyerid] = @buyerid";
+            using (SqlConnection con = new SqlConnection(_ConnStr))
+            {
+                con.ConnectionString = _ConnStr;
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = updatebuyer;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@buyerid", txtbuyerid.Text);
+                cmd.Parameters.AddWithValue("@sellerdeliverydate", Convert.ToDateTime(txtdeliverydate.Text));
+                cmd.Parameters.AddWithValue("@sellerreceivedbyname", txtsellerreceivedby.Text);
+                cmd.Parameters.AddWithValue("@buyerreceived", received.Text);
+                cmd.Parameters.AddWithValue("@buyerreceivedbyname", txtbuyerreceivedbyname.Text);
+                cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
+
+
+
+                con.Open();
+
+
+                cmd.ExecuteNonQuery();
+                GridViewBuyer.EditIndex = -1;
+                BindGridView();
+
+                Updatebutton.Visible = false;
+                clear();
+
+
+            }
+        }
+
+        protected void Mailbutton_Click(object sender, EventArgs e)
+        {
+            SqlConnection con1 = new SqlConnection(_ConnStr);
+            con1.Open();
+            SqlCommand cmd1 = new SqlCommand("update ShipmentDeliveryBuyer set ShipmentDeliveryBuyer_Submit = 'Y' where buyerid=@buyerid", con1);
+
+            cmd1.Parameters.AddWithValue("@buyerid", txtbuyerid.Text);
+
+
+
+
+            cmd1.ExecuteNonQuery();
+
+            BindGridView();
+            con1.Close();
+
+
+
+
+            Updatebutton.Visible = false;
+
+        }
         void clear()
         {
             txtshipmentnumber.Text = string.Empty;
@@ -218,7 +274,7 @@ namespace FinalYearProject
 
             con1.Open();
 
-            SqlCommand cmd = new SqlCommand("select *from ShipmentDeliveryBuyer", con1);
+            SqlCommand cmd = new SqlCommand("select *from ShipmentDeliveryBuyer where BuyerUserID = '" + Session["M_Subscriber_UserID"].ToString() + "'", con1);
             SqlDataAdapter dabuyer= new SqlDataAdapter(cmd);
             DataSet dsbuyer = new DataSet();
             dabuyer.Fill(dsbuyer);
@@ -252,13 +308,23 @@ namespace FinalYearProject
                 {
                     e.Row.Cells[20].Text = "No";
                 }
-
+                if (e.Row.Cells[25].Text == "Y")
+                {
+                    e.Row.Cells[25].Text = "Yes";
+                    e.Row.Enabled = false;
+                }
+                if (e.Row.Cells[25].Text == "N")
+                {
+                    e.Row.Cells[25].Text = "No";
+                    e.Row.Enabled = true;
+                }
             }
 
         }
         protected void GridViewBuyer_SelectedIndexChanged(object sender, EventArgs e)
         {
             GridViewRow row = GridViewBuyer.SelectedRow;
+            txtbuyerid.Text = row.Cells[2].Text;
             txtshipmentnumber.Text = row.Cells[3].Text;
             txtcreationdate.Text = row.Cells[4].Text;
             dropdowncustomer.SelectedItem.Text = row.Cells[5].Text;
@@ -301,6 +367,7 @@ namespace FinalYearProject
             }
             txtbuyerreceivedbyname.Text = row.Cells[21].Text;
             txtbuyerdeliverydatetime.Text = row.Cells[22].Text;
+            
 
             BindGridView();
 
@@ -321,110 +388,7 @@ namespace FinalYearProject
 
 
         }
-        protected void Updatebutton1_Click(object sender, EventArgs e)
-        {
-            SqlConnection con = new SqlConnection(_ConnStr);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("update ShipmentDeliveryBuyer set sellershipmentnumber=@sellershipmentnumber,sellercreationdate=@sellercreationdate,sellercustomer=@sellercustomer,sellernumberofpackages=@sellernumberofpackages,sellerhawb=@sellerhawb,sellerhawbdate=@sellerhawbdate,sellermawb=@sellermawb,sellermawbdate=@sellermawbdate,sellerairline=@sellerairline,sellerflightnumber=@sellerflightnumber,selleretd=@selleretd,sellereta=@sellereta,selleratd=@selleratd,sellerata=@sellerata,sellerdelivered=@sellerdelivered,sellerdeliverydate=@sellerdeliverydate,sellerreceivedbyname=@sellerreceivedbyname,buyerreceived=@buyerreceived,buyerreceivedbyname=@buyerreceivedbyname,buyerdeliverydate=@buyerdeliverydate where buyerid = @buyerid", con);
-            cmd.Parameters.AddWithValue("@buyerid", txtbuyerid.Text);   
-            cmd.Parameters.AddWithValue("@sellershipmentnumber", txtshipmentnumber.Text);
-            cmd.Parameters.AddWithValue("@sellercreationdate", Convert.ToDateTime(txtcreationdate.Text));
-            cmd.Parameters.AddWithValue("@sellercustomer", dropdowncustomer.SelectedItem.Text);
-            cmd.Parameters.AddWithValue("@sellernumberofpackages", txtnoofpackages.Text);
-            cmd.Parameters.AddWithValue("@sellerhawb", txthawb.Text);
-            cmd.Parameters.AddWithValue("@sellerhawbdate", Convert.ToDateTime(txthawbdate.Text));
-            cmd.Parameters.AddWithValue("@sellermawb", txtmawb.Text);
-            cmd.Parameters.AddWithValue("@sellermawbdate", Convert.ToDateTime(txtmawbdate.Text));
-            cmd.Parameters.AddWithValue("@sellerairline", txtairline.Text);
-            cmd.Parameters.AddWithValue("@sellerflightnumber", txtflightnumber.Text);
-            cmd.Parameters.AddWithValue("@selleretd", Convert.ToDateTime(txtetd.Text));
-            cmd.Parameters.AddWithValue("@sellereta", Convert.ToDateTime(txteta.Text));
-            cmd.Parameters.AddWithValue("@selleratd", Convert.ToDateTime(txtatd.Text));
-            cmd.Parameters.AddWithValue("@sellerata", Convert.ToDateTime(txtata.Text));
-            cmd.Parameters.AddWithValue("@sellerdelivered", delivery.Text);
-            cmd.Parameters.AddWithValue("@sellerdeliverydate", Convert.ToDateTime(txtdeliverydate.Text));
-            cmd.Parameters.AddWithValue("@sellerreceivedbyname", txtsellerreceivedby.Text);
-            cmd.Parameters.AddWithValue("@buyerreceived", received.Text);
-            cmd.Parameters.AddWithValue("@buyerreceivedbyname", txtbuyerreceivedbyname.Text);
-            cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
-            
-
-            cmd.ExecuteNonQuery();
-            GridViewBuyer.EditIndex = -1;
-            BindGridView();
-            Updatebutton.Visible = false;
-           
-
-        }
-        protected void Submitbutton_Click(object sender, EventArgs e)
-        {
-            //SqlConnection con = new SqlConnection(_ConnStr);
-            //string sellermailid = txtsellermail.Text;
-            //SqlCommand cmd = new SqlCommand("select M_Subscriber_UserID from M_Subscriber inner join M_Company on M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno where M_Company_Name = '" + sellercompanyname + "'", con);
-            //string email;
-
-
-            //con.Open();
-            //SqlDataReader dr = cmd.ExecuteReader();
-            //while (dr.Read())
-            //{
-            //    email = dr[0].ToString();
-            //    MailMessage msg = new MailMessage();
-            //    msg.From = new MailAddress(Session["M_Subscriber_UserID"].ToString());
-            //    msg.To.Add(email);
-            //    msg.Subject = "Buyer RFQ details";
-            //    msg.IsBodyHtml = true;
-
-            //    msg.Body = "Please find herewith the details of Shipment Confirmation" + "<br/>" +
-            //        "Buyer UserName:" + Session["M_Subscriber_UserID"].ToString() + "<br/>" +
-            //        "Buyer :" + lblcompanyname.Text + "<br/>" +
-            //        "Seller Mail ID:" +txtsellermail.Text +"<br/>"+
-            //        "BuyerCompanyName:" + dropdowncustomer.SelectedItem.Text + "<br/>" +
-
-            //               "Creation Date:" + txtcreationdate.Text + "<br/>" +
-
-            //                 "Number of Packages:" + txtnoofpackages.Text + "<br/>" +
-
-            //                 "HAWB:" + txthawb.Text + "<br/>" +
-            //                 "HAWB Date:" + txthawb.Text + "<br/>" +
-            //                 "MAWB:" + txtmawb.Text + "<br/>" +
-            //                 "MAWB Date:" + txtmawbdate.Text + "<br/>" +
-            //                 "Airline:" + txtairline.Text + "<br/>" +
-            //                 "FlightNumber:" + txtflightnumber.Text + "<br/>" +
-            //                 "ETD:" + txtetd.Text + "<br/>" +
-            //                 "ETA:" + txteta.Text + "<br/>" +
-            //                 "ATD:" + txtata.Text + "<br/>" +
-            //                 "ETA:" + txtata.Text + "<br/>" +
-            //    "Delivered:" + delivery.Text + "<br/>" +
-            //    "Deliverydate:" + txtdeliverydate.Text + " < br /> " +
-            //        "Receiver Name: " + txtsellerreceivedby.Text + " < br /> " +
-            //        "Received?: " + received.Text + " < br /> " +
-            //         "Buyer Name: " + txtbuyerreceivedbyname.Text + " < br /> " +
-            //         "Buyer Delivery Date: " + txtbuyerdeliverydatetime.Text + " < br /> ";
-            //    SmtpClient smtp = new SmtpClient();
-            //    smtp.Host = "smtp.gmail.com";
-            //    smtp.Port = 587;
-            //    smtp.Credentials = new System.Net.NetworkCredential("freightlogisticsnie@gmail.com", "niemysuru");
-            //    smtp.EnableSsl = true;
-            //    smtp.Send(msg);
-            //}
-
-
-
-
-            GridViewBuyer.SelectedRow.Cells[0].Enabled = false;
-            GridViewBuyer.SelectedRow.Cells[1].Enabled = false;
-
-
-
-            Updatebutton.Visible = false;
-
-
-
-
-
-
-        }
+        
         protected void Cancelbutton_Click(object sender, EventArgs e)
         {
             clear();

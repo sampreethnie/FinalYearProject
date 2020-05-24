@@ -364,15 +364,6 @@ namespace FinalYearProject {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderdeliverydatetime;
         
         /// <summary>
-        /// txtsellermail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtsellermail;
-        
-        /// <summary>
         /// Addbutton control.
         /// </summary>
         /// <remarks>
@@ -391,13 +382,13 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.Button Updatebutton;
         
         /// <summary>
-        /// Submitbutton control.
+        /// Mailbutton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Submitbutton;
+        protected global::System.Web.UI.WebControls.Button Mailbutton;
         
         /// <summary>
         /// Cancelbutton control.

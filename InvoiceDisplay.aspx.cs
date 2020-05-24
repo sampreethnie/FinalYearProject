@@ -9,10 +9,6 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Text.RegularExpressions;
 using System.Drawing;
-
-
-
-
 namespace FinalYearProject
 {
     public partial class InvoiceDisplay : System.Web.UI.Page
@@ -29,8 +25,24 @@ namespace FinalYearProject
 
 
 
-            Label1.Text = Request.QueryString["shipmentnumber"];
-            Label2.Text = Request.QueryString["customer_M_Company_Name"];
+            Label1.Text = Request.QueryString["ShipmentRFQ_Number"];
+            Label2.Text = Request.QueryString["shipmentnumber"];
+            Label3.Text = Request.QueryString["customer_M_Company_Name"];
+            Label5.Text = Request.QueryString["RFQ_OriginCountry"];
+            Label6.Text = Request.QueryString["RFQ_OriginAirport"];
+            Label7.Text = Request.QueryString["RFQ_DestinationCountry"];
+            Label8.Text = Request.QueryString["RFQ_DestinationAirport"];
+            Label9.Text = Request.QueryString["RFQ_TotalGrwt"];
+            Label10.Text = Request.QueryString["RFQ_TotalChwt"];
+            Label11.Text = Request.QueryString["RFQ_NumberofPackages"];
+            Label12.Text = Request.QueryString["sellerdelivered"];
+            Label13.Text = Request.QueryString["buyerreceived"];
+            Label14.Text= Request.QueryString["M_Currency_Name"];
+            Label4.Text = Request.QueryString["creationdate"];
+            txtcustomer.Text = Request.QueryString["customer_M_Company_Name"];
+            txtdisplaycurrency.Text = Request.QueryString["M_Currency_Name"];
+            txteditcustomer.Text= Request.QueryString["customer_M_Company_Name"];
+            txteditcurrency.Text= Request.QueryString["M_Currency_Name"];
             //Label3.Text = finaltime;
 
             txttaxname.Visible = false;
@@ -49,25 +61,25 @@ namespace FinalYearProject
                 con.Open();
 
 
-                SqlCommand comcompany = new SqlCommand("select M_Company_Slno,M_Company_Name from M_Company", con);
+                //SqlCommand comcompany = new SqlCommand("select M_Company_Slno,M_Company_Name from M_Company", con);
 
 
-                SqlDataAdapter dacompany = new SqlDataAdapter(comcompany);
-                DataSet dscompany = new DataSet();
-                dacompany.Fill(dscompany);
-                Customer.DataTextField = dscompany.Tables[0].Columns["M_Company_Name"].ToString();
-                Customer.DataValueField = dscompany.Tables[0].Columns["M_Company_Slno"].ToString();
-                Customer.DataSource = dscompany.Tables[0];
-                Customer.DataBind();
-                Customereditdropdown.DataTextField = dscompany.Tables[0].Columns["M_Company_Name"].ToString();
-                Customereditdropdown.DataValueField = dscompany.Tables[0].Columns["M_Company_Slno"].ToString();
-                Customereditdropdown.DataSource = dscompany.Tables[0];
-                Customereditdropdown.DataBind();
+                //SqlDataAdapter dacompany = new SqlDataAdapter(comcompany);
+                //DataSet dscompany = new DataSet();
+                //dacompany.Fill(dscompany);
+                //Customer.DataTextField = dscompany.Tables[0].Columns["M_Company_Name"].ToString();
+                //Customer.DataValueField = dscompany.Tables[0].Columns["M_Company_Slno"].ToString();
+                //Customer.DataSource = dscompany.Tables[0];
+                //Customer.DataBind();
+                //Customereditdropdown.DataTextField = dscompany.Tables[0].Columns["M_Company_Name"].ToString();
+                //Customereditdropdown.DataValueField = dscompany.Tables[0].Columns["M_Company_Slno"].ToString();
+                //Customereditdropdown.DataSource = dscompany.Tables[0];
+                //Customereditdropdown.DataBind();
 
-                con.Close();
-                BindGridView();
-                Customer.Items.Insert(0, new ListItem("--Select Customer--", "0"));
-                Customereditdropdown.Items.Insert(0, new ListItem("--Select Customer--", "0"));
+                //con.Close();
+                //BindGridView();
+                //Customer.Items.Insert(0, new ListItem("--Select Customer--", "0"));
+                //Customereditdropdown.Items.Insert(0, new ListItem("--Select Customer--", "0"));
                 SqlConnection conchargeinvoice = new SqlConnection(_ConnStr);
 
                 conchargeinvoice.Open();
@@ -78,6 +90,11 @@ namespace FinalYearProject
                 chargeinvoicedropdown.DataValueField = dschargeinvoice.Tables[0].Columns["TM_INVOICE_No"].ToString();
                 chargeinvoicedropdown.DataSource = dschargeinvoice.Tables[0];
                 chargeinvoicedropdown.DataBind();
+                dropdowneditinvoice.DataValueField = dschargeinvoice.Tables[0].Columns["TM_INVOICE_No"].ToString();
+                dropdowneditinvoice.DataSource = dschargeinvoice.Tables[0];
+                dropdowneditinvoice.DataBind();
+
+
                 conchargeinvoice.Close();
                 chargeinvoicedropdown.Items.Insert(0, new ListItem("--Select Invoice--", "0"));
                 SqlConnection concurrencycharge = new SqlConnection(_ConnStr);
@@ -90,9 +107,33 @@ namespace FinalYearProject
                 dropdowncurrency.DataTextField = dscurrencycharge.Tables[0].Columns["M_Currency_Name"].ToString();
                 dropdowncurrency.DataSource = dscurrencycharge.Tables[0];
                 dropdowncurrency.DataBind();
+
+                dropdowneditcurrency.DataValueField = dscurrencycharge.Tables[0].Columns["M_Currency_Code"].ToString();
+                dropdowneditcurrency.DataTextField = dscurrencycharge.Tables[0].Columns["M_Currency_Name"].ToString();
+                dropdowneditcurrency.DataSource = dscurrencycharge.Tables[0];
+                dropdowneditcurrency.DataBind();
                 concurrencycharge.Close();
                 dropdowncurrency.Items.Insert(0, new ListItem("--Select Currency--"));
                 chargebasisdropdown.Items.Insert(0, new ListItem("--Select Charge Basis--"));
+                SqlConnection concharge = new SqlConnection(_ConnStr);
+                concharge.Open();
+                SqlCommand comcharge = new SqlCommand("select M_Charge_Code,M_Charge_Name from M_Charge", concurrencycharge);
+                SqlDataAdapter dacharge = new SqlDataAdapter(comcharge);
+                DataSet dscharge = new DataSet();
+                dacharge.Fill(dscharge);
+                dropdowncharge.DataValueField = dscharge.Tables[0].Columns["M_Charge_Code"].ToString();
+                dropdowncharge.DataTextField = dscharge.Tables[0].Columns["M_Charge_Name"].ToString();
+                dropdowncharge.DataSource = dscharge.Tables[0];
+                dropdowncharge.DataBind();
+                dropdownchargeeditinvoice.DataValueField = dscharge.Tables[0].Columns["M_Charge_Code"].ToString();
+                dropdownchargeeditinvoice.DataTextField = dscharge.Tables[0].Columns["M_Charge_Name"].ToString();
+                dropdownchargeeditinvoice.DataSource = dscharge.Tables[0];
+                dropdownchargeeditinvoice.DataBind();
+
+                concharge.Close();
+                dropdowncharge.Items.Insert(0, new ListItem("--Select Charge--"));
+                
+
 
                 lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
                 SqlConnection con1 = new SqlConnection(_ConnStr);
@@ -115,13 +156,15 @@ namespace FinalYearProject
                     ButtonBuyer.Visible = false;
                     
                 }
+                BindGridView();
+                BindChargeGridView();
             }
         }
         private void BindGridView()
         {
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
-            SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE_No,TM_INVOICE_ShipmentRefNo,M_Company_Name,TM_INVOICE_Description,TM_INVOICE_ShipmentDelivered from TM_INVOICE,M_Company where TM_INVOICE.TM_INVOICE_Customer = M_Company.M_Company_Slno", con);
+            SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE_No,TM_INVOICE_ShipmentRefNo,TM_INVOICE_Customer,TM_INVOICE_Currency,TM_INVOICE_Date from TM_INVOICE; select SUM(TD_INVOICE_TAXAMOUNT) from TD_INVOICE inner join  TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No;", con);
             SqlDataAdapter dainvoice = new SqlDataAdapter(cmd);
             DataSet dsinvoice = new DataSet();
             dainvoice.Fill(dsinvoice);
@@ -133,7 +176,7 @@ namespace FinalYearProject
         {
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
-            SqlCommand cmd = new SqlCommand("select TD_INVOICE_SLNO,TD_INVOICE_TMSLNO,TD_INVOICE_DESCRIPTION,TD_INVOICE_BASIS,TD_INVOICE_QTY,TD_INVOICE_Rate,M_Currency_Name,TD_INVOICE_AMOUNTFC,TD_INVOICE_EXCHRATE,TD_INVOICE_AMOUNTBC,TD_INVOICE_TAXABLE,TD_INVOICE_TAXPERCENTAGE,TD_INVOICE_TAXNAME,TD_INVOICE_TAXAMOUNT,TD_INVOICE_TOTALAMOUNT from TD_INVOICE,M_Currency where TD_INVOICE.TD_INVOICE_CURRENCY = M_Currency.M_Currency_Code", con);
+            SqlCommand cmd = new SqlCommand("select TD_INVOICE_SLNO,TD_INVOICE_TMSLNO,M_Charge_Name,TD_INVOICE_DESCRIPTION,TD_INVOICE_BASIS,TD_INVOICE_QTY,TD_INVOICE_Rate,M_Currency_Name,TD_INVOICE_AMOUNTFC,TD_INVOICE_EXCHRATE,TD_INVOICE_AMOUNTBC,TD_INVOICE_TAXABLE,TD_INVOICE_TAXPERCENTAGE,TD_INVOICE_TAXNAME,TD_INVOICE_TAXAMOUNT,TD_INVOICE_TOTALAMOUNT from TD_INVOICE inner join M_Currency on TD_INVOICE.TD_INVOICE_CURRENCY = M_Currency.M_Currency_Code inner join  M_Charge on TD_INVOICE.TD_INVOICE_CHARGESLNO = M_Charge.M_Charge_Code", con);
             SqlDataAdapter dacharge = new SqlDataAdapter(cmd);
             DataSet dscharge = new DataSet();
             dacharge.Fill(dscharge);
@@ -175,8 +218,8 @@ namespace FinalYearProject
         protected void AddInvoiceButton_Click(object sender, EventArgs e)
         { 
 
-            string addinvoice = @"INSERT INTO [TM_INVOICE] ([TM_INVOICE_No],[TM_INVOICE_ShipmentRefNo],[TM_INVOICE_Customer],[TM_INVOICE_Description],[TM_INVOICE_ShipmentDelivered]) VALUES(@TM_INVOICE_No,@TM_INVOICE_ShipmentRefNo,@TM_INVOICE_Customer,@TM_INVOICE_Description,@TM_INVOICE_ShipmentDelivered)";
-            string isdeliverycheck = Isdelivered.Checked ? "Y" : "N";
+            string addinvoice = @"INSERT INTO [TM_INVOICE] ([TM_INVOICE_No],[TM_INVOICE_ShipmentRefNo],[TM_INVOICE_Customer],[TM_INVOICE_Date],[TM_INVOICE_Currency]) VALUES(@TM_INVOICE_No,@TM_INVOICE_ShipmentRefNo,@TM_INVOICE_Customer,@TM_INVOICE_Date,@TM_INVOICE_Currency)";
+          
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
                 con.ConnectionString = _ConnStr;
@@ -185,15 +228,16 @@ namespace FinalYearProject
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@TM_INVOICE_No", txtinvoicenumber.Text);
                 cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentRefNo", txtshipmentrefno.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_Customer", Customer.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_Description", txtDescription.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentDelivered", isdeliverycheck);
+                cmd.Parameters.AddWithValue("@TM_INVOICE_Customer", txtcustomer.Text);
+                cmd.Parameters.AddWithValue("@TM_INVOICE_Date", Convert.ToDateTime(txtinvoicedate.Text));
+                cmd.Parameters.AddWithValue("@TM_INVOICE_Currency", txtdisplaycurrency.Text);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
 
                 BindGridView();
                 con.Close();
+                clear();
 
             }
 
@@ -205,73 +249,109 @@ namespace FinalYearProject
             GridViewRow gvRow = (GridViewRow)imgbtnInvoice.NamingContainer;
 
             lblslno.Text = InvoiceGridView.DataKeys[gvRow.RowIndex].Value.ToString();
-            txtinvoicenumbereditpopup.Text = gvRow.Cells[1].Text;
-            txtshipmentrefnoeditpopup.Text = gvRow.Cells[2].Text;
-            Customereditdropdown.SelectedItem.Text = gvRow.Cells[3].Text;
-            txtdescriptioneditpopup.Text = gvRow.Cells[4].Text;
-            bool result = false;
-            if (gvRow.Cells[5].Text == "Y")
-            {
-                result = true;
-                Isdeliverededitpopup.Checked = true;
-
-            }
-            else
-            {
-                result = false;
-                Isdeliverededitpopup.Checked = false;
-            }
+            txteditinvoice.Text = gvRow.Cells[1].Text;
+            txteditinvoicedate.Text = gvRow.Cells[2].Text;
+            txteditshipmentrefno.Text = gvRow.Cells[3].Text;
+            txteditcustomer.Text = gvRow.Cells[4].Text;
+            txteditcurrency.Text = gvRow.Cells[5].Text;
+            
+            
             mpeInvoiceEdit.Show();
         }
         protected void ImagebuttonCharge_Click(object sender, EventArgs e)
         {
             ImageButton imgbtnCharge = sender as ImageButton;
             GridViewRow gvrow = (GridViewRow)imgbtnCharge.NamingContainer;
-            lblchargeinvoice.Text = gvChargeInvoice.DataKeys[gvrow.RowIndex].Value.ToString();
-            dropdowneditinvoice.SelectedItem.Value = gvrow.Cells[1].Text;
-            dropdowneditcharge.SelectedItem.Text = gvrow.Cells[2].Text;
+            lblchargeslno.Text = gvChargeInvoice.DataKeys[gvrow.RowIndex].Value.ToString();
+        
+
+            dropdowneditinvoice.SelectedItem.Text = gvrow.Cells[1].Text;
+
+            dropdownchargeeditinvoice.SelectedItem.Text = gvrow.Cells[2].Text;
             txteditdescription.Text = gvrow.Cells[3].Text;
-            txteditquantity.Text = gvrow.Cells[4].Text;
-            dropdowneditcurrency.SelectedItem.Text = gvrow.Cells[5].Text;
+            dropdowneditcharge.SelectedItem.Text = gvrow.Cells[4].Text;
+
+            txteditquantity.Text = gvrow.Cells[5].Text;
             txteditrate.Text = gvrow.Cells[6].Text;
-            txteditamountfc.Text = gvrow.Cells[7].Text;
-            txteditexchangerate.Text = gvrow.Cells[8].Text;
-            txteditamountbc.Text = gvrow.Cells[9].Text;
+            dropdowneditcurrency.SelectedItem.Text = gvrow.Cells[7].Text;
+
+            txteditamountfc.Text = gvrow.Cells[8].Text;
+            txteditexchangerate.Text = gvrow.Cells[9].Text;
+            txteditamountbc.Text = gvrow.Cells[10].Text;
             bool resultcharge = false;
-            if(gvrow.Cells[10].Text == "Y")
+            if (gvrow.Cells[11].Text == "Yes")
             {
-                resultcharge = true;
-                txtedittaxname.Text = gvrow.Cells[11].Text;
-                txtedittaxpercentage.Text = gvrow.Cells[12].Text;
-                txtedittaxamount.Text = gvrow.Cells[13].Text;
-                txtedittotalamount.Text = gvrow.Cells[14].Text;
+                ListItem yes = radioedittaxable.Items.FindByValue("Y");
+                yes.Selected = true;
+
+                txtedittaxname.Visible = true;
+                txtedittaxpercentage.Visible = true;
+                txtedittaxamount.Visible = true;
+                txtedittotalamount.Visible = true;
+
 
             }
+            if (gvrow.Cells[11].Text == "No")
+            {
+                ListItem no = radioedittaxable.Items.FindByValue("N");
+                no.Selected = true;
+
+
+                txtedittaxname.Visible = false;
+                txtedittaxpercentage.Visible = false;
+                txtedittaxamount.Visible = false;
+                txtedittotalamount.Visible = false;
+
+            }
+            txtedittaxname.Text = gvrow.Cells[12].Text;
+            txtedittaxpercentage.Text = gvrow.Cells[13].Text;
+            txtedittaxamount.Text = gvrow.Cells[14].Text;
+            txtedittotalamount.Text = gvrow.Cells[15].Text;
+
             mpechargeeditinvoicedisplay.Show();
 
 
 
         }
         protected void InvoiceDisplay_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+        { 
+            
+            if(e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[5].Text == "Y")
+                string invoiceno = e.Row.Cells[1].Text;
+                
+                SqlConnection conn = new SqlConnection(_ConnStr);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("select SUM(TD_INVOICE_TAXAMOUNT) TM_INVOICE_Taxamount from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
+                cmd.Parameters.Add(new SqlParameter("@TM_INVOICE_No", invoiceno));
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
                 {
-                    e.Row.Cells[5].Text = "Yes";
+                    Label Tax = (Label)e.Row.FindControl("lbltaxamt");
+                    object value = dr.GetValue(0);
+                    Tax.Text = value.ToString();
                 }
-                else
+                dr.Close();
+               
+              
+                SqlCommand cmd1 = new SqlCommand("select SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
+                cmd1.Parameters.Add(new SqlParameter("@TM_INVOICE_No", invoiceno));
+                SqlDataReader dr1 = cmd1.ExecuteReader();
+                if (dr1.Read())
                 {
-                    e.Row.Cells[5].Text = "No";
+                    Label Total = (Label)e.Row.FindControl("lbltotalamt");
+                    object value = dr1.GetValue(0);
+                    Total.Text = value.ToString();
                 }
+                
             }
         }
 
 
         protected void UpdateInvoice_Click(object sender, EventArgs e)
         {
-            string updateinvoice = @"UPDATE [TM_INVOICE] SET [TM_INVOICE_No] = @TM_INVOICE_No,[TM_INVOICE_ShipmentRefNo] = @TM_INVOICE_ShipmentRefNo,[TM_INVOICE_Customer] = @TM_INVOICE_Customer,[TM_INVOICE_Description] = @TM_INVOICE_Description,[TM_INVOICE_ShipmentDelivered] = @TM_INVOICE_ShipmentDelivered where [TM_INVOICE_Slno] = @TM_INVOICE_Slno";
-            string isdeliverycheckeditpopup = Isdeliverededitpopup.Checked ? "Y" : "N";
+            string updateinvoice = @"UPDATE [TM_INVOICE] SET [TM_INVOICE_No] = @TM_INVOICE_No,[TM_INVOICE_ShipmentRefNo] = @TM_INVOICE_ShipmentRefNo,[TM_INVOICE_Date] = @TM_INVOICE_Date where [TM_INVOICE_Slno] = @TM_INVOICE_Slno";
+            
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
                 con.ConnectionString = _ConnStr;
@@ -279,26 +359,37 @@ namespace FinalYearProject
                 cmd.CommandText = updateinvoice;
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.Parameters.AddWithValue("@TM_INVOICE_Slno", lblslno.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_No", txtinvoicenumbereditpopup.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentRefNo", txtshipmentrefnoeditpopup.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_Customer", Customereditdropdown.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_Description", txtdescriptioneditpopup.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentDelivered", isdeliverycheckeditpopup);
+                cmd.Parameters.AddWithValue("@TM_INVOICE_No", txteditinvoice.Text);
+                cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentRefNo",txteditshipmentrefno.Text);
+                cmd.Parameters.AddWithValue("@TM_INVOICE_Date", Convert.ToDateTime(txteditinvoicedate.Text));
+              
 
                 con.Open();
                 cmd.ExecuteNonQuery();
                 BindGridView();
 
                 con.Close();
-                
+                clear();
 
             }
         }
         protected void btnUpdateCharge_Click(object sender, EventArgs e)
         {
-            string updatechargeinvoice = @"UPDATE [TD_INVOICE] SET [TD_INVOICE_TMSLNO] = @TD_INVOICE_TMSLNO,
+            string taxable = string.Empty;
+            ListItem yes = radioedittaxable.Items.FindByValue("Y");
+            ListItem no = radioedittaxable.Items.FindByValue("N");
+            if(yes.Selected)
+            {
+                taxable = "Y";
+            }
+            else if(no.Selected)
+            {
+                taxable = "N";
+            }
+            string updatechargeinvoice = @"UPDATE [TD_INVOICE] SET [TD_INVOICE_TMSLNO] = @TD_INVOICE_TMSLNO, [TD_INVOICE_CHARGESLNO] = @TD_INVOICE_CHARGESLNO,
       [TD_INVOICE_DESCRIPTION] = @TD_INVOICE_DESCRIPTION,
            [TD_INVOICE_BASIS] = @TD_INVOICE_BASIS,
+          
             [TD_INVOICE_QTY] = @TD_INVOICE_QTY,
              [TD_INVOICE_Rate] = @TD_INVOICE_Rate,
               [TD_INVOICE_CURRENCY] = @TD_INVOICE_CURRENCY,
@@ -316,17 +407,19 @@ namespace FinalYearProject
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = updatechargeinvoice;
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@TD_INVOICE_SLNO", lblchargeedit.Text);
-                cmd.Parameters.AddWithValue("@TD_INVOICE_TMSLNO", dropdowneditcharge.SelectedItem.Value);
+                
+                cmd.Parameters.AddWithValue("@TD_INVOICE_SLNO", lblchargeslno.Text);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_TMSLNO", dropdowneditinvoice.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_CHARGESLNO", dropdownchargeeditinvoice.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_DESCRIPTION", txteditdescription.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_BASIS", dropdowneditcharge.SelectedItem.Value);
-                cmd.Parameters.AddWithValue("TD_INVOICE_QTY", txteditquantity.Text);
-                cmd.Parameters.AddWithValue("TD_INVOICE_Rate", txteditrate.Text);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_QTY", txteditquantity.Text);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_Rate", txteditrate.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_CURRENCY", dropdowneditcurrency.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_AMOUNTFC", txteditamountfc.Text);
-                cmd.Parameters.AddWithValue("@TD_INVOICE_EXCHRATE", txtexchangerate.Text);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_EXCHRATE", txteditexchangerate.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_AMOUNTBC", txteditamountbc.Text);
-                cmd.Parameters.AddWithValue("@TD_INVOICE_TAXABLE", radioedittaxable.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_TAXABLE", taxable);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TAXPERCENTAGE", txtedittaxpercentage.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TAXNAME", txtedittaxname.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TAXAMOUNT", txtedittaxamount.Text);
@@ -344,6 +437,7 @@ namespace FinalYearProject
 
             if (radioedittaxable.SelectedValue.ToString() == "Y")
             {
+                
                 lbledittaxname.Visible = true;
                 txtedittaxname.Visible = true;
                 lbltaxpercentage.Visible = true;
@@ -352,9 +446,12 @@ namespace FinalYearProject
                 txtedittaxamount.Visible = true;
                 lbledittotalamount.Visible = true;
                 txtedittotalamount.Visible = true;
+
+
             }
             else if (radioedittaxable.SelectedValue.ToString() == "N")
             {
+                
                 lbledittaxname.Visible = false;
                 txtedittaxname.Visible = false;
                 lbltaxpercentage.Visible = false;
@@ -363,9 +460,16 @@ namespace FinalYearProject
                 txtedittaxamount.Visible = false;
                 lbledittotalamount.Visible = false;
                 txtedittotalamount.Visible = false;
+                txtedittaxname.Text = string.Empty;
+                txtedittaxpercentage.Text = string.Empty;
+                txtedittaxamount.Text = string.Empty;
+                txtedittotalamount.Text = string.Empty;
+
             }
             mpechargeeditinvoicedisplay.Show();
         }
+
+
         protected void radiotaxable_SelectedIndexChanged(object sender,EventArgs e)
         {
             if (radiotaxable.SelectedValue.ToString() == "Y")
@@ -438,12 +542,12 @@ namespace FinalYearProject
         protected void btnChargeAdd_Click(object sender, EventArgs e)
         {
             string addinvoice =
-@"INSERT INTO [TD_INVOICE] ([TD_INVOICE_TMSLNO],[TD_INVOICE_DESCRIPTION],[TD_INVOICE_BASIS],
+@"INSERT INTO [TD_INVOICE] ([TD_INVOICE_TMSLNO],[TD_INVOICE_DESCRIPTION],[TD_INVOICE_CHARGESLNO],[TD_INVOICE_BASIS],
 [TD_INVOICE_QTY],[TD_INVOICE_Rate],[TD_INVOICE_CURRENCY],[TD_INVOICE_AMOUNTFC],[TD_INVOICE_EXCHRATE],
 [TD_INVOICE_AMOUNTBC],[TD_INVOICE_TAXABLE],[TD_INVOICE_TAXPERCENTAGE],[TD_INVOICE_TAXNAME],
 [TD_INVOICE_TAXAMOUNT],[TD_INVOICE_TOTALAMOUNT]) 
 
-VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_BASIS,@TD_INVOICE_QTY,
+VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INVOICE_BASIS,@TD_INVOICE_QTY,
 @TD_INVOICE_Rate,@TD_INVOICE_CURRENCY,@TD_INVOICE_AMOUNTFC,@TD_INVOICE_EXCHRATE,@TD_INVOICE_AMOUNTBC,
 @TD_INVOICE_TAXABLE,@TD_INVOICE_TAXPERCENTAGE,@TD_INVOICE_TAXNAME,@TD_INVOICE_TAXAMOUNT,@TD_INVOICE_TOTALAMOUNT)";
 
@@ -453,9 +557,11 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_BASIS,@TD_INVOICE_
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = addinvoice;
                 cmd.CommandType = System.Data.CommandType.Text;
+                
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TMSLNO", chargeinvoicedropdown.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_DESCRIPTION", txtdescriptioncharge.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_BASIS", chargebasisdropdown.SelectedItem.Value);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_CHARGESLNO", dropdowncharge.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_QTY", txtquantity.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_Rate", txtrate.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_CURRENCY", dropdowncurrency.SelectedItem.Value);
@@ -473,7 +579,7 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_BASIS,@TD_INVOICE_
 
                 BindChargeGridView();
 
-
+                
             }
         }
 
@@ -481,44 +587,44 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_BASIS,@TD_INVOICE_
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[3].Text == "G")
+                if (e.Row.Cells[4].Text == "G")
                 {
-                    e.Row.Cells[3].Text = "GrWt";
+                    e.Row.Cells[4].Text = "GrWt";
                 }
-                else if (e.Row.Cells[3].Text == "C")
+                else if (e.Row.Cells[4].Text == "C")
                 {
-                    e.Row.Cells[3].Text = "Chwt";
+                    e.Row.Cells[4].Text = "Chwt";
                 }
-                else if (e.Row.Cells[3].Text == "S")
+                else if (e.Row.Cells[4].Text == "S")
                 {
-                    e.Row.Cells[3].Text = "Shipment";
+                    e.Row.Cells[4].Text = "Shipment";
                 }
-                if(e.Row.Cells[10].Text == "Y")
+                if(e.Row.Cells[11].Text == "Y")
                 {
-                    e.Row.Cells[10].Text = "Yes";
+                    e.Row.Cells[11].Text = "Yes";
                 }
-                else if(e.Row.Cells[10].Text == "N")
+                else if(e.Row.Cells[11].Text == "N")
                 {
-                    e.Row.Cells[10].Text = "No";
+                    e.Row.Cells[11].Text = "No";
                 }
             }
         }
 
-        protected void Customer_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            mpeInvoiceDisplay.Show();
-            SqlConnection con = new SqlConnection(_ConnStr);
-            SqlCommand cmd = new SqlCommand("select M_Currency_Name from M_Currency,M_Company where M_Currency.M_Currency_Code = M_Company.M_Company_Currency and M_Company_Slno = @M_Company_Slno ");
-            cmd.Parameters.AddWithValue("@M_Company_Slno", Customer.SelectedItem.Value);
-            cmd.Connection = con;
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            while(sdr.Read())
-            {
-                txtdisplaycurrency.Text = sdr[0].ToString();
-            }
-            con.Close();
-        }
+        //protected void Customer_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    mpeInvoiceDisplay.Show();
+        //    SqlConnection con = new SqlConnection(_ConnStr);
+        //    SqlCommand cmd = new SqlCommand("select M_Currency_Name from M_Currency,M_Company where M_Currency.M_Currency_Code = M_Company.M_Company_Currency and M_Company_Slno = @M_Company_Slno ");
+        //    cmd.Parameters.AddWithValue("@M_Company_Slno", Customer.SelectedItem.Value);
+        //    cmd.Connection = con;
+        //    con.Open();
+        //    SqlDataReader sdr = cmd.ExecuteReader();
+        //    while(sdr.Read())
+        //    {
+        //        txtdisplaycurrency.Text = sdr[0].ToString();
+        //    }
+        //    con.Close();
+        //}
 
         protected void Customereditdropdown_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -532,5 +638,12 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_BASIS,@TD_INVOICE_
             lblMessage.ForeColor = System.Drawing.Color.Green;
 
         }
+        private void clear()
+        {
+            txtinvoicenumber.Text = string.Empty;
+            txtinvoicedate.Text = string.Empty;
+            txtshipmentrefno.Text = string.Empty;
+        }
+       
     }
 }

@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head runat="server">
     <title></title>
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,52 +16,7 @@
 
 <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-   <script type="text/javascript">
    
-    function BaseCurrencyCalculation()
-    {
-        var _txt1 = document.getElementById('<%= txtamountfc.ClientID %>');
-        var _txt2 = document.getElementById('<%= txtexchangerate.ClientID %>');
-        var _txt3 = document.getElementById('<%= txtamountbc.ClientID %>');
-        var t1=0, t2=0;
-        
-        if(_txt1.value != "") t1=_txt1.value;
-        if(_txt2.value != "") t2=_txt2.value;
-        
-        _txt3.value = parseInt(t1) * parseInt(t2);
-    }
-        function ForeignCurrencyCalculation()
-    {
-        var _txt1 = document.getElementById('<%= txtrate.ClientID %>');
-        var _txt2 = document.getElementById('<%= txtquantity.ClientID %>');
-        var _txt3 = document.getElementById('<%= txtamountfc.ClientID %>');
-        var t1=0, t2=0;
-        
-        if(_txt1.value != "") t1=_txt1.value;
-        if(_txt2.value != "") t2=_txt2.value;
-        
-        _txt3.value = parseInt(t1) * parseInt(t2);
-        }
-        function TaxandTotalamountCalculation()
-    {
-        var _txt1 = document.getElementById('<%= txtamountbc.ClientID %>');
-        var _txt2 = document.getElementById('<%= txtpercentage.ClientID %>');
-        var _txt3 = document.getElementById('<%= txttaxamount.ClientID %>');
-        var _txt4 = document.getElementById('<%= txttotalamount.ClientID %>');
-        var t1=0, t2=0, t3=0;
-        
-        if(_txt1.value != "") t1=_txt1.value;
-        if (_txt2.value != "") t2 = _txt2.value;
-        
-        
-        
-        _txt3.value = parseInt(t1) * parseInt(t2);
-        if (_txt3.value != "") t3 = _txt3.value;
-        _txt4.value = parseInt(t1) + parseInt(t3);
-        }
-       
-
-    </script>    
     
     <style type="text/css">
         .modalBackground
@@ -152,8 +107,8 @@
           
     <li><a href="RFQ.aspx">RFQ</a></li>
     
-    <li><a href="#">Quote Negotiation(Buyer)</a></li>
-     <li><a href="#">Orders(Buyer)</a></li>
+      <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+     <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="#">Invoice Verification </a></li>
    
@@ -172,8 +127,8 @@
     <!-- here is the asp.net link button to make post back -->
           
      <li><a href="SQ.aspx">SellerQuote</a></li>
-      <li><a href="#">Quote Negotiation(Seller)</a></li>
-      <li><a href="#">Orders(Seller)</a></li>
+      <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
+      <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
@@ -224,10 +179,20 @@
                                     <div id="collapseOne" class="panel panel-collapse" role="tabpanel" aria-labelledby="headingOne">
                                            <div class="panel-body">
                                                <div>
-    ShipmentNumber : <asp:Label ID="Label1" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
-       CustomerName :  <asp:Label ID="Label2" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
-        Date :  <asp:Label ID="Label3" runat="server" Text="Label" Visible="false" style="font-size:large"></asp:Label> <br />
-        
+    RFQ Number : <asp:Label ID="Label1" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+    ShipmentNumber : <asp:Label ID="Label2" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+    CustomerName :  <asp:Label ID="Label3" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+    Date :  <asp:Label ID="Label4" runat="server" Text="Label" Visible="false" style="font-size:large"></asp:Label> <br />
+    Origin Country : <asp:Label ID="Label5" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+     Origin Airport  : <asp:Label ID="Label6" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+     Destination Country : <asp:Label ID="Label7" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+     Destination Airport : <asp:Label ID="Label8" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+     Gross Weight : <asp:Label ID="Label9" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+     Chargeable Weight : <asp:Label ID="Label10" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+     Number of Packages : <asp:Label ID="Label11" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+      Delivered? : <asp:Label ID="Label12" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+     Received? : <asp:Label ID="Label13" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
+      Buyer Currency: <asp:Label ID="Label14" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
 
        </div>
                                                </div>
@@ -251,11 +216,12 @@
                                       <div class="panel-body">
                                           <div>
                                               <asp:Button ID="Addbutton" runat="server" Text="Add" style="width:80px" OnClick="Addbutton_Click" />
-                                              <asp:GridView ID="InvoiceGridView" runat="server" GridLines="None" AllowPaging="true" DataKeyNames="TM_INVOICE_Slno" OnRowDataBound="InvoiceDisplay_RowDataBound" AutoGenerateColumns="false">
+                                              <asp:GridView ID="InvoiceGridView" runat="server"   Width="65%" Height="50px"  AllowPaging="true" DataKeyNames="TM_INVOICE_Slno" OnRowDataBound="InvoiceDisplay_RowDataBound" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                                  <AlternatingRowStyle BackColor="White" />
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
 <AlternatingRowStyle BackColor="White" />
 <Columns>
 
@@ -264,12 +230,22 @@
 
 <asp:BoundField DataField="TM_INVOICE_Slno" HeaderText="InvoiceSerialNo" Visible="false" />
          
-<asp:BoundField DataField="TM_INVOICE_No" HeaderText="Invoice Number" />
-
-<asp:BoundField DataField="TM_INVOICE_ShipmentRefNo" HeaderText="ShipmentReferenceNumber" />
-<asp:BoundField DataField="M_Company_Name" HeaderText="Customer" />
-<asp:BoundField DataField="TM_INVOICE_Description" HeaderText="Description" />
-<asp:BoundField DataField="TM_INVOICE_ShipmentDelivered" HeaderText="Is Delivered?" />
+<asp:BoundField DataField="TM_INVOICE_No" HeaderText="Invoice Number"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+   
+    <asp:BoundField DataField="TM_INVOICE_Date" HeaderText="Invoice Date" DataFormatString="{0:dd/MM/yyyy}"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+<asp:BoundField DataField="TM_INVOICE_ShipmentRefNo" HeaderText="ShipmentReferenceNumber"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
+<asp:BoundField DataField="TM_INVOICE_Customer" HeaderText="Customer"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+<asp:BoundField DataField="TM_INVOICE_Currency" HeaderText="Currency"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
+    <asp:TemplateField HeaderText="Tax Amount">
+        <ItemTemplate>
+           <asp:Label ID="lbltaxamt" runat="server"></asp:Label>
+        </ItemTemplate>
+        </asp:TemplateField>
+    <asp:TemplateField HeaderText="Total Amount">
+        <ItemTemplate>
+           <asp:Label ID="lbltotalamt" runat="server"></asp:Label>
+        </ItemTemplate>
+        </asp:TemplateField>
     <asp:TemplateField HeaderText="Edit">
 <ItemTemplate>
 <asp:ImageButton ID="imgbtnInvoice" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" OnClick="ImageButtoninvoice_Click" />
@@ -287,10 +263,10 @@
 <ajaxToolkit:ModalPopupExtender ID="mpeInvoiceDisplay" runat="server" TargetControlID="btnShowPopup" PopupControlID="pnlpopup"
 CancelControlID="btnCancel" BackgroundCssClass="modalBackground">
 </ajaxToolkit:ModalPopupExtender>
-<asp:Panel ID="pnlpopup" runat="server" BackColor="Yellow" Height="399px" Width="600px" style="display:none">
+<asp:Panel ID="pnlpopup" runat="server" BackColor="White" Height="399px" Width="600px" style="display:none" >
 <table width="100%" style="border:Solid 3px #D55500; width:100%; height:100%" cellpadding="0" cellspacing="0">
-<tr style="background-color:orangered">
-<td colspan="2" style=" height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Add Invoice</td>
+<tr style="background-color:blue">
+<td colspan="2" style=" height:10%; color:white; font-weight:bold; font-size:xx-large" align="left">Add Invoice</td>
     
 </tr>
     <tr>
@@ -306,9 +282,19 @@ InvoiceNumber:
 <asp:TextBox ID="txtinvoicenumber" runat="server" style="width:270px"/>
 </td>
 </tr>
+    <tr>
+<td align="left" style="font-size:19px">
+Invoice Date:
+</td>
+<td>
+<asp:TextBox ID="txtinvoicedate" runat="server" style="width:270px"/>
+                    <ajaxToolkit:CalendarExtender ID="Calendarcreationdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtinvoicedate" Format="dd/MM/yyyy" > </ajaxToolkit:CalendarExtender>
+
+</td>
+</tr>
 <tr>
 <td align="left" style="font-size:19px">
-Shipment Reference Number:
+Additional References:
 </td>
 <td>
 <asp:TextBox ID="txtshipmentrefno" runat="server" style="width:270px"/>
@@ -319,42 +305,28 @@ Shipment Reference Number:
 Customer:
 </td>
 <td>
-<asp:DropDownList ID="Customer" runat="server" AutoPostBack="true" style="width:270px" OnSelectedIndexChanged="Customer_SelectedIndexChanged"></asp:DropDownList>
+<asp:TextBox ID="txtcustomer" runat="server" ReadOnly="true"  style="width:270px" ></asp:TextBox>
 </td>
 </tr>
-<tr>
-<td align="left" style="font-size:19px">
-Description:
-</td>
-<td>
-<asp:TextBox ID="txtDescription" runat="server" style="width:270px"/>
-</td>
-</tr>
-    <tr>
-        <td align="left" style="font-size:19px">
-            Is delivered?
-</td>
-<td>
-    <asp:CheckBox ID="Isdelivered" runat="server" />
-</td>
+
         <tr>
             <td align="left" style="font-size:19px">Currency: </td>
             <td>
-                <asp:TextBox ID="txtdisplaycurrency" runat="server" style="width:270px" />
+                <asp:TextBox ID="txtdisplaycurrency" ReadOnly="true" runat="server" style="width:270px" />
             </td>
         </tr>
         <tr>
-            <td></td>
-            <tr>
+            
+            
                 <td>
-                    <asp:Button ID="btnAddInvoice" runat="server" CommandName="Add" style="width:70px; margin-right:50px;margin-left:50px;height:40px" Text="Add" OnClick="AddInvoiceButton_Click" />
+                    <asp:Button ID="btnAddInvoice" runat="server" CommandName="Add" CssClass="btn btn-primary" style="width:70px;height:50px;  background-color:orange;color:white;border:solid;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:8px; margin-right:50px;margin-left:30px;height:40px" Text="Add" OnClick="AddInvoiceButton_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="btnCancel" runat="server" style="width:70px;height:40px" Text="Cancel" />
+                    <asp:Button ID="btnCancel" runat="server" style="width:70px;height:40px;  background-color:red;color:white;border:solid;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:8px; margin-right:50px;margin-left:30px" Text="Cancel" />
                 </td>
             </tr>
-        </tr>
-    </tr>
+        
+   
 
 </table>
 </asp:Panel>
@@ -363,29 +335,42 @@ Description:
 <ajaxToolkit:ModalPopupExtender ID="mpeInvoiceEdit" runat="server" TargetControlID="btnEditPopup" PopupControlID="pnleditpopup"
 CancelControlID="btnCancel" BackgroundCssClass="modalBackground">
 </ajaxToolkit:ModalPopupExtender>
-<asp:Panel ID="pnleditpopup" runat="server" BackColor="Yellow" Height="399px" Width="600px" style="display:none">
+<asp:Panel ID="pnleditpopup" runat="server" BackColor="White" Height="399px" Width="600px" style="display:none">
 <table width="100%" style="border:Solid 3px #D55500; width:100%; height:100%" cellpadding="0" cellspacing="0">
-<tr style="background-color:orangered">
+<tr style="background-color:blue">
 <td colspan="2" style=" height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Edit Invoice</td>
     
 </tr>
-    <tr>
-        <td> <asp:Label ID="lblchargeinvoice" runat="server" Visible="false"></asp:Label></td>
+   <tr>
+        <td>
+            <asp:Label ID="lblchargeinvoice" runat="server"  />
+        </td>
     </tr>
 <tr>
 <td align="left" style="font-size:19px">
 InvoiceNumber:
 </td>
 <td>
-<asp:TextBox ID="txtinvoicenumbereditpopup" runat="server" style="width:270px"/>
+<asp:TextBox ID="txteditinvoice" runat="server" style="width:270px"/>
+</td>
+</tr>
+    <tr>
+<td align="left" style="font-size:19px">
+Invoice Date:
+</td>
+<td>
+<asp:TextBox ID="txteditinvoicedate" runat="server" style="width:270px"/>
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtendereditinvoicedate" PopupButtonID="imgPopup" runat="server" TargetControlID="txteditinvoicedate"  Format="dd/MM/yyyy" > </ajaxToolkit:CalendarExtender>
+
+   
 </td>
 </tr>
 <tr>
 <td align="left" style="font-size:19px">
-Shipment Reference Number:
+Additional References:
 </td>
 <td>
-<asp:TextBox ID="txtshipmentrefnoeditpopup" runat="server" style="width:270px"/>
+<asp:TextBox ID="txteditshipmentrefno" runat="server" style="width:270px"/>
 </td>
 </tr>
 <tr>
@@ -393,42 +378,28 @@ Shipment Reference Number:
 Customer:
 </td>
 <td>
-<asp:DropDownList ID="Customereditdropdown" runat="server" style="width:270px" OnSelectedIndexChanged="Customereditdropdown_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+<asp:TextBox ID="txteditcustomer" runat="server" ReadOnly="true"  style="width:270px" ></asp:TextBox>
 </td>
 </tr>
-<tr>
-<td align="left" style="font-size:19px">
-Description:
-</td>
-<td>
-<asp:TextBox ID="txtdescriptioneditpopup" runat="server" style="width:270px"/>
-</td>
-</tr>
-    <tr>
-        <td align="left" style="font-size:19px">
-            Is delivered?
-</td>
-<td>
-    <asp:CheckBox ID="Isdeliverededitpopup"  runat="server" />
-</td>
+
         <tr>
             <td align="left" style="font-size:19px">Currency: </td>
             <td>
-                <asp:TextBox ID="txtcurrencyeditpopup" runat="server" style="width:270px" />
+                <asp:TextBox ID="txteditcurrency" ReadOnly="true" runat="server" style="width:270px" />
             </td>
         </tr>
         <tr>
             <td></td>
             <tr>
                 <td>
-                    <asp:Button ID="UpdateInvoice" runat="server" style="width:70px;height:40px" Text="Update" OnClick="UpdateInvoice_Click" />
+                    <asp:Button ID="UpdateInvoice" runat="server" style="width:70px;height:40px;  background-color:goldenrod;color:white;border:solid;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:8px; margin-right:50px;margin-left:30px" Text="Update" OnClick="UpdateInvoice_Click" />
                 </td>
                 <td>
-                    <asp:Button ID="btnCanceledit" runat="server" style="width:70px;height:40px" Text="Cancel" />
+                    <asp:Button ID="btnCanceledit" runat="server" style="width:70px;height:40px;  background-color:red;color:white;border:solid;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:8px; margin-right:50px;margin-left:30px" Text="Cancel" />
                 </td>
             </tr>
         </tr>
-    </tr>
+    
 
 </table>
 </asp:Panel>
@@ -447,17 +418,19 @@ Description:
                     <div class="panel-body">
                         <div>
                             <asp:Button ID="AddbuttonCharge" runat="server" Text="Add" style="width:80px" OnClick="AddbuttonCharge_Click" />
-                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" GridLines="None" AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
+                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None"  AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small" />
 <AlternatingRowStyle BackColor="White" />
 <Columns>
 
 <asp:BoundField DataField="TD_INVOICE_SLNO" HeaderText="InvoiceSlno" Visible="false" />    
 <asp:BoundField DataField="TD_INVOICE_TMSLNO" HeaderText="Invoice Number" />
+    <asp:BoundField DataField="M_Charge_Name" HeaderText="ChargeName" />
 <asp:BoundField DataField="TD_INVOICE_DESCRIPTION" HeaderText="Description" />
+
 <asp:BoundField DataField="TD_INVOICE_BASIS" HeaderText="Charge Basis" />
 <asp:BoundField DataField="TD_INVOICE_QTY" HeaderText="Quantity" />
 <asp:BoundField DataField="TD_INVOICE_RATE" HeaderText="Unit Rate" />
@@ -485,120 +458,123 @@ Description:
             </div>
             <asp:Button ID="btnChargePopup" runat="server" style="display:none" />
             <ajaxToolkit:ModalPopupExtender ID="mpechargedisplay" runat="server" TargetControlID="btnChargePopup" PopupControlID="pn2popup" BackgroundCssClass="modalBackground"></ajaxToolkit:ModalPopupExtender>
-            <asp:Panel ID="pn2popup" runat="server" BackColor="Yellow" Height="599px" Width="750px" style="display:none">
-                <table width="100%" style="border:Solid 3px #D55500; width:100%; height:100%">
-                    <tr style="background-color:orangered">
-                        <td colspan="2" style="height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Add Charge Details</td>
+            <asp:Panel ID="pn2popup" runat="server" BackColor="White" Height="400px" Width="780px" style="display:none">
+                <table width="60%" style="border:Solid 3px #D55500; width:100%; height:100%">
+                    <tr style="background-color:blue">
+                        <td colspan="3" style="height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Add Charge Details</td>
     
 </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lblchargeslno" runat="server" visible="false" />
+        </td>
+    </tr>                
                     <tr>
 <td align="left" style="font-size:19px">
 InvoiceNumber:
+
+<asp:DropDownList ID="chargeinvoicedropdown" runat="server" style="width:133px;margin-left:6px"/>
 </td>
-<td>
-<asp:DropDownList ID="chargeinvoicedropdown" runat="server" style="width:270px"/>
-</td>
-</tr>
-<tr>
+
+
 <td align="left" style="font-size:19px">
 ChargeBasis :
-</td>
-<td>
-<asp:DropDownList ID="chargebasisdropdown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="chargebasisdropdown_SelectedIndexChanged" style="width:270px" >
+
+<asp:DropDownList ID="chargebasisdropdown" runat="server" AutoPostBack="true" OnSelectedIndexChanged="chargebasisdropdown_SelectedIndexChanged" style="width:170px;margin-left:6px" >
     <asp:ListItem Text="GrWt" Value="G"></asp:ListItem>
     <asp:ListItem Text="ChWt" Value="C"></asp:ListItem>
     <asp:ListItem Text="Shipment" Value="S"></asp:ListItem>
   
     </asp:DropDownList>
 </td>
-</tr>
-<tr>
+
 <td align="left" style="font-size:19px">
 Description:
-</td>
-<td>
-<asp:TextBox ID="txtdescriptioncharge" runat="server" style="width:270px"></asp:TextBox>
+
+<asp:TextBox ID="txtdescriptioncharge" runat="server" style="width:147px;margin-left:2px"></asp:TextBox>
 </td>
 </tr>
 <tr>
-<td align="left" style="font-size:19px">
-Quantity:
-</td>
-<td>
-<asp:TextBox ID="txtquantity" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px"/>
-</td>
-</tr>
-    <tr>
-        <td align="left" style="font-size:19px">
-            
+<td align:"left" style="font-size:19px">
+    Charge:
+<asp:DropdownList ID="dropdowncharge" runat="server"  style="width:140px;margin-left:5px"></asp:DropdownList>
 </td>
 
-        <tr>
-            <td align="left" style="font-size:19px">Currency: </td>
-            <td>
-                <asp:DropDownList ID="dropdowncurrency" runat="server" style="width:270px" />
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Rate </td>
-            <td>
-                <asp:TextBox ID="txtrate" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px" />
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Amount in Foreign Currency </td>
-            <td>
-                
-                 <asp:TextBox ID="txtamountfc" runat="server" onkeyup="BaseCurrencyCalculation();ForeignCurrencyCalculation();"  style="width:270px" />
-                
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Exchange Rate </td>
-            <td>
-                <asp:TextBox ID="txtexchangerate" runat="server" onkeyup="BaseCurrencyCalculation();" style="width:270px" />
-                
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Amount in Base Currency  </td>
-            <td>
-                
-                <asp:TextBox ID="txtamountbc" runat="server" onkeyup="BaseCurrencyCalculation();TaxandTotalamountCalculation();"  style="width:270px" />
-            </td>
-        </tr>
+
+<td align="left" style="font-size:19px">
+Quantity:
+
+
+<asp:TextBox ID="txtquantity" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:175px;margin-left:4px"/>
+</td>
+
+    
+
         
+            <td align="left" style="font-size:19px">Currency: 
+            
+                <asp:DropDownList ID="dropdowncurrency" runat="server" style="width:147px;margin-left:2px" />
+            </td>
+        </tr>
         <tr>
-            <td align="left" style="font-size:19px">Taxable </td>
-            <td>
-                <asp:RadioButtonList ID="radiotaxable" runat="server" AutoPostBack="true" OnSelectedIndexChanged="radiotaxable_SelectedIndexChanged"  style="width:270px">
+            <td align="left" style="font-size:19px">Rate 
+            
+                <asp:TextBox ID="txtrate" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:141px;margin-left:5px" />
+            </td>
+        
+        
+            <td align="left" style="font-size:19px">Amount in Foreign Currency 
+            
+                
+                 <asp:TextBox ID="txtamountfc" runat="server" ReadOnly="true" onkeyup="BaseCurrencyCalculation();ForeignCurrencyCalculation();"  style="width:180px;margin-left:2px" />
+                
+            </td>
+        
+        
+            <td align="left" style="font-size:19px">Exchange Rate 
+            
+                <asp:TextBox ID="txtexchangerate" runat="server" onkeyup="BaseCurrencyCalculation();" style="width:147px" />
+                
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size:19px">Amount in Base Currency  
+            
+                
+                <asp:TextBox ID="txtamountbc" runat="server"  onkeyup="BaseCurrencyCalculation();TaxandTotalamountCalculation();"  style="width:141px;margin-left:6px" />
+            </td>
+        
+        
+        
+            <td align="left" style="font-size:19px">Taxable 
+            
+                <asp:RadioButtonList ID="radiotaxable" RepeatDirection="Horizontal" runat="server" AutoPostBack="true" OnSelectedIndexChanged="radiotaxable_SelectedIndexChanged"  style="width:270px">
                     <asp:ListItem Text="Yes" Value="Y"></asp:ListItem>
                     <asp:ListItem Text="No" Value="N"></asp:ListItem>
                     </asp:RadioButtonList>
             </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lbltaxname" runat="server" Text="TaxName"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txttaxname" runat="server" style="width:270px" />
+        
+            <td align="left" style="font-size:19px"><asp:Label ID="lbltaxname" runat="server" Text="TaxName"></asp:Label> 
+            
+                <asp:TextBox ID="txttaxname" runat="server" style="width:147px" />
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lblpercentage" runat="server" Text="Tax Percentage"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txtpercentage" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+            <td align="left" style="font-size:19px"><asp:Label ID="lblpercentage" runat="server" Text="Tax Percentage"></asp:Label> 
+            
+                <asp:TextBox ID="txtpercentage" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:141px;margin-left:6px" />
             </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lbltaxamount" runat="server" Text="TaxAmount"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txttaxamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+        
+        
+            <td align="left" style="font-size:19px"><asp:Label ID="lbltaxamount" runat="server" Text="TaxAmount"></asp:Label> 
+            
+                <asp:TextBox ID="txttaxamount" runat="server"  onkeyup="TaxandTotalamountCalculation();" style="width:141px" />
             </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lbltotalamount" runat="server" Text="Total Amount"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txttotalamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+        
+        
+            <td align="left" style="font-size:19px"><asp:Label ID="lbltotalamount" runat="server" Text="Total Amount"></asp:Label> 
+            
+                <asp:TextBox ID="txttotalamount" runat="server"  onkeyup="TaxandTotalamountCalculation();" style="width:147px" />
                
             </td>
         </tr>
@@ -618,123 +594,125 @@ Quantity:
             </asp:Panel>
              <asp:Button ID="btnChargeeditpopup" runat="server" style="display:none" />
             <ajaxToolkit:ModalPopupExtender ID="mpechargeeditinvoicedisplay" runat="server" TargetControlID="btnChargeeditPopup" PopupControlID="pn2editpopup" BackgroundCssClass="modalBackground"></ajaxToolkit:ModalPopupExtender>
-            <asp:Panel ID="pn2editpopup" runat="server" BackColor="Yellow" Height="599px" Width="750px" style="display:none">
+            <asp:Panel ID="pn2editpopup" runat="server" BackColor="White" Height="430px" Width="790px" style="display:none">
                 <table width="100%" style="border:Solid 3px #D55500; width:100%; height:100%">
-                    <tr style="background-color:orangered">
-                        <td colspan="2" style="height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Edit Charge Details</td>
+                    <tr style="background-color:blue">
+                        <td colspan="3" style="height:10%; color:White; font-weight:bold; font-size:xx-large" align="left">Edit Charge Details</td>
     
 </tr>
-                    <tr>
+                   <%-- <tr>
                         <td>
-                            <asp:Label ID="lblchargeedit" runat="server" Text="editcharge" Visible="false"></asp:Label>
+                            <asp:Label ID="lblchargeedit" runat="server" Text="editcharge" ></asp:Label>
                         </td>
-<td align="left" style="font-size:19px">
+                        </tr>--%>
+                        <tr>
+<td align="left" style="font-size:19px;margin-left:2px">
 InvoiceNumber:
+
+<asp:DropDownList ID="dropdowneditinvoice" runat="server" style="width:100px;margin-left:5px"/>
 </td>
-<td>
-<asp:DropDownList ID="dropdowneditinvoice" runat="server" style="width:270px"/>
-</td>
-</tr>
-<tr>
+
 <td align="left" style="font-size:19px">
 ChargeBasis :
-</td>
-<td>
-<asp:DropDownList ID="dropdowneditcharge" runat="server" AutoPostBack="true" OnSelectedIndexChanged="chargebasiseditdropdown_SelectedIndexChanged" style="width:270px" >
+
+<asp:DropDownList ID="dropdowneditcharge" runat="server"  OnSelectedIndexChanged="chargebasiseditdropdown_SelectedIndexChanged" style="width:147px" >
     <asp:ListItem Text="GrWt" Value="G"></asp:ListItem>
     <asp:ListItem Text="ChWt" Value="C"></asp:ListItem>
     <asp:ListItem Text="Shipment" Value="S"></asp:ListItem>
   
     </asp:DropDownList>
 </td>
-</tr>
-<tr>
+
 <td align="left" style="font-size:19px">
 Description:
-</td>
-<td>
-<asp:TextBox ID="txteditdescription" runat="server" style="width:270px"></asp:TextBox>
+
+<asp:TextBox ID="txteditdescription" runat="server" style="width:147px"></asp:TextBox>
 </td>
 </tr>
-<tr>
+                    <tr>
 <td align="left" style="font-size:19px">
-Quantity:
-</td>
-<td>
-<asp:TextBox ID="txteditquantity" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px"/>
-</td>
-</tr>
-    <tr>
-        <td align="left" style="font-size:19px">
-            
+Charge:
+
+<asp:DropdownList ID="dropdownchargeeditinvoice" runat="server" style="width:141px;margin-left:5px"></asp:DropdownList>
 </td>
 
-        <tr>
-            <td align="left" style="font-size:19px">Currency: </td>
-            <td>
-                <asp:DropDownList ID="dropdowneditcurrency" runat="server" style="width:270px" />
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Rate </td>
-            <td>
-                <asp:TextBox ID="txteditrate" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:270px" />
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Amount in Foreign Currency </td>
-            <td>
-                
-                 <asp:TextBox ID="txteditamountfc" runat="server" onkeyup="BaseCurrencyCalculation();ForeignCurrencyCalculation();"  style="width:270px" />
-                
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Exchange Rate </td>
-            <td>
-                <asp:TextBox ID="txteditexchangerate" runat="server" onkeyup="BaseCurrencyCalculation();" style="width:270px" />
-                
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px">Amount in Base Currency  </td>
-            <td>
-                
-                <asp:TextBox ID="txteditamountbc" runat="server" onkeyup="BaseCurrencyCalculation();TaxandTotalamountCalculation();"  style="width:270px" />
-            </td>
-        </tr>
+
+<td align="left" style="font-size:19px">
+Quantity:
+
+<asp:TextBox ID="txteditquantity" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:141px"/>
+</td>
+
+    
+            
+
+
         
+            <td align="left" style="font-size:19px">Currency: 
+            
+                <asp:DropDownList ID="dropdowneditcurrency" runat="server" style="width:147px" />
+            </td>
+        </tr>
         <tr>
-            <td align="left" style="font-size:19px">Taxable </td>
-            <td>
+            <td align="left" style="font-size:19px">Rate 
+            
+                <asp:TextBox ID="txteditrate" runat="server" onkeyup="ForeignCurrencyCalculation();"  style="width:141px;margin-left:5px" />
+            </td>
+        
+        
+            <td align="left" style="font-size:19px">Amount in Foreign Currency 
+            
+                
+                 <asp:TextBox ID="txteditamountfc" runat="server"  onkeyup="BaseCurrencyCalculation();ForeignCurrencyCalculation();"  style="width:141px" />
+                
+            </td>
+        
+        
+            <td align="left" style="font-size:19px">Exchange Rate 
+            
+                <asp:TextBox ID="txteditexchangerate"  runat="server" onkeyup="BaseCurrencyCalculation();" style="width:147px" />
+                
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="font-size:19px">Amount in Base Currency  
+            
+                
+                <asp:TextBox ID="txteditamountbc" runat="server" onkeyup="BaseCurrencyCalculation();TaxandTotalamountCalculation();"  style="width:141px;margin-left:5px" />
+            </td>
+        
+        
+        
+            <td align="left" style="font-size:19px">Taxable ?
+            
                 <asp:RadioButtonList ID="radioedittaxable" runat="server" AutoPostBack="true" OnSelectedIndexChanged="radiotaxableedit_SelectedIndexChanged"  style="width:270px">
-                    <asp:ListItem Text="Yes" Value="Y"></asp:ListItem>
+                    <asp:ListItem Text="Yes" Value="Y" ></asp:ListItem>
                     <asp:ListItem Text="No" Value="N"></asp:ListItem>
                     </asp:RadioButtonList>
+                
+            </td>
+        
+        
+            <td align="left" style="font-size:19px"><asp:Label ID="lbledittaxname" runat="server" Text="TaxName"></asp:Label>
+            
+                <asp:TextBox ID="txtedittaxname" runat="server" style="width:147px" />
             </td>
         </tr>
         <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lbledittaxname" runat="server" Text="TaxName"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txtedittaxname" runat="server" style="width:270px" />
+            <td align="left" style="font-size:19px"><asp:Label ID="lbltaxpercentage" runat="server" Text="Tax Percentage"></asp:Label> 
+            
+                <asp:TextBox ID="txtedittaxpercentage" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:147px;margin-left:5px" />
             </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lbltaxpercentage" runat="server" Text="Tax Percentage"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txtedittaxpercentage" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+        
+        
+            <td align="left" style="font-size:19px"><asp:Label ID="lbledittaxamount" runat="server" Text="TaxAmount"></asp:Label> 
+            
+                <asp:TextBox ID="txtedittaxamount"  runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:147px" />
             </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lbledittaxamount" runat="server" Text="TaxAmount"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txtedittaxamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="font-size:19px"><asp:Label ID="lbledittotalamount" runat="server" Text="Total Amount"></asp:Label> </td>
-            <td>
-                <asp:TextBox ID="txtedittotalamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:270px" />
+        
+            <td align="left" style="font-size:19px"><asp:Label ID="lbledittotalamount" runat="server" Text="Total Amount"></asp:Label> 
+            
+                <asp:TextBox ID="txtedittotalamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:147px" />
                
             </td>
         </tr>
@@ -763,6 +741,104 @@ Quantity:
             <asp:Label ID="lblMessage" runat="server" Font-Bold="true" style="font-size:30px"></asp:Label>
           </div>
         
+
+
+
+       
     </form>
+
+
 </body>
+
+     <script type="text/javascript">
+   
+    function BaseCurrencyCalculation()
+    {
+        var _txt1 = document.getElementById('<%= txtamountfc.ClientID %>');
+        var _txt2 = document.getElementById('<%= txtexchangerate.ClientID %>');
+        var _txt3 = document.getElementById('<%= txtamountbc.ClientID %>');
+        var t1=0, t2=0;
+        
+        if(_txt1.value != "") t1=_txt1.value;
+        if(_txt2.value != "") t2=_txt2.value;
+        
+        _txt3.value = parseInt(t1) * parseInt(t2);
+
+         var _txt4 = document.getElementById('<%= txteditamountfc.ClientID %>');
+        var _txt5 = document.getElementById('<%= txteditexchangerate.ClientID %>');
+        var _txt6 = document.getElementById('<%= txteditamountbc.ClientID %>');
+        var t3=0, t4=0;
+        
+        if(_txt4.value != "") t3=_txt4.value;
+        if(_txt5.value != "") t4=_txt5.value;
+        
+        _txt6.value = parseInt(t3) * parseInt(t4);
+
+
+
+    }
+        function ForeignCurrencyCalculation()
+    {
+        var _txt1 = document.getElementById('<%= txtrate.ClientID %>');
+        var _txt2 = document.getElementById('<%= txtquantity.ClientID %>');
+        var _txt3 = document.getElementById('<%= txtamountfc.ClientID %>');
+        var t1=0, t2=0;
+        
+        if(_txt1.value != "") t1=_txt1.value;
+        if(_txt2.value != "") t2=_txt2.value;
+        
+        _txt3.value = parseInt(t1) * parseInt(t2);
+
+
+             var _txt4 = document.getElementById('<%= txteditrate.ClientID %>');
+        var _txt5 = document.getElementById('<%= txteditquantity.ClientID %>');
+        var _txt6 = document.getElementById('<%= txteditamountfc.ClientID %>');
+        var t3=0, t4=0;
+        
+        if(_txt4.value != "") t3=_txt4.value;
+        if(_txt5.value != "") t4=_txt4.value;
+        
+        _txt6.value = parseInt(t3) * parseInt(t4);
+
+
+        }
+        function TaxandTotalamountCalculation()
+    {
+        var _txt1 = document.getElementById('<%= txtamountbc.ClientID %>');
+        var _txt2 = document.getElementById('<%= txtpercentage.ClientID %>');
+        var _txt3 = document.getElementById('<%= txttaxamount.ClientID %>');
+        var _txt4 = document.getElementById('<%= txttotalamount.ClientID %>');
+        var t1=0, t2=0, t3=0;
+        
+        if(_txt1.value != "") t1=_txt1.value;
+        if (_txt2.value != "") t2 = _txt2.value;
+        
+        
+        
+        _txt3.value = parseInt(t1) * parseInt(t2);
+        if (_txt3.value != "") t3 = _txt3.value;
+        _txt4.value = parseInt(t1) + parseInt(t3);
+
+
+        var _txt5 = document.getElementById('<%= txteditamountbc.ClientID %>');
+        var _txt6 = document.getElementById('<%= txtedittaxpercentage.ClientID %>');
+        var _txt7 = document.getElementById('<%= txtedittaxamount.ClientID %>');
+        var _txt8 = document.getElementById('<%= txtedittotalamount.ClientID %>');
+        var t4=0, t5=0, t6=0;
+        
+        if(_txt5.value != "") t4=_txt5.value;
+        if (_txt6.value != "") t5 = _txt6.value;
+        
+        
+        
+        _txt7.value = parseInt(t4) * parseInt(t5);
+        if (_txt7.value != "") t6 = _txt7.value;
+        _txt8.value = parseInt(t4) + parseInt(t6);
+
+        }
+       
+
+    </script>   
+    
+
 </html>

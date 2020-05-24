@@ -62,14 +62,14 @@ namespace FinalYearProject
                 con.Open();
 
 
-                SqlCommand comrfqnumber = new SqlCommand("select RFQ_Number from RFQ", con);
+                SqlCommand comrfqnumber = new SqlCommand("select distinct SQ_RFQ_Number from SQ where SQ_OrderStatus = 'Y'", con);
 
 
                 SqlDataAdapter darfqnumber = new SqlDataAdapter(comrfqnumber);
                 DataSet dsrfqnumber = new DataSet();
                 darfqnumber.Fill(dsrfqnumber);
 
-                dropdownrfq.DataValueField = dsrfqnumber.Tables[0].Columns["RFQ_Number"].ToString();
+                dropdownrfq.DataValueField = dsrfqnumber.Tables[0].Columns["SQ_RFQ_Number"].ToString();
                 //dropdownrfq.DataTextField = dsrfqnumber.Tables[0].Columns["RFQ_Number"].ToString();
                 dropdownrfq.DataSource = dsrfqnumber.Tables[0];
                 dropdownrfq.DataBind();
@@ -103,7 +103,7 @@ namespace FinalYearProject
             txtreceivedby.Text = string.Empty;
             txtreceivermobilenumber.Text = string.Empty;
             txtreceivermailid.Text = string.Empty;
-
+            txtrfqnumber.Text = string.Empty;
 
         }
 
@@ -114,7 +114,7 @@ namespace FinalYearProject
 
             con1.Open();
 
-            SqlCommand cmd = new SqlCommand("select *from ShipmentDetailsSeller ", con1);
+            SqlCommand cmd = new SqlCommand("select *from ShipmentDetailsSeller where userid = '" + Session["M_Subscriber_UserID"].ToString() + "' ", con1);
             SqlDataAdapter daseller = new SqlDataAdapter(cmd);
             DataSet dsseller = new DataSet();
             daseller.Fill(dsseller);
@@ -141,8 +141,16 @@ namespace FinalYearProject
                 {
                     e.Row.Cells[18].Text = "No";
                 }
-
-
+                if(e.Row.Cells[25].Text == "Y")
+                {
+                    e.Row.Cells[25].Text = "Yes";
+                    e.Row.Enabled = false;
+                }
+                if(e.Row.Cells[25].Text == "N")
+                {
+                    e.Row.Cells[25].Text = "No";
+                    e.Row.Enabled = true;
+                }
 
 
 
@@ -158,8 +166,8 @@ namespace FinalYearProject
         }
         protected void Addbutton_Click(object sender, EventArgs e)
         {
-            string adddetails = @"INSERT INTO [ShipmentDetailsSeller] ([creationdate],[customer_M_Company_Name],[numberofpackages],[grossweight],[chargeableweight],[hawb],[hawbdate],[mawb],[mawbdate],[airline],[flightnumber],[etd],[eta],[atd],[ata],[delivered],[delivery],[receivedbyname],[receivermobileno],[receiveremailid],[userid],[SellerTimestamp])
-            VALUES(@creationdate,@customer_M_Company_Name,@numberofpackages,@grossweight,@chargeableweight,@hawb,@hawbdate,@mawb,@mawbdate,@airline,@flightnumber,@etd,@eta,@atd,@ata,@delivered,@delivery,@receivedbyname,@receivermobileno,@receiveremailid,@userid,@SellerTimestamp)";
+            string adddetails = @"INSERT INTO [ShipmentDetailsSeller] ([creationdate],[customer_M_Company_Name],[numberofpackages],[grossweight],[chargeableweight],[hawb],[hawbdate],[mawb],[mawbdate],[airline],[flightnumber],[etd],[eta],[atd],[ata],[delivered],[delivery],[receivedbyname],[receivermobileno],[receiveremailid],[userid],[SellerTimestamp],[ShipmentDetailsSeller_Submit],[ShipmentRFQ_Number])
+            VALUES(@creationdate,@customer_M_Company_Name,@numberofpackages,@grossweight,@chargeableweight,@hawb,@hawbdate,@mawb,@mawbdate,@airline,@flightnumber,@etd,@eta,@atd,@ata,@delivered,@delivery,@receivedbyname,@receivermobileno,@receiveremailid,@userid,@SellerTimestamp,'N',@ShipmentRFQ_Number)";
             string deliverchecking = delivery.Checked ? "Y" : "N";
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
@@ -191,6 +199,7 @@ namespace FinalYearProject
                 cmd.Parameters.AddWithValue("@receiveremailid", txtreceivermailid.Text);
                 cmd.Parameters.AddWithValue("@userid", Session["M_Subscriber_UserID"]);
                 cmd.Parameters.AddWithValue("@SellerTimestamp", DateTime.Now);
+                cmd.Parameters.AddWithValue("@ShipmentRFQ_Number", txtrfqnumber.Text);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -203,27 +212,7 @@ namespace FinalYearProject
 
             }
         }
-        //protected void mailbutton_Click(object sender, EventArgs e)
-        //{
-        //    StringWriter sw = new StringWriter();
-        //    HtmlTextWriter ht = new HtmlTextWriter(sw);
-        //    GridViewSeller.RenderControl(ht);
-        //    MailMessage mm = new MailMessage("sampreeth1998@gmail.com", txtreceivermailid.Text);
-        //    mm.Body = "<h1> Gridview Details </h1> <hr/>" + sw.ToString();
-        //    mm.IsBodyHtml = true;
-        //    mm.Subject = "gridviewdata";
-        //    SmtpClient smtp = new SmtpClient();
-        //    smtp.Host = "smtp.gmail.com";
-        //    smtp.Port = 587;
-        //    smtp.EnableSsl = true;
-        //    System.Net.NetworkCredential nc = new System.Net.NetworkCredential("sampreeth1998@gmail.com", "sampreet");
-        //    smtp.Credentials = nc;
-        //    smtp.Send(mm);
-        //}
-        //public override void VerifyRenderingInServerForm(Control control)
-        //{
-
-        //}
+        
 
 
 
@@ -264,6 +253,7 @@ namespace FinalYearProject
             txtreceivedby.Text = row.Cells[20].Text;
             txtreceivermobilenumber.Text = row.Cells[21].Text;
             txtreceivermailid.Text = row.Cells[22].Text;
+            txtrfqnumber.Text = row.Cells[26].Text;
             Addbutton.Visible = false;
             Updatebutton.Visible = true;
             BindGridView();
@@ -399,8 +389,19 @@ namespace FinalYearProject
                 smtp.EnableSsl = true;
                 smtp.Send(msg);
             }
-            GridViewSeller.SelectedRow.Cells[0].Enabled = false;
-            GridViewSeller.SelectedRow.Cells[1].Enabled = false;
+            SqlConnection con1 = new SqlConnection(_ConnStr);
+            con1.Open();
+            SqlCommand cmd1 = new SqlCommand("update ShipmentDetailsSeller set ShipmentDetailsSeller_Submit = 'Y' where shipmentnumber=@shipmentnumber", con1);
+
+            cmd1.Parameters.AddWithValue("@shipmentnumber", txtshipmentnumber.Text);
+
+
+
+
+            cmd1.ExecuteNonQuery();
+
+            BindGridView();
+            con1.Close();
 
 
 
@@ -444,7 +445,7 @@ namespace FinalYearProject
             {
                 using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.CommandText = "SELECT shipmentnumber,creationdate,customer_M_Company_Name,numberofpackages,grossweight,chargeableweight,hawb,hawbdate,mawb,mawbdate,airline,flightnumber,etd,eta,atd,ata,delivered,delivery,receivedbyname,receivermobileno,receiveremailid FROM ShipmentDetailsSeller WHERE shipmentnumber LIKE '%'+@shipmentnumber+'%' OR customer_M_Company_Name LIKE '%'+@customer_M_Company_Name+'%' OR numberofpackages LIKE '%'+@numberofpackages+'%' OR hawb LIKE '%'+@hawb+'%' OR mawb LIKE '%'+@mawb+'%' OR airline LIKE '%'+@airline+'%' OR flightnumber LIKE '%'+@flightnumber+'%' OR delivered LIKE '%'+@delivered+'%' OR receivedbyname LIKE '%'+@receivedbyname+'%' OR receivermobileno LIKE '%'+@receivermobileno+'%' OR receiveremailid LIKE '%'+@receiveremailid+'%' ";
+                    cmd.CommandText = "SELECT shipmentnumber,creationdate,customer_M_Company_Name,numberofpackages,grossweight,chargeableweight,hawb,hawbdate,mawb,mawbdate,airline,flightnumber,etd,eta,atd,ata,delivered,delivery,receivedbyname,receivermobileno,receiveremailid,ShipmentRFQ_Number FROM ShipmentDetailsSeller WHERE shipmentnumber LIKE '%'+@shipmentnumber+'%' OR customer_M_Company_Name LIKE '%'+@customer_M_Company_Name+'%' OR numberofpackages LIKE '%'+@numberofpackages+'%' OR hawb LIKE '%'+@hawb+'%' OR mawb LIKE '%'+@mawb+'%' OR airline LIKE '%'+@airline+'%' OR flightnumber LIKE '%'+@flightnumber+'%' OR delivered LIKE '%'+@delivered+'%' OR receivedbyname LIKE '%'+@receivedbyname+'%' OR receivermobileno LIKE '%'+@receivermobileno+'%' OR receiveremailid LIKE '%'+@receiveremailid+'%' ";
                     cmd.Connection = con;
                     cmd.Parameters.AddWithValue("@shipmentnumber", txtSearch.Text.Trim());
                     cmd.Parameters.AddWithValue("@customer_M_Company_Name", txtSearch.Text.Trim());
@@ -462,6 +463,7 @@ namespace FinalYearProject
                     cmd.Parameters.AddWithValue("@receiveremailid", txtSearch.Text.Trim());
                     cmd.Parameters.AddWithValue("@userid", Session["M_Subscriber_UserID"]);
                     cmd.Parameters.AddWithValue("@SellerTimestamp", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@ShipmentRFQ_Number", txtrfqnumber.Text);
                     DataTable dt = new DataTable();
                     using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
                     {
@@ -497,7 +499,7 @@ namespace FinalYearProject
         }
         protected void dropdownrfq_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string query = "select RFQ_CreationDate,M_Company_Name,RFQ_NumberofPackages,RFQ_TotalGrwt,RFQ_TotalChwt from RFQ inner join M_Company on RFQ.RFQ_Company = M_Company.M_Company_Slno where " + "RFQ_Number= @RFQ_Number";
+            string query = "select RFQ_CreationDate,M_Company_Name,RFQ_NumberofPackages,RFQ_TotalGrwt,RFQ_TotalChwt,RFQ_Number from RFQ inner join M_Company on RFQ.RFQ_Company = M_Company.M_Company_Slno where " + "RFQ_Number= @RFQ_Number";
             SqlConnection con = new SqlConnection(_ConnStr);
             SqlCommand cmd = new SqlCommand();
 
@@ -521,7 +523,7 @@ namespace FinalYearProject
                 txtgrossweight.Text = sdr[3].ToString();
 
                 txtchargeableweight.Text = sdr[4].ToString();
-
+                txtrfqnumber.Text = sdr[5].ToString();
 
 
 

@@ -24,7 +24,7 @@ namespace FinalYearProject
                 con.Open();
 
 
-                SqlCommand comrfqnumber = new SqlCommand("select RFQ_Number from RFQ", con);
+                SqlCommand comrfqnumber = new SqlCommand("select RFQ_Number from RFQ where RFQ_Submit = 'Y' ", con);
 
 
                 SqlDataAdapter darfqnumber = new SqlDataAdapter(comrfqnumber);
@@ -102,13 +102,14 @@ namespace FinalYearProject
                 lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
                 SqlConnection con1 = new SqlConnection(_ConnStr);
                 con1.Open();
-                string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+                string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag,M_Company_Currency from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
                 SqlCommand com1 = new SqlCommand(str, con1);
                 SqlDataAdapter da1 = new SqlDataAdapter(com1);
                 DataSet ds1 = new DataSet();
                 da1.Fill(ds1);
                 lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
                 Session["CompanySlnosq"] = ds1.Tables[0].Rows[0]["M_Company_Slno"];
+                Session["SellerCurrencysq"] = ds1.Tables[0].Rows[0]["M_Company_Currency"];
                 //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
                 if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
                 {
@@ -124,7 +125,7 @@ namespace FinalYearProject
 
         protected void dropdownrfq_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string query = "select RFQ_Number,RFQ_CreationDate,RFQ_OriginCountry,RFQ_DestinationCountry,RFQ_OriginAirport,RFQ_DestinationAirport,RFQ_NumberofPackages,RFQ_TotalGrwt,RFQ_TotalVolwt,RFQ_TotalChwt,RFQ_PickupAddress,RFQ_DeliveryAddress,RFQ_PickupDate,RFQ_ReqTT,RFQ_QuoteDueBy,RFQ_Commodity,RFQ_HandlingInfo,M_Company_Name,M_Currency_Name from RFQ inner join M_Company on RFQ.RFQ_Company = M_Company.M_Company_Slno inner join M_Currency on M_Company.M_Company_Currency = M_Currency.M_Currency_Code where "+"RFQ_Number= @RFQ_Number";
+            string query = "select RFQ_Number,RFQ_CreationDate,RFQ_OriginCountry,RFQ_DestinationCountry,RFQ_OriginAirport,RFQ_DestinationAirport,RFQ_NumberofPackages,RFQ_TotalGrwt,RFQ_TotalVolwt,RFQ_TotalChwt,RFQ_PickupAddress,RFQ_DeliveryAddress,RFQ_PickupDate,RFQ_ReqTT,RFQ_QuoteDueBy,RFQ_Commodity,RFQ_HandlingInfo,M_Company_Name,M_Currency_Name,RFQ_ExpectedPrice from RFQ inner join M_Company on RFQ.RFQ_Company = M_Company.M_Company_Slno inner join M_Currency on M_Company.M_Company_Currency = M_Currency.M_Currency_Code where " + "RFQ_Number= @RFQ_Number";
             SqlConnection con = new SqlConnection(_ConnStr);
             SqlCommand cmd = new SqlCommand();
             
@@ -160,7 +161,7 @@ namespace FinalYearProject
                 txthandlinginfo.Text = sdr[16].ToString();
                 txtbuyername.Text = sdr[17].ToString();
                 txtbuyercurrency.Text = sdr[18].ToString();
-
+                txtexpectedprice.Text = sdr[19].ToString();
 
                
             }
@@ -189,16 +190,19 @@ namespace FinalYearProject
             txtbuyercurrency.Text = string.Empty;
             txtbuyername.Text = string.Empty;
             txtofferprice.Text = string.Empty;
-
+            txtexpectedprice.Text = string.Empty;
+            dropdownrfq.SelectedItem.Text = string.Empty;
         }
         protected void btnlogout_Click(object sender, EventArgs e)
         {
             Session["M_Subscriber_UserID"] = null;
             Response.Redirect("Mainpage.aspx");
         }
+
+
         protected void Addbutton_Click(object sender, EventArgs e)
         {
-            string addsq = @"insert into [SQ] ([SQ_RFQ_Number],[SQ_Company],[SQ_RFQ_CreationDate],[SQ_RFQ_OriginCountry],[SQ_RFQ_DestinationCountry],[SQ_RFQ_OriginAirport],[SQ_RFQ_DestinationAirport],[SQ_RFQ_NumberofPackages],[SQ_RFQ_TotalGrwt],[SQ_RFQ_TotalVolwt],[SQ_RFQ_TotalChwt],[SQ_RFQ_PickupAddress],[SQ_RFQ_DeliveryAddress],[SQ_RFQ_PickupDate],[SQ_RFQ_ReqTT],[SQ_RFQ_QuoteDueBy],[SQ_RFQ_Commodity],[SQ_RFQ_HandlingInfo],[SQ_UserID],[SQ_OfferPrice],[SQ_Timestamp],[SQ_RFQ_Company],[SQ_BuyerCurrency]) values(@SQ_RFQ_Number,@SQ_Company,@SQ_RFQ_CreationDate,@SQ_RFQ_OriginCountry,@SQ_RFQ_DestinationCountry,@SQ_RFQ_OriginAirport,@SQ_RFQ_DestinationAirport,@SQ_RFQ_NumberofPackages,@SQ_RFQ_TotalGrwt,@SQ_RFQ_TotalVolwt,@SQ_RFQ_TotalChwt,@SQ_RFQ_PickupAddress,@SQ_RFQ_DeliveryAddress,@SQ_RFQ_PickupDate,@SQ_RFQ_ReqTT,@SQ_RFQ_QuoteDueBy,@SQ_RFQ_Commodity,@SQ_RFQ_HandlingInfo,@SQ_UserID,@SQ_OfferPrice,@SQ_Timestamp,@SQ_RFQ_Company,@SQ_BuyerCurrency)";
+            string addsq = @"insert into [SQ] ([SQ_RFQ_Number],[SQ_Company],[SQ_RFQ_CreationDate],[SQ_RFQ_OriginCountry],[SQ_RFQ_DestinationCountry],[SQ_RFQ_OriginAirport],[SQ_RFQ_DestinationAirport],[SQ_RFQ_NumberofPackages],[SQ_RFQ_TotalGrwt],[SQ_RFQ_TotalVolwt],[SQ_RFQ_TotalChwt],[SQ_RFQ_PickupAddress],[SQ_RFQ_DeliveryAddress],[SQ_RFQ_PickupDate],[SQ_RFQ_ReqTT],[SQ_RFQ_QuoteDueBy],[SQ_RFQ_Commodity],[SQ_RFQ_HandlingInfo],[SQ_UserID],[SQ_OfferPrice],[SQ_Timestamp],[SQ_RFQ_Company],[SQ_BuyerCurrency],[SQ_Submit],[SQ_RFQ_ExpectedPrice],[SQ_OrderStatus]) values(@SQ_RFQ_Number,@SQ_Company,@SQ_RFQ_CreationDate,@SQ_RFQ_OriginCountry,@SQ_RFQ_DestinationCountry,@SQ_RFQ_OriginAirport,@SQ_RFQ_DestinationAirport,@SQ_RFQ_NumberofPackages,@SQ_RFQ_TotalGrwt,@SQ_RFQ_TotalVolwt,@SQ_RFQ_TotalChwt,@SQ_RFQ_PickupAddress,@SQ_RFQ_DeliveryAddress,@SQ_RFQ_PickupDate,@SQ_RFQ_ReqTT,@SQ_RFQ_QuoteDueBy,@SQ_RFQ_Commodity,@SQ_RFQ_HandlingInfo,@SQ_UserID,@SQ_OfferPrice,@SQ_Timestamp,@SQ_RFQ_Company,@SQ_BuyerCurrency,'N',@SQ_RFQ_ExpectedPrice,'N')";
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
                 con.ConnectionString = _ConnStr;
@@ -233,6 +237,7 @@ namespace FinalYearProject
                 cmd.Parameters.AddWithValue("@SQ_Timestamp", DateTime.Now);
                 cmd.Parameters.AddWithValue("@SQ_RFQ_Company", txtbuyername.Text);
                 cmd.Parameters.AddWithValue("@SQ_BuyerCurrency", txtbuyercurrency.Text);
+                cmd.Parameters.AddWithValue("@SQ_RFQ_ExpectedPrice", txtexpectedprice.Text);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 BindGridView();
@@ -248,7 +253,7 @@ namespace FinalYearProject
 
             con1.Open();
 
-            SqlCommand cmd = new SqlCommand("select SQ_Slno,SQ_RFQ_Number,SQ_Company,SQ_RFQ_CreationDate,SQ_RFQ_OriginCountry,SQ_RFQ_DestinationCountry,SQ_RFQ_OriginAirport,SQ_RFQ_DestinationAirport,SQ_RFQ_NumberofPackages,SQ_RFQ_TotalGrwt,SQ_RFQ_TotalVolwt,SQ_RFQ_TotalChwt,SQ_RFQ_PickupAddress,SQ_RFQ_DeliveryAddress,SQ_RFQ_PickupDate,SQ_RFQ_ReqTT,SQ_RFQ_QuoteDueBy,SQ_RFQ_Commodity,SQ_RFQ_HandlingInfo,SQ_UserID,SQ_OfferPrice,SQ_Timestamp,SQ_RFQ_Company,SQ_BuyerCurrency from SQ where SQ_UserID = '" + Session["M_Subscriber_UserID"].ToString() + "' ", con1);
+            SqlCommand cmd = new SqlCommand("select SQ_Slno,SQ_RFQ_Number,SQ_Company,SQ_RFQ_CreationDate,SQ_RFQ_OriginCountry,SQ_RFQ_DestinationCountry,SQ_RFQ_OriginAirport,SQ_RFQ_DestinationAirport,SQ_RFQ_NumberofPackages,SQ_RFQ_TotalGrwt,SQ_RFQ_TotalVolwt,SQ_RFQ_TotalChwt,SQ_RFQ_PickupAddress,SQ_RFQ_DeliveryAddress,SQ_RFQ_PickupDate,SQ_RFQ_ReqTT,SQ_RFQ_QuoteDueBy,SQ_RFQ_Commodity,SQ_RFQ_HandlingInfo,SQ_UserID,SQ_OfferPrice,SQ_Timestamp,SQ_RFQ_Company,SQ_BuyerCurrency,SQ_Submit,SQ_RFQ_ExpectedPrice,SQ_OrderStatus,M_Company_Name,M_Currency_Name from SQ inner join M_Company on SQ.SQ_Company = M_Company.M_Company_Slno inner join M_Currency on M_Company.M_Company_Currency = M_Currency.M_Currency_Code where SQ_UserID = '" + Session["M_Subscriber_UserID"].ToString() + "' ", con1);
             SqlDataAdapter dasq = new SqlDataAdapter(cmd);
             DataSet dssq = new DataSet();
             dasq.Fill(dssq);
@@ -281,9 +286,12 @@ namespace FinalYearProject
             txtquotedueby.Text = row.Cells[18].Text;
             dropdowncommodity.SelectedItem.Text = row.Cells[19].Text;
             txthandlinginfo.Text = row.Cells[20].Text;
-            txtofferprice.Text = row.Cells[22].Text;
-            txtbuyername.Text = row.Cells[24].Text;
-            txtbuyercurrency.Text = row.Cells[25].Text;
+            txtbuyername.Text = row.Cells[21].Text;
+            txtbuyercurrency.Text = row.Cells[22].Text;
+            
+            txtofferprice.Text = row.Cells[24].Text;
+            txtexpectedprice.Text = row.Cells[25].Text;
+            
 
 
             
@@ -292,6 +300,55 @@ namespace FinalYearProject
             Addbutton.Visible = false;
             //Updatebutton.Visible = true;
             BindGridView();
+        }
+        protected void GridViewSq_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[27].Text == "Y")
+                {
+                    e.Row.Cells[27].Text = "Yes";
+                    e.Row.Enabled = false;
+
+
+
+                }
+                if (e.Row.Cells[27].Text == "N")
+                {
+                    e.Row.Cells[27].Text = "No";
+                    e.Row.Enabled = true;
+                    
+
+
+
+
+
+
+
+                }
+                if (e.Row.Cells[28].Text == "Y")
+                {
+                    e.Row.Cells[28].Text = "Order Placed";
+                    e.Row.Enabled = false;
+
+
+
+                }
+                if (e.Row.Cells[28].Text == "N")
+                {
+                    e.Row.Cells[28].Text = "Order Pending";
+                    e.Row.Enabled = true;
+
+
+
+
+
+
+
+
+                }
+            }
         }
         protected void Cancelbutton_Click(object sender, EventArgs e)
         {
@@ -325,28 +382,7 @@ namespace FinalYearProject
 
             con.Close();
 
-            //string updatesq = @"update [SQ] set [SQ_OfferPrice]=@SQ_OfferPrice,[SQ_Timestamp]=@SQ_Timestamp where [SQ_Slno] = @SQ_Slno";
-            //using (SqlConnection con = new SqlConnection(_ConnStr))
-            //{
-            //    con.ConnectionString = _ConnStr;
-            //    SqlCommand cmd = con.CreateCommand();
-            //    cmd.CommandText = updatesq;
-            //    cmd.CommandType = System.Data.CommandType.Text;
-            //    cmd.Parameters.AddWithValue("@SQ_Slno", SqlDbType.Int);
-
-            //    cmd.Parameters.AddWithValue("@SQ_OfferPrice", txtofferprice.Text);
-
-            //    cmd.Parameters.AddWithValue("@SQ_Timestamp", DateTime.Now);
-
-            //    con.Open();
-            //    cmd.ExecuteNonQuery();
-            //    GridViewSq.EditIndex = -1;
-            //    BindGridView();
-
-            //    con.Close();
-            //    //cmd.ExecuteNonQuery();
-            //    //GridViewRfq.EditIndex = -1;
-            //    //BindGridView();
+           
 
 
         }
@@ -408,6 +444,7 @@ namespace FinalYearProject
                              "Quote Due by:" + txtquotedueby.Text + "<br/>" +
                              "Commodity:" + dropdowncommodity.SelectedItem.Text + "<br/>" +
                              "Handling Info:" + txthandlinginfo.Text + "<br/>"+
+                             "Expected Price:"+txtexpectedprice.Text +  "<br/>"+
                 "Offer Price:" + txtofferprice.Text + "<br/>";
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com";
@@ -416,9 +453,20 @@ namespace FinalYearProject
                 smtp.EnableSsl = true;
                 smtp.Send(msg);
             }
-            GridViewSq.SelectedRow.Cells[0].Enabled = false;
-            GridViewSq.SelectedRow.Cells[1].Enabled = false;
 
+            SqlConnection con1 = new SqlConnection(_ConnStr);
+            con1.Open();
+            SqlCommand cmd1 = new SqlCommand("update SQ set SQ_Submit = 'Y' where SQ_Slno=@SQ_Slno", con1);
+
+            cmd1.Parameters.AddWithValue("@SQ_Slno", txtsqlslno.Text);
+
+
+
+
+            cmd1.ExecuteNonQuery();
+
+            BindGridView();
+            con1.Close();
 
 
 

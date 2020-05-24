@@ -110,8 +110,8 @@
           
     <li><a href="RFQ.aspx">RFQ</a></li>
     
-    <li><a href="#">Quote Negotiation(Buyer)</a></li>
-     <li><a href="#">Orders(Buyer)</a></li>
+     <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+     <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="#">Invoice Verification </a></li>
    
@@ -130,8 +130,8 @@
     <!-- here is the asp.net link button to make post back -->
           
     <li><a href="SQ.aspx">SellerQuote</a></li>
-      <li><a href="#">Quote Negotiation(Seller)</a></li>
-      <li><a href="#">Orders(Seller)</a></li>
+      <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
+      <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
@@ -208,10 +208,10 @@
              <label style="font-size:19px;margin-left:19px;margin-right:58px"> Receiver Name <br> <asp:TextBox ID="txtreceivedby" Width="145px" runat="server"></asp:TextBox> </label>
                 <label style="font-size:19px;margin-left:30px;margin-right:119px"> Receiver Mobile Number <br> <asp:TextBox ID="txtreceivermobilenumber" Width="145px" runat="server"></asp:TextBox> </label>
                 <label style="font-size:19px;margin-left:129px"> Receiver Mail ID <br> <asp:TextBox ID="txtreceivermailid" Width="145px" runat="server"></asp:TextBox> </label>
-            
+               <label style="font-size:19px;margin-left:129px"> RFQ Number <br> <asp:TextBox ID="txtrfqnumber" Width="145px" ReadOnly="true" runat="server"></asp:TextBox> </label>
              <br /> <br /> <br /> <br />  
            
-            <asp:Button ID="Addbutton"  Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
+            <asp:Button ID="Addbutton"   Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
             <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton_Click" />
                  <asp:Button ID="Submitbutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Submit" runat="server" font-size="Medium" BackColor="YellowGreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Submitbutton_Click" />
              
@@ -260,6 +260,8 @@
                         <asp:BoundField DataField="receiveremailid" HeaderText="ReceiverEmail" />
                         <asp:BoundField DataField="userid" HeaderText="UserID" Visible="false" />
                         <asp:BoundField DataField="SellerTimestamp" HeaderText="Timestamp" Visible="false" />
+                        <asp:BoundField DataField="ShipmentDetailsSeller_Submit" HeaderText="Submit?" />
+                        <asp:BoundField DataField="ShipmentRFQ_Number" HeaderText="RFQ Number" />
                     </Columns>
                     
                     <EditRowStyle BackColor="#999999" />

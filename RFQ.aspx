@@ -112,8 +112,8 @@
           
     <li><a href="RFQ.aspx">RFQ</a></li>
     
-    <li><a href="#">Quote Negotiation(Buyer)</a></li>
-     <li><a href="#">Orders(Buyer)</a></li>
+    <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+     <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="#">Invoice Verification </a></li>
    
@@ -132,8 +132,8 @@
     <!-- here is the asp.net link button to make post back -->
           
      <li><a href="SQ.aspx">SellerQuote</a></li>
-      <li><a href="#">Quote Negotiation(Seller)</a></li>
-      <li><a href="#">Orders(Seller)</a></li>
+      <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
+      <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
@@ -207,7 +207,8 @@
             <asp:RequiredFieldValidator ID="rfvcommodity" ControlToValidate="dropdowncommodity" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 <br /> <br />
                  <label style="font-size:19px;margin-left:20px;margin-right:59px"> Handling Info <br> <asp:TextBox ID="txthandlinginfo" Width="145px"  runat="server"></asp:TextBox> </label>
-                 
+                 <label style="font-size:19px;margin-left:20px;margin-right:59px"> ExpectedPrice <br> <asp:TextBox ID="txtexpectedprice" Width="145px"  runat="server"></asp:TextBox> </label>
+                  <asp:RequiredFieldValidator ID="rfvexpectedprice" ControlToValidate="txtexpectedprice" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
                 
            
@@ -232,7 +233,7 @@
                  <asp:ImageButton ID="btnRefresh" runat="server" CssClass="pull-right" width="20" Height="20" ImageUrl="/images/refresh.png" OnClick="Refresh"  />
                  
                 
-                <asp:GridView ID="GridViewRfq"  runat="server" AutoGenerateColumns="false"  RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="RFQ_Slno" OnSelectedIndexChanged="GridViewRfq_SelectedIndexChanged" OnRowDeleting ="GridViewRfq_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
+                <asp:GridView ID="GridViewRfq"  runat="server" AutoGenerateColumns="false"  RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="RFQ_Slno"  OnRowDataBound="GridViewRfq_RowDataBound" OnSelectedIndexChanged="GridViewRfq_SelectedIndexChanged" OnRowDeleting ="GridViewRfq_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
                     <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                     
@@ -258,8 +259,10 @@
                         <asp:BoundField DataField="RFQ_QuoteDueBy" HeaderText="Quote DueBy" />
                         <asp:BoundField DataField="RFQ_Commodity" HeaderText="Commodity" />
                         <asp:BoundField DataField="RFQ_HandlingInfo" HeaderText="Handling Info" />
+                        <asp:BoundField DataField="RFQ_ExpectedPrice" HeaderText="ExpectedPrice" />
                         <asp:BoundField DataField="RFQ_UserID" HeaderText="UserID" Visible="false" />
                         <asp:BoundField DataField="RFQ_Timestamp" HeaderText="Timestamp" Visible="false" />
+                        <asp:BoundField DataField="RFQ_Submit" HeaderText="Submitted?" />
                         
                     </Columns>
                     
