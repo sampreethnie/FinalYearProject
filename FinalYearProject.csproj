@@ -172,6 +172,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
+    <Content Include="InvoiceAudit.aspx" />
     <Content Include="InvoiceDetails.aspx" />
     <Content Include="InvoiceDisplay.aspx" />
     <Content Include="MasterPage.Master" />
@@ -340,6 +341,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceAudit.aspx.cs">
+      <DependentUpon>InvoiceAudit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvoiceAudit.aspx.designer.cs">
+      <DependentUpon>InvoiceAudit.aspx</DependentUpon>
     </Compile>
     <Compile Include="InvoiceDetails.aspx.cs">
       <DependentUpon>InvoiceDetails.aspx</DependentUpon>

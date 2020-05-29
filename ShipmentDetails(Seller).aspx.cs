@@ -310,33 +310,7 @@ namespace FinalYearProject
         }
         protected void Submitbutton_Click(object sender, EventArgs e)
         {
-            //SqlConnection con = new SqlConnection(_ConnStr);
-            //con.Open();
-            //SqlCommand cmd = new SqlCommand("update ShipmentDetailsSeller set creationdate=@creationdate,customer_M_Company_Name=@customer_M_Company_Name,numberofpackages=@numberofpackages,grossweight=@grossweight,chargeableweight=@chargeableweight,hawb=@hawb,hawbdate=@hawbdate,mawb=@mawb,mawbdate=@mawbdate,airline=@airline,flightnumber=@flightnumber,etd=@etd,eta=@eta,atd=@atd,ata=@ata,delivered=@delivered,delivery=@delivery,receivedbyname=@receivedbyname,receivermobileno=@receivermobileno,receiveremailid=@receiveremailid where shipmentnumber=@shipmentnumber", con);
-            //cmd.Parameters.AddWithValue("@shipmentnumber", txtshipmentnumber.Text);
-            //cmd.Parameters.AddWithValue("@creationdate", Convert.ToDateTime(txtcreationdate.Text));
-            //cmd.Parameters.AddWithValue("@customer_M_Company_Name", dropdowncustomer.SelectedItem.Text);
-            //cmd.Parameters.AddWithValue("@numberofpackages", txtnoofpackages.Text);
-            //cmd.Parameters.AddWithValue("@grossweight", txtgrossweight.Text);
-            //cmd.Parameters.AddWithValue("@chargeableweight", txtchargeableweight.Text);
-            //cmd.Parameters.AddWithValue("@hawb", txthawb.Text);
-            //cmd.Parameters.AddWithValue("@hawbdate", Convert.ToDateTime(txthawbdate.Text));
-            //cmd.Parameters.AddWithValue("@mawb", txtmawb.Text);
-            //cmd.Parameters.AddWithValue("@mawbdate", Convert.ToDateTime(txtmawbdate.Text));
-            //cmd.Parameters.AddWithValue("@airline", txtairline.Text);
-            //cmd.Parameters.AddWithValue("@flightnumber", txtflightnumber.Text);
-            //cmd.Parameters.AddWithValue("@etd", Convert.ToDateTime(txtetd.Text));
-            //cmd.Parameters.AddWithValue("@eta", Convert.ToDateTime(txteta.Text));
-            //cmd.Parameters.AddWithValue("@atd", Convert.ToDateTime(txtatd.Text));
-            //cmd.Parameters.AddWithValue("@ata", Convert.ToDateTime(txtata.Text));
-            //cmd.Parameters.AddWithValue("@delivered", delivery.Text);
-            //cmd.Parameters.AddWithValue("@delivery", Convert.ToDateTime(txtdeliverydate.Text));
-            //cmd.Parameters.AddWithValue("@receivedbyname", txtreceivedby.Text);
-            //cmd.Parameters.AddWithValue("@receivermobileno", txtreceivermobilenumber.Text);
-            //cmd.Parameters.AddWithValue("@receiveremailid", txtreceivermailid.Text);
-
-            //cmd.ExecuteNonQuery();
-            //BindGridView();
+        
 
 
             SqlConnection con = new SqlConnection(_ConnStr);

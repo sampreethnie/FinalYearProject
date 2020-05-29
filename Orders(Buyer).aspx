@@ -153,7 +153,7 @@
               
          <label style="font-size:19px;margin-left:20px;margin-right:110px;"> To Date  <br > <asp:TextBox ID="txttodate" TextMode="Date" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 
-            <asp:Button ID="btnSave" runat="server" Text="Search" OnClick="btnSearch_Click" />
+            <asp:Button ID="btnSave" runat="server" Text="Search" style="width:70px" OnClick="btnSearch_Click" />
             <div>
                 <asp:GridView ID="GridViewOrdersBuyer"  runat="server"  AutoGenerateColumns="false" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" DataKeyNames="ORD_Number"  CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     

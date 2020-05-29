@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.IO;
 namespace FinalYearProject
 {
     public partial class InvoiceDisplay : System.Web.UI.Page
@@ -21,7 +22,7 @@ namespace FinalYearProject
             //DateTime dt = Convert.ToDateTime(dateTime);
 
             //string finaltime = dt.ToString();
-
+           
 
 
 
@@ -38,12 +39,14 @@ namespace FinalYearProject
             Label12.Text = Request.QueryString["sellerdelivered"];
             Label13.Text = Request.QueryString["buyerreceived"];
             Label14.Text= Request.QueryString["M_Currency_Name"];
-            Label4.Text = Request.QueryString["creationdate"];
             txtcustomer.Text = Request.QueryString["customer_M_Company_Name"];
             txtdisplaycurrency.Text = Request.QueryString["M_Currency_Name"];
             txteditcustomer.Text= Request.QueryString["customer_M_Company_Name"];
             txteditcurrency.Text= Request.QueryString["M_Currency_Name"];
             //Label3.Text = finaltime;
+            txtrfqnumber.Text = Label1.Text;
+            txteditrfqnumber.Text = Label1.Text;
+
 
             txttaxname.Visible = false;
             lbltaxname.Visible = false;
@@ -83,7 +86,7 @@ namespace FinalYearProject
                 SqlConnection conchargeinvoice = new SqlConnection(_ConnStr);
 
                 conchargeinvoice.Open();
-                SqlCommand comchargeinvoice = new SqlCommand("select TM_INVOICE_No from TM_INVOICE", conchargeinvoice);
+                SqlCommand comchargeinvoice = new SqlCommand("select TM_INVOICE_No from TM_INVOICE where TM_INVOICE_Status = 'N' or TM_INVOICE_Status='P' ", conchargeinvoice);
                 SqlDataAdapter dachargeinvoice = new SqlDataAdapter(comchargeinvoice);
                 DataSet dschargeinvoice = new DataSet();
                 dachargeinvoice.Fill(dschargeinvoice);
@@ -138,13 +141,14 @@ namespace FinalYearProject
                 lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
                 SqlConnection con1 = new SqlConnection(_ConnStr);
                 con1.Open();
-                string str = "select M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+                string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
                 SqlCommand com1 = new SqlCommand(str, con1);
                 SqlDataAdapter da1 = new SqlDataAdapter(com1);
                 DataSet ds1 = new DataSet();
                 da1.Fill(ds1);
                 lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
                 //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
+                lblcompanyslno.Text = ds1.Tables[0].Rows[0]["M_Company_Slno"].ToString();
                 if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
                 {
                     ButtonSeller.Visible = false;
@@ -156,15 +160,17 @@ namespace FinalYearProject
                     ButtonBuyer.Visible = false;
                     
                 }
+
                 BindGridView();
                 BindChargeGridView();
+               
             }
         }
         private void BindGridView()
         {
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
-            SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE_No,TM_INVOICE_ShipmentRefNo,TM_INVOICE_Customer,TM_INVOICE_Currency,TM_INVOICE_Date from TM_INVOICE; select SUM(TD_INVOICE_TAXAMOUNT) from TD_INVOICE inner join  TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No;", con);
+            SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE_No,TM_INVOICE_ShipmentRefNo,TM_INVOICE_Customer,TM_INVOICE_Currency,TM_INVOICE_Date,TM_INVOICE_Status,TM_INVOICE_RFQNumber from TM_INVOICE; select SUM(TD_INVOICE_TAXAMOUNT) from TD_INVOICE inner join  TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No;", con);
             SqlDataAdapter dainvoice = new SqlDataAdapter(cmd);
             DataSet dsinvoice = new DataSet();
             dainvoice.Fill(dsinvoice);
@@ -176,7 +182,7 @@ namespace FinalYearProject
         {
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
-            SqlCommand cmd = new SqlCommand("select TD_INVOICE_SLNO,TD_INVOICE_TMSLNO,M_Charge_Name,TD_INVOICE_DESCRIPTION,TD_INVOICE_BASIS,TD_INVOICE_QTY,TD_INVOICE_Rate,M_Currency_Name,TD_INVOICE_AMOUNTFC,TD_INVOICE_EXCHRATE,TD_INVOICE_AMOUNTBC,TD_INVOICE_TAXABLE,TD_INVOICE_TAXPERCENTAGE,TD_INVOICE_TAXNAME,TD_INVOICE_TAXAMOUNT,TD_INVOICE_TOTALAMOUNT from TD_INVOICE inner join M_Currency on TD_INVOICE.TD_INVOICE_CURRENCY = M_Currency.M_Currency_Code inner join  M_Charge on TD_INVOICE.TD_INVOICE_CHARGESLNO = M_Charge.M_Charge_Code", con);
+            SqlCommand cmd = new SqlCommand("select TD_INVOICE_SLNO,TD_INVOICE_TMSLNO,M_Charge_Name,TD_INVOICE_DESCRIPTION,TD_INVOICE_BASIS,TD_INVOICE_QTY,TD_INVOICE_Rate,M_Currency_Name,TD_INVOICE_AMOUNTFC,TD_INVOICE_EXCHRATE,TD_INVOICE_AMOUNTBC,TD_INVOICE_TAXABLE,TD_INVOICE_TAXPERCENTAGE,TD_INVOICE_TAXNAME,TD_INVOICE_TAXAMOUNT,TD_INVOICE_TOTALAMOUNT,TD_INVOICE_Status from TD_INVOICE inner join M_Currency on TD_INVOICE.TD_INVOICE_CURRENCY = M_Currency.M_Currency_Code inner join  M_Charge on TD_INVOICE.TD_INVOICE_CHARGESLNO = M_Charge.M_Charge_Code", con);
             SqlDataAdapter dacharge = new SqlDataAdapter(cmd);
             DataSet dscharge = new DataSet();
             dacharge.Fill(dscharge);
@@ -216,29 +222,54 @@ namespace FinalYearProject
             Response.Redirect("Mainpage.aspx");
         }
         protected void AddInvoiceButton_Click(object sender, EventArgs e)
-        { 
-
-            string addinvoice = @"INSERT INTO [TM_INVOICE] ([TM_INVOICE_No],[TM_INVOICE_ShipmentRefNo],[TM_INVOICE_Customer],[TM_INVOICE_Date],[TM_INVOICE_Currency]) VALUES(@TM_INVOICE_No,@TM_INVOICE_ShipmentRefNo,@TM_INVOICE_Customer,@TM_INVOICE_Date,@TM_INVOICE_Currency)";
-          
+        {
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
-                con.ConnectionString = _ConnStr;
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = addinvoice;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@TM_INVOICE_No", txtinvoicenumber.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentRefNo", txtshipmentrefno.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_Customer", txtcustomer.Text);
-                cmd.Parameters.AddWithValue("@TM_INVOICE_Date", Convert.ToDateTime(txtinvoicedate.Text));
-                cmd.Parameters.AddWithValue("@TM_INVOICE_Currency", txtdisplaycurrency.Text);
-
                 con.Open();
-                cmd.ExecuteNonQuery();
 
-                BindGridView();
-                con.Close();
-                clear();
 
+                string query = "select TM_INVOICE_No from TM_INVOICE where TM_INVOICE_No = '" + txtinvoicenumber.Text + "' ";
+                SqlCommand cmd2 = new SqlCommand(query, con);
+                SqlDataReader dr = cmd2.ExecuteReader();
+                dr.Read();
+                if (dr.HasRows)
+                {
+                    lblvalidatecurr.Text = "Invoice Number already exists.. Enter Other Number";
+                    dr.Close();
+                }
+                
+                else
+                {
+                    dr.Close();
+                    string addinvoice = @"INSERT INTO [TM_INVOICE] ([TM_INVOICE_No],[TM_INVOICE_ShipmentRefNo],[TM_INVOICE_Customer],[TM_INVOICE_Date],[TM_INVOICE_Currency],[TM_INVOICE_RFQNumber],[TM_INVOICE_COMPANYSLNO],[TM_INVOICE_USERID],[TM_INVOICE_Status]) VALUES(@TM_INVOICE_No,@TM_INVOICE_ShipmentRefNo,@TM_INVOICE_Customer,@TM_INVOICE_Date,@TM_INVOICE_Currency,@TM_INVOICE_RFQNumber,@TM_INVOICE_COMPANYSLNO,@TM_INVOICE_USERID,'P')";
+
+
+                    //con.ConnectionString = _ConnStr;
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = addinvoice;
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_No", txtinvoicenumber.Text);
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentRefNo", txtshipmentrefno.Text);
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_Customer", txtcustomer.Text);
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_Date", Convert.ToDateTime(txtinvoicedate.Text));
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_Currency", txtdisplaycurrency.Text);
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_RFQNumber", txtrfqnumber.Text);
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_COMPANYSLNO", lblcompanyslno.Text);
+                    cmd.Parameters.AddWithValue("@TM_INVOICE_USERID", Session["M_Subscriber_UserID"]);
+                    cmd.ExecuteNonQuery();
+
+                    BindGridView();
+
+
+
+                    con.Close();
+
+
+
+
+                    clear();
+
+                }
             }
 
         }
@@ -254,6 +285,7 @@ namespace FinalYearProject
             txteditshipmentrefno.Text = gvRow.Cells[3].Text;
             txteditcustomer.Text = gvRow.Cells[4].Text;
             txteditcurrency.Text = gvRow.Cells[5].Text;
+            
             
             
             mpeInvoiceEdit.Show();
@@ -343,14 +375,19 @@ namespace FinalYearProject
                     object value = dr1.GetValue(0);
                     Total.Text = value.ToString();
                 }
-                
+               if(e.Row.Cells[9].Text == "Y")
+                {
+                    e.Row.Cells[9].Text = "Accepted";
+                    e.Row.Enabled = false;
+                }
+               
             }
         }
 
 
         protected void UpdateInvoice_Click(object sender, EventArgs e)
         {
-            string updateinvoice = @"UPDATE [TM_INVOICE] SET [TM_INVOICE_No] = @TM_INVOICE_No,[TM_INVOICE_ShipmentRefNo] = @TM_INVOICE_ShipmentRefNo,[TM_INVOICE_Date] = @TM_INVOICE_Date where [TM_INVOICE_Slno] = @TM_INVOICE_Slno";
+            string updateinvoice = @"UPDATE [TM_INVOICE] SET [TM_INVOICE_No] = @TM_INVOICE_No,[TM_INVOICE_ShipmentRefNo] = @TM_INVOICE_ShipmentRefNo,[TM_INVOICE_Date] = @TM_INVOICE_Date,[TM_INVOICE_RFQNumber] = @TM_INVOICE_RFQNumber,[TM_INVOICE_COMPANYSLNO] = @TM_INVOICE_COMPANYSLNO,[TM_INVOICE_USERID] = @TM_INVOICE_USERID where [TM_INVOICE_Slno] = @TM_INVOICE_Slno";
             
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
@@ -362,8 +399,9 @@ namespace FinalYearProject
                 cmd.Parameters.AddWithValue("@TM_INVOICE_No", txteditinvoice.Text);
                 cmd.Parameters.AddWithValue("@TM_INVOICE_ShipmentRefNo",txteditshipmentrefno.Text);
                 cmd.Parameters.AddWithValue("@TM_INVOICE_Date", Convert.ToDateTime(txteditinvoicedate.Text));
-              
-
+                cmd.Parameters.AddWithValue("@TM_INVOICE_RFQNumber", txteditrfqnumber.Text);
+                cmd.Parameters.AddWithValue("@TM_INVOICE_COMPANYSLNO", lblcompanyslno.Text);
+                cmd.Parameters.AddWithValue("@TM_INVOICE_USERID", Session["M_Subscriber_UserID"]);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 BindGridView();
@@ -400,7 +438,7 @@ namespace FinalYearProject
                    [TD_INVOICE_TAXPERCENTAGE] = @TD_INVOICE_TAXPERCENTAGE,
               [TD_INVOICE_TAXNAME] = @TD_INVOICE_TAXNAME,
              [TD_INVOICE_TAXAMOUNT] = @TD_INVOICE_TAXAMOUNT,
-              [TD_INVOICE_TOTALAMOUNT] = @TD_INVOICE_TOTALAMOUNT where [TD_INVOICE_SLNO] = @TD_INVOICE_SLNO";
+              [TD_INVOICE_TOTALAMOUNT] = @TD_INVOICE_TOTALAMOUNT,[TD_INVOICE_USERID] = @TD_INVOICE_USERID,[TD_INVOICE_TIMESTAMP] = @TD_INVOICE_TIMESTAMP where [TD_INVOICE_SLNO] = @TD_INVOICE_SLNO";
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
                 con.ConnectionString = _ConnStr;
@@ -424,6 +462,8 @@ namespace FinalYearProject
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TAXNAME", txtedittaxname.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TAXAMOUNT", txtedittaxamount.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TOTALAMOUNT", txtedittotalamount.Text);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_USERID", Session["M_Subscriber_UserID"]);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_TIMESTAMP", DateTime.Now);
                 con.Open();
                 cmd.ExecuteNonQuery();
 
@@ -545,11 +585,11 @@ namespace FinalYearProject
 @"INSERT INTO [TD_INVOICE] ([TD_INVOICE_TMSLNO],[TD_INVOICE_DESCRIPTION],[TD_INVOICE_CHARGESLNO],[TD_INVOICE_BASIS],
 [TD_INVOICE_QTY],[TD_INVOICE_Rate],[TD_INVOICE_CURRENCY],[TD_INVOICE_AMOUNTFC],[TD_INVOICE_EXCHRATE],
 [TD_INVOICE_AMOUNTBC],[TD_INVOICE_TAXABLE],[TD_INVOICE_TAXPERCENTAGE],[TD_INVOICE_TAXNAME],
-[TD_INVOICE_TAXAMOUNT],[TD_INVOICE_TOTALAMOUNT]) 
+[TD_INVOICE_TAXAMOUNT],[TD_INVOICE_TOTALAMOUNT],[TD_INVOICE_Status],[TD_INVOICE_USERID],[TD_INVOICE_TIMESTAMP]) 
 
 VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INVOICE_BASIS,@TD_INVOICE_QTY,
 @TD_INVOICE_Rate,@TD_INVOICE_CURRENCY,@TD_INVOICE_AMOUNTFC,@TD_INVOICE_EXCHRATE,@TD_INVOICE_AMOUNTBC,
-@TD_INVOICE_TAXABLE,@TD_INVOICE_TAXPERCENTAGE,@TD_INVOICE_TAXNAME,@TD_INVOICE_TAXAMOUNT,@TD_INVOICE_TOTALAMOUNT)";
+@TD_INVOICE_TAXABLE,@TD_INVOICE_TAXPERCENTAGE,@TD_INVOICE_TAXNAME,@TD_INVOICE_TAXAMOUNT,@TD_INVOICE_TOTALAMOUNT,'P',@TD_INVOICE_USERID,@TD_INVOICE_TIMESTAMP)";
 
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
@@ -573,6 +613,8 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INV
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TAXNAME", txttaxname.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TAXAMOUNT", txttaxamount.Text);
                 cmd.Parameters.AddWithValue("@TD_INVOICE_TOTALAMOUNT", txttotalamount.Text);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_USERID", Session["M_Subscriber_UserID"]);
+                cmd.Parameters.AddWithValue("@TD_INVOICE_TIMESTAMP", DateTime.Now);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -607,6 +649,21 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INV
                 {
                     e.Row.Cells[11].Text = "No";
                 }
+                if(e.Row.Cells[16].Text == "Y")
+                {
+                    e.Row.Cells[16].Text = "Accepted";
+                    e.Row.Enabled = false;
+                }
+                if (e.Row.Cells[16].Text == "N")
+                {
+                    e.Row.Cells[16].Text = "Rejected";
+                    
+                }
+                if (e.Row.Cells[16].Text == "P")
+                {
+                    e.Row.Cells[16].Text = "Pending";
+
+                }
             }
         }
 
@@ -633,10 +690,52 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INV
         protected void btnUpload_Click(object sender, EventArgs e)
         {
 
-            invoiceupload.SaveAs(Server.MapPath("~/Uploads/" + invoiceupload.FileName));
-            lblMessage.Text = "File Uploaded";
-            lblMessage.ForeColor = System.Drawing.Color.Green;
+            //invoiceupload.SaveAs(Server.MapPath("~/Uploads/" + invoiceupload.FileName));
+            //lblMessage.Text = "File Uploaded";
+            //lblMessage.ForeColor = System.Drawing.Color.Green;
+            if(invoiceupload.HasFile)
+            {
+                invoiceupload.PostedFile.SaveAs(Server.MapPath("~/Uploads/" + invoiceupload.FileName));
+            }
+            DataTable dt = new DataTable();
+            dt.Columns.Add("File", typeof(string));
+            dt.Columns.Add("Size", typeof(string));
+            dt.Columns.Add("Type", typeof(string));
+            foreach (string strFile in Directory.GetFiles(Server.MapPath("~/Uploads/")))
+            {
+                FileInfo fi = new FileInfo(strFile);
+                dt.Rows.Add(fi.Name, fi.Length, GetFileTypeByExtension(fi.Extension));
 
+
+
+            }
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+        
+        private string GetFileTypeByExtension(string extension)
+        {
+            switch(extension.ToLower())
+            {
+                case ".doc":
+                case ".docx":
+                    return "Microsoft Word Document";
+                case ".jpg":
+                case ".png":
+                    return "Image";
+                case ".pdf":
+                    return "PDF Document";
+                case ".txt":
+                    return "Text Document";
+                case ".xlsx":
+                case ".xls":
+                    return "Microsoft Excel Document";
+                default:
+                    return "Unknown";
+
+
+
+            }
         }
         private void clear()
         {
@@ -644,6 +743,19 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INV
             txtinvoicedate.Text = string.Empty;
             txtshipmentrefno.Text = string.Empty;
         }
+
        
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if(e.CommandName == "Download")
+            {
+                Response.Clear();
+                Response.ContentType = "application/octet-stream";
+                Response.AppendHeader("content-disposition", "filename = " + e.CommandArgument);
+                Response.TransmitFile(Server.MapPath("~/Uploads/") + e.CommandArgument);
+                Response.End();
+            }
+        }
     }
 }

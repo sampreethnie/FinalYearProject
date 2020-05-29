@@ -182,7 +182,6 @@
     RFQ Number : <asp:Label ID="Label1" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
     ShipmentNumber : <asp:Label ID="Label2" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
     CustomerName :  <asp:Label ID="Label3" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
-    Date :  <asp:Label ID="Label4" runat="server" Text="Label" Visible="false" style="font-size:large"></asp:Label> <br />
     Origin Country : <asp:Label ID="Label5" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
      Origin Airport  : <asp:Label ID="Label6" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
      Destination Country : <asp:Label ID="Label7" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
@@ -193,7 +192,7 @@
       Delivered? : <asp:Label ID="Label12" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
      Received? : <asp:Label ID="Label13" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
       Buyer Currency: <asp:Label ID="Label14" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
-
+       CompanySlno: <asp:Label ID="lblcompanyslno" runat="server" Text="Label" Visible="false" style="font-size:large"></asp:Label> <br />
        </div>
                                                </div>
                                         </div>
@@ -246,11 +245,14 @@
            <asp:Label ID="lbltotalamt" runat="server"></asp:Label>
         </ItemTemplate>
         </asp:TemplateField>
+    <asp:BoundField DataField="TM_INVOICE_RFQNumber" HeaderText="RFQ Number"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
+    <asp:BoundField DataField="TM_INVOICE_Status" HeaderText="Status"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
     <asp:TemplateField HeaderText="Edit">
 <ItemTemplate>
 <asp:ImageButton ID="imgbtnInvoice" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" OnClick="ImageButtoninvoice_Click" />
     </ItemTemplate>
     </asp:TemplateField>
+    
 
 </Columns>
                                               </asp:GridView> 
@@ -315,6 +317,13 @@ Customer:
                 <asp:TextBox ID="txtdisplaycurrency" ReadOnly="true" runat="server" style="width:270px" />
             </td>
         </tr>
+    <tr>
+            <td align="left" style="font-size:19px">RFQ Number: </td>
+            <td>
+                <asp:TextBox ID="txtrfqnumber" ReadOnly="true" runat="server" style="width:270px" />
+            </td>
+        </tr>
+    
         <tr>
             
             
@@ -325,7 +334,11 @@ Customer:
                     <asp:Button ID="btnCancel" runat="server" style="width:70px;height:40px;  background-color:red;color:white;border:solid;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:8px; margin-right:50px;margin-left:30px" Text="Cancel" />
                 </td>
             </tr>
-        
+        <tr>
+        <td>
+            <asp:Label ID="lblvalidatecurr" runat="server"  />
+        </td>
+    </tr>
    
 
 </table>
@@ -389,7 +402,23 @@ Customer:
             </td>
         </tr>
         <tr>
-            <td></td>
+            <td align="left" style="font-size:19px">RFQ Number: </td>
+            <td>
+                <asp:TextBox ID="txteditrfqnumber" ReadOnly="true" runat="server" style="width:270px" />
+            </td>
+        </tr>
+    <tr>
+            <td align="left" style="font-size:19px">Tax Amount: </td>
+            <td>
+                <asp:TextBox ID="txtedittotaltaxamount" ReadOnly="true" runat="server" style="width:270px" />
+            </td>
+        </tr>
+     <tr>
+            <td align="left" style="font-size:19px">Total Amount: </td>
+            <td>
+                <asp:TextBox ID="txteditfinaltotalamount" ReadOnly="true" runat="server" style="width:270px" />
+            </td>
+        </tr>
             <tr>
                 <td>
                     <asp:Button ID="UpdateInvoice" runat="server" style="width:70px;height:40px;  background-color:goldenrod;color:white;border:solid;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;border-top-left-radius:8px; margin-right:50px;margin-left:30px" Text="Update" OnClick="UpdateInvoice_Click" />
@@ -418,11 +447,12 @@ Customer:
                     <div class="panel-body">
                         <div>
                             <asp:Button ID="AddbuttonCharge" runat="server" Text="Add" style="width:80px" OnClick="AddbuttonCharge_Click" />
-                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None"  AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
+                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None" Width="91%" Height="50px"  AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
+                                                  <AlternatingRowStyle BackColor="White" />
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
 <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Small" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
 <AlternatingRowStyle BackColor="White" />
 <Columns>
 
@@ -443,12 +473,14 @@ Customer:
     <asp:BoundField DataField="TD_INVOICE_TAXPERCENTAGE" HeaderText="TaxPercentage" />
     <asp:BoundField DataField="TD_INVOICE_TAXAMOUNT" HeaderText="Taxamount" />
     <asp:BoundField DataField="TD_INVOICE_TOTALAMOUNT" HeaderText="TotalAmount" />
+    <asp:BoundField DataField="TD_INVOICE_Status" HeaderText="Status"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
     
     <asp:TemplateField HeaderText="Edit">
 <ItemTemplate>
 <asp:ImageButton ID="imgbtnCharge" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" OnClick="ImagebuttonCharge_Click" />
     </ItemTemplate>
     </asp:TemplateField>
+        
 
 </Columns>
  </asp:GridView> 
@@ -701,18 +733,18 @@ Quantity:
         <tr>
             <td align="left" style="font-size:19px"><asp:Label ID="lbltaxpercentage" runat="server" Text="Tax Percentage"></asp:Label> 
             
-                <asp:TextBox ID="txtedittaxpercentage" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:147px;margin-left:5px" />
+                <asp:TextBox ID="txtedittaxpercentage" runat="server" onkeyup="EditTaxandTotalamountCalculation();" style="width:147px;margin-left:5px" />
             </td>
         
         
             <td align="left" style="font-size:19px"><asp:Label ID="lbledittaxamount" runat="server" Text="TaxAmount"></asp:Label> 
             
-                <asp:TextBox ID="txtedittaxamount"  runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:147px" />
+                <asp:TextBox ID="txtedittaxamount"  runat="server" onkeyup="EditTaxandTotalamountCalculation();" style="width:147px" />
             </td>
         
             <td align="left" style="font-size:19px"><asp:Label ID="lbledittotalamount" runat="server" Text="Total Amount"></asp:Label> 
             
-                <asp:TextBox ID="txtedittotalamount" runat="server" onkeyup="TaxandTotalamountCalculation();" style="width:147px" />
+                <asp:TextBox ID="txtedittotalamount" runat="server" onkeyup="EditTaxandTotalamountCalculation();" style="width:147px" />
                
             </td>
         </tr>
@@ -736,6 +768,28 @@ Quantity:
             <asp:Label ID="lbluploadfile" runat="server" Text="Upload File" style="font-size:10px"></asp:Label>
             <br />
             <asp:FileUpload ID="invoiceupload" runat="server" /> &nbsp;&nbsp; <asp:Button ID="btnUpload" runat="server" style="width:90px" OnClick="btnUpload_Click" Text="UploadFile" />
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" Height="253px" OnRowCommand="GridView1_RowCommand" Width="345px">
+                <AlternatingRowStyle BackColor="White" />
+                <Columns>
+                    <asp:TemplateField HeaderText="File">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("File") %>' CommandName="Download"  Text='<%# Eval("File") %>'></asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="Size" HeaderText="Size in Bytes" />
+                    <asp:BoundField DataField="Type" HeaderText="File Type" />
+                </Columns>
+                <EditRowStyle BackColor="#2461BF" />
+                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#EFF3FB" />
+                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+            </asp:GridView>
             <br />
             
             <asp:Label ID="lblMessage" runat="server" Font-Bold="true" style="font-size:30px"></asp:Label>
@@ -820,23 +874,28 @@ Quantity:
         _txt4.value = parseInt(t1) + parseInt(t3);
 
 
-        var _txt5 = document.getElementById('<%= txteditamountbc.ClientID %>');
-        var _txt6 = document.getElementById('<%= txtedittaxpercentage.ClientID %>');
-        var _txt7 = document.getElementById('<%= txtedittaxamount.ClientID %>');
-        var _txt8 = document.getElementById('<%= txtedittotalamount.ClientID %>');
-        var t4=0, t5=0, t6=0;
         
-        if(_txt5.value != "") t4=_txt5.value;
-        if (_txt6.value != "") t5 = _txt6.value;
-        
-        
-        
-        _txt7.value = parseInt(t4) * parseInt(t5);
-        if (_txt7.value != "") t6 = _txt7.value;
-        _txt8.value = parseInt(t4) + parseInt(t6);
 
         }
-       
+         function EditTaxandTotalamountCalculation()
+         {
+             
+    
+        var _txt1 = document.getElementById('<%= txteditamountbc.ClientID %>');
+        var _txt2 = document.getElementById('<%= txtedittaxpercentage.ClientID %>');
+        var _txt3 = document.getElementById('<%= txtedittaxamount.ClientID %>');
+        var _txt4 = document.getElementById('<%= txtedittotalamount.ClientID %>');
+        var t1=0, t2=0, t3=0;
+        
+        if(_txt1.value != "") t1=_txt1.value;
+        if (_txt2.value != "") t2 = _txt2.value;
+        
+        
+        
+        _txt3.value = parseInt(t1) * parseInt(t2);
+        if (_txt3.value != "") t3 = _txt3.value;
+        _txt4.value = parseInt(t1) + parseInt(t3);
+         }
 
     </script>   
     

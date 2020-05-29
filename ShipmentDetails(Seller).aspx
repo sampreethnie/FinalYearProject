@@ -148,7 +148,7 @@
     <p class="navbar-text" style="font-size:21px">Shipment Details(Seller)</p>
              </nav>
             
-            <div >
+            <div>
             
             <label style="font-size:19px;margin-left:20px;margin-right:50px">Select RFQ Number* <br> <asp:DropDownList ID="dropdownrfq" Height="30px"  Width="160px" runat="server" OnSelectedIndexChanged="dropdownrfq_SelectedIndexChanged" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
            <br /> <br />

@@ -147,7 +147,7 @@
 
          <nav class="navbar3 navbar navbar-dark bg-primary" style="height:20px;"id="navbarthree"> 
  
-    <p class="navbar-text" style="font-size:21px">Orders(Buyer)</p>
+    <p class="navbar-text" style="font-size:21px">Orders(Seller)</p>
              </nav>
             
             <div>
