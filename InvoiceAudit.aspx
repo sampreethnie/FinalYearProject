@@ -51,7 +51,7 @@
       </li>
       <li class="divider"></li>
       <li>
-        <a ><asp:Button ID="btnlogout" runat="server" style="width:70px;height:40px;color:black;background-color:orange;border-color:chartreuse;border-radius:inherit" Text="Logout"  /></a>
+        <a ><asp:Button ID="btnlogout" runat="server" style="width:70px;height:40px;color:black;background-color:orange;border-color:chartreuse;border-radius:inherit" Text="Logout" OnClick="btnlogout_Click"  /></a>
       </li>
                  
 			    </ul>
@@ -105,7 +105,7 @@
      <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
-      <li><a href="#">Invoice Verification </a></li>
+    <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -221,6 +221,16 @@
 <asp:BoundField DataField="TM_INVOICE_ShipmentRefNo" HeaderText="ShipmentReferenceNumber"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
 <asp:BoundField DataField="TM_INVOICE_Customer" HeaderText="Customer"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 <asp:BoundField DataField="TM_INVOICE_Currency" HeaderText="Currency"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
+    <asp:TemplateField HeaderText="Billed Amount">
+        <ItemTemplate>
+           <asp:Label ID="lblbilledamt" runat="server"  ></asp:Label>
+        </ItemTemplate>
+        
+        </asp:TemplateField>
+    
+    
+    
+    
     <asp:TemplateField HeaderText="Tax Amount">
         <ItemTemplate>
            <asp:Label ID="lbltaxamt" runat="server"  ></asp:Label>
@@ -307,6 +317,14 @@ Currency
 </tr>
     <tr>
     <td align="left" style="font-size:19px">
+Billed Amount
+</td>
+<td>
+    <asp:TextBox ID="txtbilledamount" runat="server" ReadOnly="true" style="width:180px"/>
+</td>
+</tr>
+    <tr>
+    <td align="left" style="font-size:19px">
 Tax Amount
 </td>
 <td>
@@ -345,9 +363,10 @@ GL Code
 </asp:Panel>
         <br /> <br />
         
+                  <label style="font-size:19px;margin-left:20px;margin-right:59px"> Total Billed Amount <br> <asp:TextBox ID="txtfinalbilledamount" Width="150px" ReadOnly="true" runat="server"></asp:TextBox> </label>
 
-          <label style="font-size:19px;margin-left:20px;margin-right:59px"> TotalTaxAmount <br> <asp:TextBox ID="txtfinaltaxamount" Width="150px" ReadOnly="true" runat="server"></asp:TextBox> </label>
-        <label style="font-size:19px;margin-left:20px;margin-right:59px"> GrandTotalAmount <br> <asp:TextBox ID="txtfinaltotalamount" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
+          <label style="font-size:19px;margin-left:40px;margin-right:59px"> TotalTaxAmount <br> <asp:TextBox ID="txtfinaltaxamount" Width="150px" ReadOnly="true" runat="server"></asp:TextBox> </label>
+        <label style="font-size:19px;margin-left:40px;margin-right:59px"> GrandTotalAmount <br> <asp:TextBox ID="txtfinaltotalamount" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
     <br />
         <br />
         <br />

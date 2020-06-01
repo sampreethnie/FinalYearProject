@@ -26,8 +26,8 @@ namespace FinalYearProject
                 con.Open();
 
 
-                SqlCommand comrfqnumber = new SqlCommand("select distinct ORD_SQ_RFQ_Number from Orders ", con);
-
+                SqlCommand comrfqnumber = new SqlCommand("select distinct ORD_SQ_RFQ_Number from Orders where ORD_BuyerUserID = @ORD_BuyerUserID  ", con);
+                comrfqnumber.Parameters.AddWithValue("@ORD_BuyerUserID", Session["M_Subscriber_UserID"]);
 
                 SqlDataAdapter darfqnumber = new SqlDataAdapter(comrfqnumber);
                 DataSet dsrfqnumber = new DataSet();
@@ -40,27 +40,27 @@ namespace FinalYearProject
                 con.Close();
                 dropdownrfqaudit.Items.Insert(0, new ListItem("--Select RFQ No--", "0"));
 
-                //lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
-                //SqlConnection con1 = new SqlConnection(_ConnStr);
-                //con1.Open();
-                //string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag,M_Company_Currency from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
-                //SqlCommand com1 = new SqlCommand(str, con1);
-                //SqlDataAdapter da1 = new SqlDataAdapter(com1);
-                //DataSet ds1 = new DataSet();
-                //da1.Fill(ds1);
-                //lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
-                //Session["CompanySlnosq"] = ds1.Tables[0].Rows[0]["M_Company_Slno"];
-                //Session["SellerCurrencysq"] = ds1.Tables[0].Rows[0]["M_Company_Currency"];
-                ////lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
-                //if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
-                //{
-                //    ButtonSeller.Visible = false;
+                lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
+                SqlConnection con1 = new SqlConnection(_ConnStr);
+                con1.Open();
+                string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag,M_Company_Currency from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+                SqlCommand com1 = new SqlCommand(str, con1);
+                SqlDataAdapter da1 = new SqlDataAdapter(com1);
+                DataSet ds1 = new DataSet();
+                da1.Fill(ds1);
+                lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
+                Session["CompanySlnosq"] = ds1.Tables[0].Rows[0]["M_Company_Slno"];
+                Session["SellerCurrencysq"] = ds1.Tables[0].Rows[0]["M_Company_Currency"];
+                //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
+                if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
+                {
+                    ButtonSeller.Visible = false;
 
-                //}
-                //else
-                //{
-                //    ButtonBuyer.Visible = false;
-                //}
+                }
+                else
+                {
+                    ButtonBuyer.Visible = false;
+                }
             }
         }
 
@@ -84,7 +84,7 @@ namespace FinalYearProject
 
                 SqlConnection conn = new SqlConnection(_ConnStr);
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("select SUM(TD_INVOICE_TAXAMOUNT) TM_INVOICE_Taxamount from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
+                SqlCommand cmd = new SqlCommand("select SUM(TD_INVOICE_TAXAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
                 cmd.Parameters.Add(new SqlParameter("@TM_INVOICE_No", invoiceno));
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.Read())
@@ -96,14 +96,18 @@ namespace FinalYearProject
                 dr.Close();
 
 
-                SqlCommand cmd1 = new SqlCommand("select SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
+                SqlCommand cmd1 = new SqlCommand("select SUM(TD_INVOICE_TOTALAMOUNT),SUM(TD_INVOICE_AMOUNTBC) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
                 cmd1.Parameters.Add(new SqlParameter("@TM_INVOICE_No", invoiceno));
                 SqlDataReader dr1 = cmd1.ExecuteReader();
                 if (dr1.Read())
                 {
                     Label Total = (Label)e.Row.FindControl("lbltotalamt");
+                    Label Amtbc = (Label)e.Row.FindControl("lblbilledamt");
                     object value = dr1.GetValue(0);
+                    object valuebase = dr1.GetValue(1);
+
                     Total.Text = value.ToString();
+                    Amtbc.Text = valuebase.ToString();
                 }
                 dr1.Close();
 
@@ -119,14 +123,16 @@ namespace FinalYearProject
                 }
                 dr2.Close();
 
-                SqlCommand cmd3 = new SqlCommand("select SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE.TM_INVOICE_RFQNumber = @TM_INVOICE_RFQNumber", conn);
+                SqlCommand cmd3 = new SqlCommand("select SUM(TD_INVOICE_TOTALAMOUNT),SUM(TD_INVOICE_AMOUNTBC) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE.TM_INVOICE_RFQNumber = @TM_INVOICE_RFQNumber", conn);
                 cmd3.Parameters.Add(new SqlParameter("@TM_INVOICE_RFQNumber", txtrfqnumber.Text));
                 SqlDataReader dr3 = cmd3.ExecuteReader();
                 if (dr3.Read())
                 {
 
                     object value = dr3.GetValue(0);
+                    object valuebc = dr3.GetValue(1);
                     txtfinaltotalamount.Text = value.ToString();
+                    txtfinalbilledamount.Text = valuebc.ToString();
                 }
                 dr3.Close();
 
@@ -134,18 +140,18 @@ namespace FinalYearProject
                 //taxtotal = taxtotal + Int32.Parse(taxamountotal.Text);
                 //Label totalamountfinal = (Label)e.Row.FindControl("lbltotalamt");
                 //finaltotal = finaltotal + Int32.Parse(totalamountfinal.Text);
-                if(e.Row.Cells[9].Text == "P")
+                if(e.Row.Cells[10].Text == "P")
                 {
-                    e.Row.Cells[9].Text = "Pending";
+                    e.Row.Cells[10].Text = "Pending";
                 }
-                if (e.Row.Cells[9].Text == "Y")
+                if (e.Row.Cells[10].Text == "Y")
                 {
-                    e.Row.Cells[9].Text = "Accepted";
+                    e.Row.Cells[10].Text = "Accepted";
                     e.Row.Enabled = false;
                 }
-                if(e.Row.Cells[9].Text == "N")
+                if(e.Row.Cells[10].Text == "N")
                 {
-                    e.Row.Cells[9].Text = "Rejected";
+                    e.Row.Cells[10].Text = "Rejected";
                 }
 
             }
@@ -200,7 +206,11 @@ namespace FinalYearProject
             con.Close();
             BindGridView();
         }
-
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
+        }
         protected void imgbtninvoiceaudit_Click(object sender, ImageClickEventArgs e)
         {
             ImageButton imgbtnaudit = sender as ImageButton;
@@ -211,10 +221,12 @@ namespace FinalYearProject
             txtshipmentreferences.Text = gvRow.Cells[3].Text;
             txtcustomer.Text = gvRow.Cells[4].Text;
             txtcurrency.Text = gvRow.Cells[5].Text;
-            Label _LabelId = gvRow.FindControl("lbltaxamt") as Label;
-            Label _LabelTitle = gvRow.FindControl("lbltotalamt") as Label;
-            txttaxamount.Text = _LabelId.Text;
-            txttotalamount.Text = _LabelTitle.Text;
+            Label _Labeltaxamount = gvRow.FindControl("lbltaxamt") as Label;
+            Label _Labeltotalamount = gvRow.FindControl("lbltotalamt") as Label;
+            Label _Labelbilledamount = gvRow.FindControl("lblbilledamt") as Label;
+            txttaxamount.Text = _Labeltaxamount.Text;
+            txttotalamount.Text = _Labeltotalamount.Text;
+            txtbilledamount.Text = _Labelbilledamount.Text;
             mpeqnb.Show();
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -222,7 +234,7 @@ namespace FinalYearProject
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
 
-            SqlCommand cmd = new SqlCommand("update TM_INVOICE set TM_INVOICE_Status=@TM_INVOICE_Status,TM_INVOICE_Taxamount =@TM_INVOICE_Taxamount,TM_INVOICE_Totalamount = @TM_INVOICE_Totalamount,TM_INVOICE_GLCode = @TM_INVOICE_GLCode where TM_INVOICE_Slno=@TM_INVOICE_Slno", con);
+            SqlCommand cmd = new SqlCommand("update TM_INVOICE set TM_INVOICE_Status=@TM_INVOICE_Status,TM_INVOICE_Taxamount =@TM_INVOICE_Taxamount,TM_INVOICE_Totalamount = @TM_INVOICE_Totalamount,TM_INVOICE_GLCode = @TM_INVOICE_GLCode,TM_INVOICE_BilledAmount = @TM_INVOICE_BilledAmount where TM_INVOICE_Slno=@TM_INVOICE_Slno", con);
             cmd.Parameters.AddWithValue("@TM_INVOICE_Slno", lblslno.Text);
 
 
@@ -230,7 +242,7 @@ namespace FinalYearProject
             cmd.Parameters.AddWithValue("@TM_INVOICE_Taxamount", txttaxamount.Text);
             cmd.Parameters.AddWithValue("@TM_INVOICE_Totalamount", txttotalamount.Text);
             cmd.Parameters.AddWithValue("@TM_INVOICE_GLCode", txtglcode.Text);
-
+            cmd.Parameters.AddWithValue("@TM_INVOICE_BilledAmount", txtbilledamount.Text);
 
 
 

@@ -65,7 +65,8 @@ namespace FinalYearProject
             {
                 con.ConnectionString = _ConnStr;
                 SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "select ShipmentRFQ_Number,shipmentnumber,creationdate,customer_M_Company_Name,M_Currency_Name,RFQ_OriginCountry,RFQ_DestinationCountry,RFQ_OriginAirport,RFQ_DestinationAirport,RFQ_TotalGrwt,RFQ_TotalChwt,RFQ_NumberofPackages,sellerdelivered,buyerreceived from ShipmentDeliveryBuyer inner join ShipmentDetailsSeller on ShipmentDeliveryBuyer.sellershipmentnumber = ShipmentDetailsSeller.shipmentnumber inner join RFQ on ShipmentDetailsSeller.ShipmentRFQ_Number = RFQ.RFQ_Number inner join M_Company on RFQ.RFQ_Company = M_Company.M_Company_Slno inner join M_Currency on M_Company.M_Company_Currency = M_Currency.M_Currency_Code   where ShipmentDeliveryBuyer.sellerdelivered='Y' and ShipmentDeliveryBuyer.buyerreceived='Y'";
+                cmd.CommandText = "select ShipmentRFQ_Number,shipmentnumber,creationdate,customer_M_Company_Name,M_Currency_Name,RFQ_OriginCountry,RFQ_DestinationCountry,RFQ_OriginAirport,RFQ_DestinationAirport,RFQ_TotalGrwt,RFQ_TotalChwt,RFQ_NumberofPackages,sellerdelivered,buyerreceived from ShipmentDeliveryBuyer inner join ShipmentDetailsSeller on ShipmentDeliveryBuyer.sellershipmentnumber = ShipmentDetailsSeller.shipmentnumber inner join RFQ on ShipmentDetailsSeller.ShipmentRFQ_Number = RFQ.RFQ_Number inner join M_Company on RFQ.RFQ_Company = M_Company.M_Company_Slno inner join M_Currency on M_Company.M_Company_Currency = M_Currency.M_Currency_Code   where ShipmentDeliveryBuyer.sellerdelivered='Y' and ShipmentDeliveryBuyer.buyerreceived='Y' and userid = @userid";
+                cmd.Parameters.AddWithValue("@userid", Session["M_Subscriber_UserID"]);
                 cmd.CommandType = System.Data.CommandType.Text;
                 DataTable dtable = new DataTable();
                 if (con.State == ConnectionState.Closed) con.Open();

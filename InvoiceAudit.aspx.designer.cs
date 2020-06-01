@@ -364,6 +364,15 @@ namespace FinalYearProject {
         protected global::System.Web.UI.WebControls.TextBox txtcurrency;
         
         /// <summary>
+        /// txtbilledamount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtbilledamount;
+        
+        /// <summary>
         /// txttaxamount control.
         /// </summary>
         /// <remarks>
@@ -416,6 +425,15 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// txtfinalbilledamount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtfinalbilledamount;
         
         /// <summary>
         /// txtfinaltaxamount control.

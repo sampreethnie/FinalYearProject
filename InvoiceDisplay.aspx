@@ -110,7 +110,7 @@
       <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
-      <li><a href="#">Invoice Verification </a></li>
+     <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -215,7 +215,7 @@
                                       <div class="panel-body">
                                           <div>
                                               <asp:Button ID="Addbutton" runat="server" Text="Add" style="width:80px" OnClick="Addbutton_Click" />
-                                              <asp:GridView ID="InvoiceGridView" runat="server"   Width="65%" Height="50px"  AllowPaging="true" DataKeyNames="TM_INVOICE_Slno" OnRowDataBound="InvoiceDisplay_RowDataBound" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                              <asp:GridView ID="InvoiceGridView" runat="server"   Width="85%" Height="50px"  AllowPaging="true" DataKeyNames="TM_INVOICE_Slno" OnRowDataBound="InvoiceDisplay_RowDataBound" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
                                                   <AlternatingRowStyle BackColor="White" />
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -235,7 +235,16 @@
 <asp:BoundField DataField="TM_INVOICE_ShipmentRefNo" HeaderText="ShipmentReferenceNumber"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
 <asp:BoundField DataField="TM_INVOICE_Customer" HeaderText="Customer"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 <asp:BoundField DataField="TM_INVOICE_Currency" HeaderText="Currency"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
-    <asp:TemplateField HeaderText="Tax Amount">
+   
+    <asp:TemplateField HeaderText="Billed Amount">
+        <ItemTemplate>
+           <asp:Label ID="lblbilledamt" runat="server"  ></asp:Label>
+        </ItemTemplate>
+        
+        </asp:TemplateField>
+    
+    
+     <asp:TemplateField HeaderText="Tax Amount">
         <ItemTemplate>
            <asp:Label ID="lbltaxamt" runat="server"></asp:Label>
         </ItemTemplate>
@@ -245,14 +254,22 @@
            <asp:Label ID="lbltotalamt" runat="server"></asp:Label>
         </ItemTemplate>
         </asp:TemplateField>
-    <asp:BoundField DataField="TM_INVOICE_RFQNumber" HeaderText="RFQ Number"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
-    <asp:BoundField DataField="TM_INVOICE_Status" HeaderText="Status"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
-    <asp:TemplateField HeaderText="Edit">
+    <asp:BoundField DataField="TM_INVOICE_RFQNumber" HeaderText="RFQ Number" Visible="false"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
+    <asp:BoundField DataField="TM_INVOICE_Status" HeaderText="Status"  ItemStyle-Width="50px"  HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+    <asp:TemplateField HeaderText="Edit" >
 <ItemTemplate>
-<asp:ImageButton ID="imgbtnInvoice" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" OnClick="ImageButtoninvoice_Click" />
+<asp:ImageButton ID="imgbtnInvoice" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" style="margin-right:45px" OnClick="ImageButtoninvoice_Click" />
     </ItemTemplate>
     </asp:TemplateField>
     
+    <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        
+                        
+                       <asp:ImageButton ID="ibtnDelete" runat="server" ImageUrl="/images/delete.png" OnClientClick="javascript: return confirm('Do you want to delete it?');" OnClick="ibtnDelete_Click"/>
+                       
+              </ItemTemplate>
+                </asp:TemplateField>
 
 </Columns>
                                               </asp:GridView> 
@@ -447,7 +464,7 @@ Customer:
                     <div class="panel-body">
                         <div>
                             <asp:Button ID="AddbuttonCharge" runat="server" Text="Add" style="width:80px" OnClick="AddbuttonCharge_Click" />
-                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None" Width="91%" Height="50px"  AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
+                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None" Width="98%" Height="50px"  AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
                                                   <AlternatingRowStyle BackColor="White" />
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -477,9 +494,18 @@ Customer:
     
     <asp:TemplateField HeaderText="Edit">
 <ItemTemplate>
-<asp:ImageButton ID="imgbtnCharge" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" OnClick="ImagebuttonCharge_Click" />
+<asp:ImageButton ID="imgbtnCharge" ImageUrl="/images/edit1.png" runat="server" Width="25" Height="25" style="margin-right:30px" OnClick="ImagebuttonCharge_Click" />
     </ItemTemplate>
     </asp:TemplateField>
+
+    <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        
+                        
+                       <asp:ImageButton ID="ibtnchargeDelete" runat="server" ImageUrl="/images/delete.png" style="margin-left:2px" OnClientClick="javascript: return confirm('Do you want to delete it?');" OnClick="ibtnchargeDelete_Click"/>
+                       
+              </ItemTemplate>
+                </asp:TemplateField>
         
 
 </Columns>

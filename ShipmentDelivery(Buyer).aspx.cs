@@ -145,48 +145,67 @@ namespace FinalYearProject
         }
         protected void Addbutton_Click(object sender, EventArgs e)
         {
-            string adddetails = @"INSERT INTO [ShipmentDeliveryBuyer] ([sellershipmentnumber],[sellercreationdate],[sellercustomer],[sellernumberofpackages],[sellerhawb],[sellerhawbdate],[sellermawb],[sellermawbdate],[sellerairline],[sellerflightnumber],[selleretd],[sellereta],[selleratd],[sellerata],[sellerdelivered],[sellerdeliverydate],[sellerreceivedbyname],[buyerreceived],[buyerreceivedbyname],[buyerdeliverydate],[BuyerUserID],[BuyerTimestamp],[ShipmentDeliveryBuyer_Submit])
-            VALUES(@sellershipmentnumber,@sellercreationdate,@sellercustomer,@sellernumberofpackages,@sellerhawb,@sellerhawbdate,@sellermawb,@sellermawbdate,@sellerairline,@sellerflightnumber,@selleretd,@sellereta,@selleratd,@sellerata,@sellerdelivered,@sellerdeliverydate,@sellerreceivedbyname,@buyerreceived,@buyerreceivedbyname,@buyerdeliverydate,@BuyerUserID,@BuyerTimestamp,'N')";
-            string receivedchecking = received.Checked ? "Y" : "N";
-            string deliverychecking = delivery.Checked ? "Y" : "N";
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
-                con.ConnectionString = _ConnStr;
-
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = adddetails;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@buyerid", txtbuyerid.Text);
-                cmd.Parameters.AddWithValue("@sellershipmentnumber", txtshipmentnumber.Text);
-                cmd.Parameters.AddWithValue("@sellercreationdate", Convert.ToDateTime(txtcreationdate.Text));
-                cmd.Parameters.AddWithValue("@sellercustomer", dropdowncustomer.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@sellernumberofpackages", txtnoofpackages.Text);
-                cmd.Parameters.AddWithValue("@sellerhawb", txthawb.Text);
-                cmd.Parameters.AddWithValue("@sellerhawbdate", Convert.ToDateTime(txthawbdate.Text));
-                cmd.Parameters.AddWithValue("@sellermawb", txtmawb.Text);
-                cmd.Parameters.AddWithValue("@sellermawbdate", Convert.ToDateTime(txtmawbdate.Text));
-                cmd.Parameters.AddWithValue("@sellerairline", txtairline.Text);
-                cmd.Parameters.AddWithValue("@sellerflightnumber", txtflightnumber.Text);
-                cmd.Parameters.AddWithValue("@selleretd", Convert.ToDateTime(txtetd.Text));
-                cmd.Parameters.AddWithValue("@sellereta", Convert.ToDateTime(txteta.Text));
-                cmd.Parameters.AddWithValue("@selleratd", Convert.ToDateTime(txtatd.Text));
-                cmd.Parameters.AddWithValue("@sellerata", Convert.ToDateTime(txtata.Text));
-                cmd.Parameters.AddWithValue("@sellerdelivered", deliverychecking);
-                cmd.Parameters.AddWithValue("@sellerdeliverydate", Convert.ToDateTime(txtdeliverydate.Text));
-                cmd.Parameters.AddWithValue("@sellerreceivedbyname", txtsellerreceivedby.Text);
-                cmd.Parameters.AddWithValue("@buyerreceived", receivedchecking);
-                cmd.Parameters.AddWithValue("@buyerreceivedbyname", txtbuyerreceivedbyname.Text);
-                cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
-                cmd.Parameters.AddWithValue("@BuyerUserID", Session["M_Subscriber_UserID"]);
-                cmd.Parameters.AddWithValue("@BuyerTimestamp", DateTime.Now);
                 con.Open();
-                cmd.ExecuteNonQuery();
-                BindGridView();
-                clear();
-                con.Close();
 
 
-              
+                string query = "select shipmentnumber from ShipmentDetailsSeller where shipmentnumber = '" + txtshipmentnumber.Text + "' ";
+                SqlCommand cmd2 = new SqlCommand(query, con);
+                SqlDataReader dr = cmd2.ExecuteReader();
+                dr.Read();
+                if (dr.HasRows)
+                {
+                    lblvalidateshipment.Text = "Shipment Number already exists.. Choose Other Number";
+                    dr.Close();
+                }
+                else
+                {
+                    dr.Close();
+
+                    string adddetails = @"INSERT INTO [ShipmentDeliveryBuyer] ([sellershipmentnumber],[sellercreationdate],[sellercustomer],[sellernumberofpackages],[sellerhawb],[sellerhawbdate],[sellermawb],[sellermawbdate],[sellerairline],[sellerflightnumber],[selleretd],[sellereta],[selleratd],[sellerata],[sellerdelivered],[sellerdeliverydate],[sellerreceivedbyname],[buyerreceived],[buyerreceivedbyname],[buyerdeliverydate],[BuyerUserID],[BuyerTimestamp],[ShipmentDeliveryBuyer_Submit])
+            VALUES(@sellershipmentnumber,@sellercreationdate,@sellercustomer,@sellernumberofpackages,@sellerhawb,@sellerhawbdate,@sellermawb,@sellermawbdate,@sellerairline,@sellerflightnumber,@selleretd,@sellereta,@selleratd,@sellerata,@sellerdelivered,@sellerdeliverydate,@sellerreceivedbyname,@buyerreceived,@buyerreceivedbyname,@buyerdeliverydate,@BuyerUserID,@BuyerTimestamp,'N')";
+                    string receivedchecking = received.Checked ? "Y" : "N";
+                    string deliverychecking = delivery.Checked ? "Y" : "N";
+
+
+                    con.ConnectionString = _ConnStr;
+
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = adddetails;
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Parameters.AddWithValue("@buyerid", txtbuyerid.Text);
+                    cmd.Parameters.AddWithValue("@sellershipmentnumber", txtshipmentnumber.Text);
+                    cmd.Parameters.AddWithValue("@sellercreationdate", Convert.ToDateTime(txtcreationdate.Text));
+                    cmd.Parameters.AddWithValue("@sellercustomer", dropdowncustomer.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@sellernumberofpackages", txtnoofpackages.Text);
+                    cmd.Parameters.AddWithValue("@sellerhawb", txthawb.Text);
+                    cmd.Parameters.AddWithValue("@sellerhawbdate", Convert.ToDateTime(txthawbdate.Text));
+                    cmd.Parameters.AddWithValue("@sellermawb", txtmawb.Text);
+                    cmd.Parameters.AddWithValue("@sellermawbdate", Convert.ToDateTime(txtmawbdate.Text));
+                    cmd.Parameters.AddWithValue("@sellerairline", txtairline.Text);
+                    cmd.Parameters.AddWithValue("@sellerflightnumber", txtflightnumber.Text);
+                    cmd.Parameters.AddWithValue("@selleretd", Convert.ToDateTime(txtetd.Text));
+                    cmd.Parameters.AddWithValue("@sellereta", Convert.ToDateTime(txteta.Text));
+                    cmd.Parameters.AddWithValue("@selleratd", Convert.ToDateTime(txtatd.Text));
+                    cmd.Parameters.AddWithValue("@sellerata", Convert.ToDateTime(txtata.Text));
+                    cmd.Parameters.AddWithValue("@sellerdelivered", deliverychecking);
+                    cmd.Parameters.AddWithValue("@sellerdeliverydate", Convert.ToDateTime(txtdeliverydate.Text));
+                    cmd.Parameters.AddWithValue("@sellerreceivedbyname", txtsellerreceivedby.Text);
+                    cmd.Parameters.AddWithValue("@buyerreceived", receivedchecking);
+                    cmd.Parameters.AddWithValue("@buyerreceivedbyname", txtbuyerreceivedbyname.Text);
+                    cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
+                    cmd.Parameters.AddWithValue("@BuyerUserID", Session["M_Subscriber_UserID"]);
+                    cmd.Parameters.AddWithValue("@BuyerTimestamp", DateTime.Now);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    BindGridView();
+                    clear();
+                    con.Close();
+
+
+
+                }
             }
         }
 

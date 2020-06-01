@@ -202,49 +202,71 @@ namespace FinalYearProject
 
         protected void Addbutton_Click(object sender, EventArgs e)
         {
-            string addsq = @"insert into [SQ] ([SQ_RFQ_Number],[SQ_Company],[SQ_RFQ_CreationDate],[SQ_RFQ_OriginCountry],[SQ_RFQ_DestinationCountry],[SQ_RFQ_OriginAirport],[SQ_RFQ_DestinationAirport],[SQ_RFQ_NumberofPackages],[SQ_RFQ_TotalGrwt],[SQ_RFQ_TotalVolwt],[SQ_RFQ_TotalChwt],[SQ_RFQ_PickupAddress],[SQ_RFQ_DeliveryAddress],[SQ_RFQ_PickupDate],[SQ_RFQ_ReqTT],[SQ_RFQ_QuoteDueBy],[SQ_RFQ_Commodity],[SQ_RFQ_HandlingInfo],[SQ_UserID],[SQ_OfferPrice],[SQ_Timestamp],[SQ_RFQ_Company],[SQ_BuyerCurrency],[SQ_Submit],[SQ_RFQ_ExpectedPrice],[SQ_OrderStatus]) values(@SQ_RFQ_Number,@SQ_Company,@SQ_RFQ_CreationDate,@SQ_RFQ_OriginCountry,@SQ_RFQ_DestinationCountry,@SQ_RFQ_OriginAirport,@SQ_RFQ_DestinationAirport,@SQ_RFQ_NumberofPackages,@SQ_RFQ_TotalGrwt,@SQ_RFQ_TotalVolwt,@SQ_RFQ_TotalChwt,@SQ_RFQ_PickupAddress,@SQ_RFQ_DeliveryAddress,@SQ_RFQ_PickupDate,@SQ_RFQ_ReqTT,@SQ_RFQ_QuoteDueBy,@SQ_RFQ_Commodity,@SQ_RFQ_HandlingInfo,@SQ_UserID,@SQ_OfferPrice,@SQ_Timestamp,@SQ_RFQ_Company,@SQ_BuyerCurrency,'N',@SQ_RFQ_ExpectedPrice,'N')";
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
-                con.ConnectionString = _ConnStr;
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = addsq;
-                cmd.CommandType = System.Data.CommandType.Text;
-               
-                cmd.Parameters.AddWithValue("@SQ_Slno",txtsqlslno.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_Number",txtrfqnumber.Text);
-                
-                cmd.Parameters.AddWithValue("@SQ_Company", Session["CompanySlnosq"]);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_CreationDate", Convert.ToDateTime(txtcreationdate.Text));
-                cmd.Parameters.AddWithValue("@SQ_RFQ_OriginCountry", dropdownorigincountry.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_DestinationCountry", dropdowndestinationcountry.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_OriginAirport", dropdownoriginairport.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_DestinationAirport", dropdowndestinationairport.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_NumberofPackages", txtnoofpackages.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_TotalGrwt", txtgrossweight.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_TotalVolwt", txtvolumetricweight.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_TotalChwt", txtchargeableweight.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_PickupAddress", txtpickupaddress.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_DeliveryAddress", txtdeliveryaddress.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_PickupDate", Convert.ToDateTime(txtpickupdate.Text));
-                cmd.Parameters.AddWithValue("@SQ_RFQ_ReqTT", txttransittime.Text);
-
-                cmd.Parameters.AddWithValue("@SQ_RFQ_QuoteDueBy", Convert.ToDateTime(txtquotedueby.Text));
-                cmd.Parameters.AddWithValue("@SQ_RFQ_Commodity", dropdowncommodity.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_HandlingInfo", txthandlinginfo.Text);
-                cmd.Parameters.AddWithValue("@SQ_UserID", Session["M_Subscriber_UserID"]);
-                cmd.Parameters.AddWithValue("@SQ_OfferPrice", txtofferprice.Text);
-                
-                cmd.Parameters.AddWithValue("@SQ_Timestamp", DateTime.Now);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_Company", txtbuyername.Text);
-                cmd.Parameters.AddWithValue("@SQ_BuyerCurrency", txtbuyercurrency.Text);
-                cmd.Parameters.AddWithValue("@SQ_RFQ_ExpectedPrice", txtexpectedprice.Text);
                 con.Open();
-                cmd.ExecuteNonQuery();
-                BindGridView();
-                clear();
-                con.Close();
-            } 
 
+
+                string query = "select RFQ_Number from RFQ where RFQ_Number = '" + txtrfqnumber.Text + "' ";
+                SqlCommand cmd2 = new SqlCommand(query, con);
+                SqlDataReader dr = cmd2.ExecuteReader();
+                dr.Read();
+                if (dr.HasRows)
+                {
+                    lblvalidatesq.Text = "Quote already exists.. Enter Other Quote";
+                    dr.Close();
+                }
+
+
+
+
+                else
+                {
+                    dr.Close();
+                    string addsq = @"insert into [SQ] ([SQ_RFQ_Number],[SQ_Company],[SQ_RFQ_CreationDate],[SQ_RFQ_OriginCountry],[SQ_RFQ_DestinationCountry],[SQ_RFQ_OriginAirport],[SQ_RFQ_DestinationAirport],[SQ_RFQ_NumberofPackages],[SQ_RFQ_TotalGrwt],[SQ_RFQ_TotalVolwt],[SQ_RFQ_TotalChwt],[SQ_RFQ_PickupAddress],[SQ_RFQ_DeliveryAddress],[SQ_RFQ_PickupDate],[SQ_RFQ_ReqTT],[SQ_RFQ_QuoteDueBy],[SQ_RFQ_Commodity],[SQ_RFQ_HandlingInfo],[SQ_UserID],[SQ_OfferPrice],[SQ_Timestamp],[SQ_RFQ_Company],[SQ_BuyerCurrency],[SQ_Submit],[SQ_RFQ_ExpectedPrice],[SQ_OrderStatus]) values(@SQ_RFQ_Number,@SQ_Company,@SQ_RFQ_CreationDate,@SQ_RFQ_OriginCountry,@SQ_RFQ_DestinationCountry,@SQ_RFQ_OriginAirport,@SQ_RFQ_DestinationAirport,@SQ_RFQ_NumberofPackages,@SQ_RFQ_TotalGrwt,@SQ_RFQ_TotalVolwt,@SQ_RFQ_TotalChwt,@SQ_RFQ_PickupAddress,@SQ_RFQ_DeliveryAddress,@SQ_RFQ_PickupDate,@SQ_RFQ_ReqTT,@SQ_RFQ_QuoteDueBy,@SQ_RFQ_Commodity,@SQ_RFQ_HandlingInfo,@SQ_UserID,@SQ_OfferPrice,@SQ_Timestamp,@SQ_RFQ_Company,@SQ_BuyerCurrency,'N',@SQ_RFQ_ExpectedPrice,'N')";
+
+
+                    //con.ConnectionString = _ConnStr;
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandText = addsq;
+                    cmd.CommandType = System.Data.CommandType.Text;
+
+                    cmd.Parameters.AddWithValue("@SQ_Slno", txtsqlslno.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_Number", txtrfqnumber.Text);
+
+                    cmd.Parameters.AddWithValue("@SQ_Company", Session["CompanySlnosq"]);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_CreationDate", Convert.ToDateTime(txtcreationdate.Text));
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_OriginCountry", dropdownorigincountry.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_DestinationCountry", dropdowndestinationcountry.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_OriginAirport", dropdownoriginairport.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_DestinationAirport", dropdowndestinationairport.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_NumberofPackages", txtnoofpackages.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_TotalGrwt", txtgrossweight.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_TotalVolwt", txtvolumetricweight.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_TotalChwt", txtchargeableweight.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_PickupAddress", txtpickupaddress.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_DeliveryAddress", txtdeliveryaddress.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_PickupDate", Convert.ToDateTime(txtpickupdate.Text));
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_ReqTT", txttransittime.Text);
+
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_QuoteDueBy", Convert.ToDateTime(txtquotedueby.Text));
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_Commodity", dropdowncommodity.SelectedItem.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_HandlingInfo", txthandlinginfo.Text);
+                    cmd.Parameters.AddWithValue("@SQ_UserID", Session["M_Subscriber_UserID"]);
+                    cmd.Parameters.AddWithValue("@SQ_OfferPrice", txtofferprice.Text);
+
+                    cmd.Parameters.AddWithValue("@SQ_Timestamp", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_Company", txtbuyername.Text);
+                    cmd.Parameters.AddWithValue("@SQ_BuyerCurrency", txtbuyercurrency.Text);
+                    cmd.Parameters.AddWithValue("@SQ_RFQ_ExpectedPrice", txtexpectedprice.Text);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    BindGridView();
+                    clear();
+                    con.Close();
+                }
+
+            }
         }
         private void BindGridView()
         {

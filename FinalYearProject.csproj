@@ -43,6 +43,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\sampr\Documents\ASP.NET AJAX Control Toolkit\Bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML, Version=0.95.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ClosedXML.0.95.3\lib\net40\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -98,6 +110,7 @@
     <Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -175,7 +188,10 @@
     <Content Include="InvoiceAudit.aspx" />
     <Content Include="InvoiceDetails.aspx" />
     <Content Include="InvoiceDisplay.aspx" />
+    <Content Include="InvoiceReport%28Buyer%29.aspx" />
+    <Content Include="InvoiceReport.aspx" />
     <Content Include="MasterPage.Master" />
+    <Content Include="OrderReport%28Buyer%29.aspx" />
     <Content Include="Orders%28Buyer%29.aspx" />
     <Content Include="Orders%28Seller%29.aspx" />
     <Content Include="QuoteNegotiation%28Buyer%29.aspx" />
@@ -183,6 +199,7 @@
     <Content Include="RFQ.aspx" />
     <Content Include="SQ.aspx" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="packages.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Mainpage.aspx" />
     <Content Include="Package.aspx" />
@@ -362,6 +379,20 @@
     <Compile Include="InvoiceDisplay.aspx.designer.cs">
       <DependentUpon>InvoiceDisplay.aspx</DependentUpon>
     </Compile>
+    <Compile Include="InvoiceReport%28Buyer%29.aspx.cs">
+      <DependentUpon>InvoiceReport%28Buyer%29.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvoiceReport%28Buyer%29.aspx.designer.cs">
+      <DependentUpon>InvoiceReport%28Buyer%29.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceReport.aspx.cs">
+      <DependentUpon>InvoiceReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvoiceReport.aspx.designer.cs">
+      <DependentUpon>InvoiceReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Mainpage.aspx.cs">
       <DependentUpon>Mainpage.aspx</DependentUpon>
     </Compile>
@@ -376,6 +407,13 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="OrderReport%28Buyer%29.aspx.cs">
+      <DependentUpon>OrderReport%28Buyer%29.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderReport%28Buyer%29.aspx.designer.cs">
+      <DependentUpon>OrderReport%28Buyer%29.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Orders%28Buyer%29.aspx.cs">
       <DependentUpon>Orders%28Buyer%29.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

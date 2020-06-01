@@ -113,7 +113,7 @@
      <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
-      <li><a href="#">Invoice Verification </a></li>
+      <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -209,7 +209,11 @@
                 <label style="font-size:19px;margin-left:30px;margin-right:119px"> Receiver Mobile Number <br> <asp:TextBox ID="txtreceivermobilenumber" Width="145px" runat="server"></asp:TextBox> </label>
                 <label style="font-size:19px;margin-left:129px"> Receiver Mail ID <br> <asp:TextBox ID="txtreceivermailid" Width="145px" runat="server"></asp:TextBox> </label>
                <label style="font-size:19px;margin-left:129px"> RFQ Number <br> <asp:TextBox ID="txtrfqnumber" Width="145px" ReadOnly="true" runat="server"></asp:TextBox> </label>
-             <br /> <br /> <br /> <br />  
+             <br />
+                <br />
+                <asp:Label ID="lblvalidateshipment" runat="server"></asp:Label>
+                
+                <br /> <br /> <br /> <br />  
            
             <asp:Button ID="Addbutton"   Style="margin-left:20px;margin-right:20px; display:inline-block;  border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Add" runat="server" font-size="Medium" BackColor="lightblue" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Addbutton_Click" />
             <asp:Button ID="Updatebutton" CausesValidation="true" ValidationGroup="addshipmentdetailsseller" Style="margin-left:20px;margin-right:20px; display:inline-block; border:inherit;border-radius:25px;font-family:'Linux Libertine G'" Text="Update" runat="server" font-size="Medium" BackColor="lightgreen" class="btn- btn-primary" Width="94px" Height="40px" OnClick="Updatebutton_Click" />

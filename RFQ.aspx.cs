@@ -190,50 +190,69 @@ namespace FinalYearProject
         }
         protected void Addbutton_Click(object sender, EventArgs e)
         {
-            string adddetails = @"INSERT INTO [RFQ] ([RFQ_Number],[RFQ_Company],[RFQ_CreationDate],[RFQ_OriginCountry],[RFQ_DestinationCountry],[RFQ_OriginAirport],[RFQ_DestinationAirport],[RFQ_NumberofPackages],[RFQ_TotalGrwt],[RFQ_TotalVolwt],[RFQ_TotalChwt],[RFQ_PickupAddress],[RFQ_DeliveryAddress],[RFQ_PickupDate],[RFQ_ReqTT],[RFQ_QuoteDueBy],[RFQ_Commodity],[RFQ_HandlingInfo],[RFQ_UserID],[RFQ_Timestamp],[RFQ_Submit],[RFQ_ExpectedPrice])
-            VALUES(@RFQ_Number,@RFQ_Company,@RFQ_CreationDate,@RFQ_OriginCountry,@RFQ_DestinationCountry,@RFQ_OriginAirport,@RFQ_DestinationAirport,@RFQ_NumberofPackages,@RFQ_TotalGrwt,@RFQ_TotalVolwt,@RFQ_TotalChwt,@RFQ_PickupAddress,@RFQ_DeliveryAddress,@RFQ_PickupDate,@RFQ_ReqTT,@RFQ_QuoteDueBy,@RFQ_Commodity,@RFQ_HandlingInfo,@RFQ_UserID,@RFQ_Timestamp,'N',@RFQ_ExpectedPrice)";
-
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
-                con.ConnectionString = _ConnStr;
-
-                SqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = adddetails;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@RFQ_Slno", lblrfqslno.Text);
-                cmd.Parameters.AddWithValue("@RFQ_Number", txtrfqnumber.Text);
-                cmd.Parameters.AddWithValue("@RFQ_Company", Session["CompanySlno"]);
-                cmd.Parameters.AddWithValue("@RFQ_CreationDate", Convert.ToDateTime(txtcreationdate.Text));
-                cmd.Parameters.AddWithValue("@RFQ_OriginCountry", dropdownorigincountry.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@RFQ_DestinationCountry", dropdowndestinationcountry.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@RFQ_OriginAirport", dropdownoriginairport.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@RFQ_DestinationAirport", dropdowndestinationairport.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@RFQ_NumberofPackages", txtnoofpackages.Text);
-                cmd.Parameters.AddWithValue("@RFQ_TotalGrwt", txtgrossweight.Text);
-                cmd.Parameters.AddWithValue("@RFQ_TotalVolwt", txtvolumetricweight.Text);
-                cmd.Parameters.AddWithValue("@RFQ_TotalChwt", txtchargeableweight.Text);
-                cmd.Parameters.AddWithValue("@RFQ_PickupAddress", txtpickupaddress.Text);
-                cmd.Parameters.AddWithValue("@RFQ_DeliveryAddress", txtdeliveryaddress.Text);
-                cmd.Parameters.AddWithValue("@RFQ_PickupDate", Convert.ToDateTime(txtpickupdate.Text));
-                cmd.Parameters.AddWithValue("@RFQ_ReqTT", txttransittime.Text);
-
-                cmd.Parameters.AddWithValue("@RFQ_QuoteDueBy", Convert.ToDateTime(txtquotedueby.Text));
-                cmd.Parameters.AddWithValue("@RFQ_Commodity", dropdowncommodity.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@RFQ_HandlingInfo", txthandlinginfo.Text);
-                cmd.Parameters.AddWithValue("@RFQ_UserID", Session["M_Subscriber_UserID"]);
-                cmd.Parameters.AddWithValue("@RFQ_Timestamp", DateTime.Now);
-                cmd.Parameters.AddWithValue("@RFQ_ExpectedPrice", txtexpectedprice.Text);
                 con.Open();
-                cmd.ExecuteNonQuery();
-                BindGridView();
-                clear();
-                con.Close();
+
+
+                string query = "select RFQ_Number from RFQ where RFQ_Number = '" + txtrfqnumber.Text + "' ";
+                SqlCommand cmd2 = new SqlCommand(query, con);
+                SqlDataReader dr = cmd2.ExecuteReader();
+                dr.Read();
+                if (dr.HasRows)
+                {
+                    lblvalidaterfq.Text = "RFQ Number already exists.. Enter Other Number";
+                    dr.Close();
+                }
+
+                else
+                {
+
+
+                    string adddetails = @"INSERT INTO [RFQ] ([RFQ_Number],[RFQ_Company],[RFQ_CreationDate],[RFQ_OriginCountry],[RFQ_DestinationCountry],[RFQ_OriginAirport],[RFQ_DestinationAirport],[RFQ_NumberofPackages],[RFQ_TotalGrwt],[RFQ_TotalVolwt],[RFQ_TotalChwt],[RFQ_PickupAddress],[RFQ_DeliveryAddress],[RFQ_PickupDate],[RFQ_ReqTT],[RFQ_QuoteDueBy],[RFQ_Commodity],[RFQ_HandlingInfo],[RFQ_UserID],[RFQ_Timestamp],[RFQ_Submit],[RFQ_ExpectedPrice])
+            VALUES(@RFQ_Number,@RFQ_Company,@RFQ_CreationDate,@RFQ_OriginCountry,@RFQ_DestinationCountry,@RFQ_OriginAirport,@RFQ_DestinationAirport,@RFQ_NumberofPackages,@RFQ_TotalGrwt,@RFQ_TotalVolwt,@RFQ_TotalChwt,@RFQ_PickupAddress,@RFQ_DeliveryAddress,@RFQ_PickupDate,@RFQ_ReqTT,@RFQ_QuoteDueBy,@RFQ_Commodity,@RFQ_HandlingInfo,@RFQ_UserID,@RFQ_Timestamp,'N',@RFQ_ExpectedPrice)";
+
+                   
+
+                        SqlCommand cmd = con.CreateCommand();
+                        cmd.CommandText = adddetails;
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        cmd.Parameters.AddWithValue("@RFQ_Slno", lblrfqslno.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_Number", txtrfqnumber.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_Company", Session["CompanySlno"]);
+                        cmd.Parameters.AddWithValue("@RFQ_CreationDate", Convert.ToDateTime(txtcreationdate.Text));
+                        cmd.Parameters.AddWithValue("@RFQ_OriginCountry", dropdownorigincountry.SelectedItem.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_DestinationCountry", dropdowndestinationcountry.SelectedItem.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_OriginAirport", dropdownoriginairport.SelectedItem.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_DestinationAirport", dropdowndestinationairport.SelectedItem.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_NumberofPackages", txtnoofpackages.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_TotalGrwt", txtgrossweight.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_TotalVolwt", txtvolumetricweight.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_TotalChwt", txtchargeableweight.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_PickupAddress", txtpickupaddress.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_DeliveryAddress", txtdeliveryaddress.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_PickupDate", Convert.ToDateTime(txtpickupdate.Text));
+                        cmd.Parameters.AddWithValue("@RFQ_ReqTT", txttransittime.Text);
+
+                        cmd.Parameters.AddWithValue("@RFQ_QuoteDueBy", Convert.ToDateTime(txtquotedueby.Text));
+                        cmd.Parameters.AddWithValue("@RFQ_Commodity", dropdowncommodity.SelectedItem.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_HandlingInfo", txthandlinginfo.Text);
+                        cmd.Parameters.AddWithValue("@RFQ_UserID", Session["M_Subscriber_UserID"]);
+                        cmd.Parameters.AddWithValue("@RFQ_Timestamp", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@RFQ_ExpectedPrice", txtexpectedprice.Text);
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        BindGridView();
+                        clear();
+                        con.Close();
 
 
 
 
+                    }
+                }
             }
-        }
+        
 
 
 
@@ -287,12 +306,24 @@ namespace FinalYearProject
         }
         protected void Updatebuttonrfq_Click(object sender, EventArgs e)
         {
-
-
-            string updaterfq = @"update [RFQ] set [RFQ_Number]=@RFQ_Number,[RFQ_Company]=@RFQ_Company,[RFQ_CreationDate]=@RFQ_CreationDate,[RFQ_OriginCountry]=@RFQ_OriginCountry,[RFQ_DestinationCountry]=@RFQ_DestinationCountry,[RFQ_OriginAirport]=@RFQ_OriginAirport,[RFQ_DestinationAirport]=@RFQ_DestinationAirport,[RFQ_NumberofPackages]=@RFQ_NumberofPackages,[RFQ_TotalGrwt]=@RFQ_TotalGrwt,[RFQ_TotalVolwt]=@RFQ_TotalVolwt,[RFQ_TotalChwt]=@RFQ_TotalChwt,[RFQ_PickupAddress]=@RFQ_PickupAddress,[RFQ_DeliveryAddress]=@RFQ_DeliveryAddress,[RFQ_PickupDate]=@RFQ_PickupDate,[RFQ_ReqTT]=@RFQ_ReqTT,[RFQ_QuoteDueBy]=@RFQ_QuoteDueBy,[RFQ_Commodity]=@RFQ_Commodity,[RFQ_HandlingInfo]=@RFQ_HandlingInfo,[RFQ_ExpectedPrice]=@RFQ_ExpectedPrice,[RFQ_Timestamp]=@RFQ_Timestamp where [RFQ_Slno] = @RFQ_Slno";
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
-                con.ConnectionString = _ConnStr;
+                con.Open();
+
+
+                string query = "select RFQ_Number from RFQ where RFQ_Number = '" + txtrfqnumber.Text + "' ";
+                SqlCommand cmd2 = new SqlCommand(query, con);
+                SqlDataReader dr = cmd2.ExecuteReader();
+                dr.Read();
+                if (dr.HasRows)
+                {
+                    lblvalidaterfq.Text = "RFQ Number already exists.. Enter Other Number";
+                    dr.Close();
+                }
+
+                string updaterfq = @"update [RFQ] set [RFQ_Number]=@RFQ_Number,[RFQ_Company]=@RFQ_Company,[RFQ_CreationDate]=@RFQ_CreationDate,[RFQ_OriginCountry]=@RFQ_OriginCountry,[RFQ_DestinationCountry]=@RFQ_DestinationCountry,[RFQ_OriginAirport]=@RFQ_OriginAirport,[RFQ_DestinationAirport]=@RFQ_DestinationAirport,[RFQ_NumberofPackages]=@RFQ_NumberofPackages,[RFQ_TotalGrwt]=@RFQ_TotalGrwt,[RFQ_TotalVolwt]=@RFQ_TotalVolwt,[RFQ_TotalChwt]=@RFQ_TotalChwt,[RFQ_PickupAddress]=@RFQ_PickupAddress,[RFQ_DeliveryAddress]=@RFQ_DeliveryAddress,[RFQ_PickupDate]=@RFQ_PickupDate,[RFQ_ReqTT]=@RFQ_ReqTT,[RFQ_QuoteDueBy]=@RFQ_QuoteDueBy,[RFQ_Commodity]=@RFQ_Commodity,[RFQ_HandlingInfo]=@RFQ_HandlingInfo,[RFQ_ExpectedPrice]=@RFQ_ExpectedPrice,[RFQ_Timestamp]=@RFQ_Timestamp where [RFQ_Slno] = @RFQ_Slno";
+           
+                
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = updaterfq;
                 cmd.CommandType = System.Data.CommandType.Text;

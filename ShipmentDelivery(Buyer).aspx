@@ -114,7 +114,7 @@
      <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
-      <li><a href="#">Invoice Verification </a></li>
+      <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -157,7 +157,7 @@
 
             </asp:DropDownList> </label>
             <br />
-                             <label for="txtshipmentnumber" style="font-size:19px;margin-left:20px;margin-right:50px"> Shipment number <br> <asp:TextBox ID="txtshipmentnumber"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
+                             <label for="txtshipmentnumber" style="font-size:19px;margin-left:20px;margin-right:50px"> Shipment number <br> <asp:TextBox ID="txtshipmentnumber" ReadOnly="true"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
            
             <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creationdate * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarcreationdate" OnClientDateSelectionChanged="AppendTime" PopupButtonID="imgPopup" runat="server" TargetControlID="txtcreationdate" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
@@ -215,6 +215,7 @@
             <label style="font-size:19px;margin-left:62px"> ReceivedBy Buyer <br> <asp:TextBox ID="txtbuyerreceivedbyname" Width="145px" runat="server"></asp:TextBox> </label>
             <label style="font-size:19px;margin-left:65px;margin-right:40px"> Delivery date Buyer * <br > <asp:TextBox ID="txtbuyerdeliverydatetime" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderdeliverydatetime" OnClientDateSelectionChanged="AppendTime" PopupButtonID="imgPopup" runat="server" TargetControlID="txtbuyerdeliverydatetime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
+            <asp:Label ID="lblvalidateshipment" runat="server"></asp:Label>
             <%--<label style="font-size:19px;margin-left:20px"> Seller Mail <br> <asp:TextBox ID="txtsellermail" Width="145px" ReadOnly="true" runat="server"></asp:TextBox> </label>--%>
             <br />
             <br />

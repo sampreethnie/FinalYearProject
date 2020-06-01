@@ -115,7 +115,7 @@
     <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
-      <li><a href="#">Invoice Verification </a></li>
+      <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
    
   </ul>
                                  </div>
@@ -210,7 +210,9 @@
                  <label style="font-size:19px;margin-left:20px;margin-right:59px"> ExpectedPrice <br> <asp:TextBox ID="txtexpectedprice" Width="145px"  runat="server"></asp:TextBox> </label>
                   <asp:RequiredFieldValidator ID="rfvexpectedprice" ControlToValidate="txtexpectedprice" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
-                
+                <br />
+                <br />
+                <asp:Label ID="lblvalidaterfq" runat="server"></asp:Label>
            
             
              <br /> <br /> <br /> <br />  

@@ -36,8 +36,14 @@ namespace FinalYearProject
             Label9.Text = Request.QueryString["RFQ_TotalGrwt"];
             Label10.Text = Request.QueryString["RFQ_TotalChwt"];
             Label11.Text = Request.QueryString["RFQ_NumberofPackages"];
-            Label12.Text = Request.QueryString["sellerdelivered"];
-            Label13.Text = Request.QueryString["buyerreceived"];
+            if (Request.QueryString["sellerdelivered"] == "Y")
+            {
+                Label12.Text = "Yes";
+            }
+            if (Request.QueryString["buyerreceived"] == "Y")
+            {
+                Label13.Text = "Yes";
+            }
             Label14.Text= Request.QueryString["M_Currency_Name"];
             txtcustomer.Text = Request.QueryString["customer_M_Company_Name"];
             txtdisplaycurrency.Text = Request.QueryString["M_Currency_Name"];
@@ -62,29 +68,7 @@ namespace FinalYearProject
             {
                 SqlConnection con = new SqlConnection(_ConnStr);
                 con.Open();
-
-
-                //SqlCommand comcompany = new SqlCommand("select M_Company_Slno,M_Company_Name from M_Company", con);
-
-
-                //SqlDataAdapter dacompany = new SqlDataAdapter(comcompany);
-                //DataSet dscompany = new DataSet();
-                //dacompany.Fill(dscompany);
-                //Customer.DataTextField = dscompany.Tables[0].Columns["M_Company_Name"].ToString();
-                //Customer.DataValueField = dscompany.Tables[0].Columns["M_Company_Slno"].ToString();
-                //Customer.DataSource = dscompany.Tables[0];
-                //Customer.DataBind();
-                //Customereditdropdown.DataTextField = dscompany.Tables[0].Columns["M_Company_Name"].ToString();
-                //Customereditdropdown.DataValueField = dscompany.Tables[0].Columns["M_Company_Slno"].ToString();
-                //Customereditdropdown.DataSource = dscompany.Tables[0];
-                //Customereditdropdown.DataBind();
-
-                //con.Close();
-                //BindGridView();
-                //Customer.Items.Insert(0, new ListItem("--Select Customer--", "0"));
-                //Customereditdropdown.Items.Insert(0, new ListItem("--Select Customer--", "0"));
                 SqlConnection conchargeinvoice = new SqlConnection(_ConnStr);
-
                 conchargeinvoice.Open();
                 SqlCommand comchargeinvoice = new SqlCommand("select TM_INVOICE_No from TM_INVOICE where TM_INVOICE_Status = 'N' or TM_INVOICE_Status='P' ", conchargeinvoice);
                 SqlDataAdapter dachargeinvoice = new SqlDataAdapter(comchargeinvoice);
@@ -366,21 +350,34 @@ namespace FinalYearProject
                 dr.Close();
                
               
-                SqlCommand cmd1 = new SqlCommand("select SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
+                SqlCommand cmd1 = new SqlCommand("select SUM(TD_INVOICE_TOTALAMOUNT),SUM(TD_INVOICE_AMOUNTBC) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No where TM_INVOICE_No = @TM_INVOICE_No group by TM_INVOICE.TM_INVOICE_No", conn);
                 cmd1.Parameters.Add(new SqlParameter("@TM_INVOICE_No", invoiceno));
                 SqlDataReader dr1 = cmd1.ExecuteReader();
                 if (dr1.Read())
                 {
                     Label Total = (Label)e.Row.FindControl("lbltotalamt");
+                    Label Amtbc = (Label)e.Row.FindControl("lblbilledamt");
                     object value = dr1.GetValue(0);
+                    object valueamtbc = dr1.GetValue(1);
                     Total.Text = value.ToString();
+                    Amtbc.Text = valueamtbc.ToString();
                 }
-               if(e.Row.Cells[9].Text == "Y")
+               if(e.Row.Cells[10].Text == "Y")
                 {
-                    e.Row.Cells[9].Text = "Accepted";
+                    e.Row.Cells[10].Text = "Accepted";
                     e.Row.Enabled = false;
                 }
-               
+                if (e.Row.Cells[10].Text == "N")
+                {
+                    e.Row.Cells[10].Text = "Rejected";
+                    
+                }
+                if (e.Row.Cells[10].Text == "P")
+                {
+                    e.Row.Cells[10].Text = "Pending";
+                   
+                }
+
             }
         }
 
@@ -503,7 +500,7 @@ namespace FinalYearProject
                 txtedittaxname.Text = string.Empty;
                 txtedittaxpercentage.Text = string.Empty;
                 txtedittaxamount.Text = string.Empty;
-                txtedittotalamount.Text = string.Empty;
+                txtedittotalamount.Text = txteditamountbc.Text;
 
             }
             mpechargeeditinvoicedisplay.Show();
@@ -533,6 +530,7 @@ namespace FinalYearProject
                 txttaxamount.Visible = false;
                 lbltotalamount.Visible = false;
                 txttotalamount.Visible = false;
+                txttotalamount.Text = txtamountbc.Text;
             }
             mpechargedisplay.Show();
         }
@@ -756,6 +754,32 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INV
                 Response.TransmitFile(Server.MapPath("~/Uploads/") + e.CommandArgument);
                 Response.End();
             }
+        }
+
+
+        protected void ibtnDelete_Click(object sender, ImageClickEventArgs e)
+        {
+            SqlConnection con = new SqlConnection(_ConnStr);
+            con.Open();
+            GridViewRow gvRow = (GridViewRow)((ImageButton)sender).NamingContainer;
+            Int32 code = Convert.ToInt32(InvoiceGridView.DataKeys[gvRow.RowIndex].Value);
+            SqlCommand delcommand = new SqlCommand("delete from TM_INVOICE where TM_INVOICE_Slno= '" + code + "'", con);
+            delcommand.ExecuteNonQuery();
+            BindGridView();
+            con.Close();
+
+        }
+        protected void ibtnchargeDelete_Click(object sender, ImageClickEventArgs e)
+        {
+            SqlConnection con = new SqlConnection(_ConnStr);
+            con.Open();
+            GridViewRow gvRow = (GridViewRow)((ImageButton)sender).NamingContainer;
+            Int32 codecharge = Convert.ToInt32(gvChargeInvoice.DataKeys[gvRow.RowIndex].Value);
+            SqlCommand delcommand = new SqlCommand("delete from TD_INVOICE where TD_INVOICE_SLNO= '" + codecharge + "'", con);
+            delcommand.ExecuteNonQuery();
+            BindChargeGridView();
+            con.Close();
+
         }
     }
 }
