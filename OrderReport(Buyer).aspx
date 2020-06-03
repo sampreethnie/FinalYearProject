@@ -52,7 +52,7 @@
       </li>
       <li class="divider"></li>
       <li>
-        <a ><asp:Button ID="btnlogout" runat="server" style="width:70px;height:40px;color:black;background-color:orange;border-color:chartreuse;border-radius:inherit" Text="Logout"  /></a>
+        <a ><asp:Button ID="btnlogout" runat="server" style="width:70px;height:40px;color:black;background-color:orange;border-color:chartreuse;border-radius:inherit" Text="Logout" OnClick="btnlogout_Click"  /></a>
       </li>
                  
 			    </ul>
@@ -104,34 +104,39 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-    <li><a href="RFQ.aspx">RFQ</a></li>
+     <li><a href="RFQ.aspx">RFQ</a></li>
     
-      <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
+    <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
-     <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
-   
+      <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
+      <li><a href="OrderReport(Buyer).aspx">Order Report(Buyer)</a></li>
+      <li><a href="InvoiceReport(Buyer).aspx"> Invoice Report(Buyer)</a></li>
+      <li><a href="RateComparisonReport.aspx"> Rate Comparison Report(Buyer) </a></li>
   </ul>
                                  </div>
        <div class="btn-group" style="vertical-align:bottom;">
                 
                                  
                     
-                <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
-    Seller
-                    <span class="caret"></span>
+                
+           <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+      Seller
+               <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-     <li><a href="SQ.aspx">SellerQuote</a></li>
+    
+    <li><a href="SQ.aspx">SellerQuote</a></li>
       <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
       <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
-   
+      <li><a href="InvoiceReport.aspx">Invoice Report(Seller)</a></li>
+      <li><a href="OrderReport(Seller).aspx"> Order Report(Seller)</a></li>
   </ul>
                                  </div>
         </div> 
@@ -187,7 +192,7 @@
          <br />
         <br />
         <br />
-         <asp:GridView ID="OrderGridView" runat="server"   Width="90%" Height="50px"  AllowPaging="true" DataKeyNames="TM_INVOICE_Slno" OnRowDataBound="InvoiceDisplay_RowDataBound" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
+         <asp:GridView ID="OrderGridView" runat="server"   Width="90%" Height="50px"  AllowPaging="true" DataKeyNames="ORD_Number" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
                                                   <AlternatingRowStyle BackColor="White" />
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -205,7 +210,7 @@
          
 <asp:BoundField DataField="ORD_Date" HeaderText="Order Date"   ItemStyle-Width="50px" DataFormatString="{0:dd/MM/yyyy}" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
    
-    <asp:BoundField DataField="ORD_SQ_RFQ_Number" HeaderText="Invoice Date"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+    <asp:BoundField DataField="ORD_SQ_RFQ_Number" HeaderText="RFQ Number"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 <asp:BoundField DataField="ORD_SQ_Company" HeaderText="LSP"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 <asp:BoundField DataField="ORD_SQ_RFQ_OriginCountry" HeaderText="Origin Country"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 

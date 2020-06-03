@@ -142,90 +142,13 @@ namespace FinalYearProject
 
             }
         }
-
-
-
-
-
-
-            
-
-        
-
-        protected void btnEnable(object sender,EventArgs e)
-        {
-            categorylist.Enabled = false;
-            txtcompanynamefinal.ReadOnly = false;
-            txtaddress1final.ReadOnly = false;
-            txtaddress2final.ReadOnly = false;
-            txtlandmarkfinal.ReadOnly = false;
-            txtcityfinal.ReadOnly = false;
-            txtpinfinal.ReadOnly = false;
-            txtpanfinal.ReadOnly = false;
-            txttanfinal.ReadOnly = false;
-            dropdowncountryfinal.Enabled = false;
-            dropdowncurrencyfinal.Enabled = false;
-            dropdownstatefinal.Enabled = true;
-            txtcompanyurlfinal.ReadOnly = false;
-            txtname.ReadOnly = false;
-            txtmobile.ReadOnly = false;
-            txtuserid.ReadOnly = false;
-        }
-        protected void btnlogout_Click(object sender, EventArgs e)
+     protected void btnlogout_Click(object sender, EventArgs e)
         {
             Session["M_Subscriber_UserID"] = null;
             Response.Redirect("Mainpage.aspx");
         }
 
-        //protected void btnEdit(object sender,EventArgs e)
-        //{
-        //   // Response.Write(Session["M_Company_Slno"]);
-
-
-
-
-
-
-
-
-        //    string updatequery = @"UPDATE [M_Company] set  [M_Company_Name] = @M_Company_Name , [M_Company_Addr1] = @M_Company_Addr1 where [M_Company_Slno] = M_Company_Slno" ;
-        //    using (SqlConnection conedit = new SqlConnection())
-        //    {
-        //        conedit.ConnectionString = constr;
-
-        //        SqlCommand cmdedit = conedit.CreateCommand();
-        //        cmdedit.CommandText = updatequery;
-        //        cmdedit.CommandType = System.Data.CommandType.Text;
-        //        CompanyEntity company = new CompanyEntity();
-        //        string companyname = txtcompanynamefinal.Text;
-        //        string companyaddress = txtaddress1final.Text;
-
-        //        cmdedit.Parameters.AddWithValue("@M_Company_Slno", SqlDbType.Int);
-
-        //        cmdedit.Parameters.AddWithValue("@M_Company_Name", SqlDbType.) = companyname;
-
-
-
-        //        cmdedit.Parameters.AddWithValue("@M_Company_Addr1", SqlDbType.Text).Value = companyaddress;
-
-
-
-
-        //        conedit.Open();
-        //        cmdedit.ExecuteNonQuery();
-        //        conedit.Close();
-        //    }    
-        //    }
-
-        //SqlConnection conedit = new SqlConnection(constr);
-        //conedit.Open();
-        //SqlCommand cmdedit = new SqlCommand("Update M_Company set M_Company_Name='" + txtcompanynamefinal.Text + "',M_Company_Addr1='" + txtaddress1final.Text + "',M_Company_Addr2='" + txtaddress2final.Text + "',M_Company_Landmark='" + txtlandmarkfinal.Text + "',M_Company_PAN='" + txtpanfinal.Text + "',M_Company_PIN='" + txtpinfinal.Text + "',M_Company_TAN='" + txttanfinal.Text + "',M_Company_URL='" + txtcompanyurlfinal.Text + "' where M_Company_Slno='" + "M_Company_Slno" + "'", conedit);
-        //cmdedit.CommandType = CommandType.Text;
-        //cmdedit.ExecuteNonQuery();
-        //conedit.Close();
-
-
-        //string UpdateQuery = "Update M_Company set M_Company_Name='" + txtcompanynamefinal.Text + "',M_Company_Addr1='" + txtaddress1final.Text + "',M_Company_Addr2='" + txtaddress2final.Text + "',M_Company_Landmark='" + txtlandmarkfinal.Text + "',M_Company_PAN='" + txtpanfinal.Text + "',M_Company_PIN='" + txtpinfinal.Text + "',M_Company_TAN='" + txttanfinal.Text + "',M_Company_URL='" + txtcompanyurlfinal.Text + "' where M_Company_Slno='" + "M_Company_Slno" + "'";
+        
 
     }
     }

@@ -13,7 +13,7 @@ using System.IO;
 
 namespace FinalYearProject
 {
-    public partial class OrderReport_Buyer_ : System.Web.UI.Page
+    public partial class OrderReport_Seller_ : System.Web.UI.Page
     {
         String _ConnStr = ConfigurationManager.ConnectionStrings["crudConnection"].ConnectionString;
 
@@ -23,16 +23,16 @@ namespace FinalYearProject
             {
                 SqlConnection concompany = new SqlConnection(_ConnStr);
                 concompany.Open();
-                SqlCommand comcompany = new SqlCommand("select distinct ORD_SQ_Company from Orders where ORD_BuyerUserID = @buyeruserid ", concompany);
-                comcompany.Parameters.AddWithValue("@buyeruserid", Session["M_Subscriber_UserID"]);
+                SqlCommand comcompany = new SqlCommand("select distinct ORD_SQ_RFQ_Company from Orders where ORD_UserID = @selleruserid ", concompany);
+                comcompany.Parameters.AddWithValue("@selleruserid", Session["M_Subscriber_UserID"]);
                 SqlDataAdapter dacompany = new SqlDataAdapter(comcompany);
                 DataSet dscompany = new DataSet();
                 dacompany.Fill(dscompany);
-                dropdownseller.DataTextField = dscompany.Tables[0].Columns["ORD_SQ_Company"].ToString();
-                dropdownseller.DataSource = dscompany.Tables[0];
-                dropdownseller.DataBind();
+                dropdowncustomer.DataTextField = dscompany.Tables[0].Columns["ORD_SQ_RFQ_Company"].ToString();
+                dropdowncustomer.DataSource = dscompany.Tables[0];
+                dropdowncustomer.DataBind();
                 concompany.Close();
-                dropdownseller.Items.Insert(0, new ListItem("--Select Company--"));
+                dropdowncustomer.Items.Insert(0, new ListItem("--Select Customer--"));
                 btnexport.Visible = false;
 
                 lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
@@ -56,33 +56,34 @@ namespace FinalYearProject
                     ButtonBuyer.Visible = false;
 
                 }
-
             }
 
-        }
-
-        protected void btnlogout_Click(object sender, EventArgs e)
-        {
-            Session["M_Subscriber_UserID"] = null;
-            Response.Redirect("Mainpage.aspx");
         }
         private void BindGridView()
         {
             SqlConnection con = new SqlConnection(_ConnStr);
             con.Open();
-            
-            
-                SqlCommand cmd = new SqlCommand("select ORD_Number,ORD_Date,ORD_SQ_RFQ_Number,ORD_SQ_Company,ORD_SQ_RFQ_OriginCountry,ORD_SQ_RFQ_DestinationCountry,ORD_SQ_RFQ_OriginAirport,ORD_SQ_RFQ_DestinationAirport,ORD_SQ_RFQ_NumberofPackages,ORD_SQ_RFQ_TotalChwt,ORD_SQ_RFQ_Commodity,ORD_SQ_BuyerCurrency,ORD_SellerCurrency from Orders where ORD_Date between @fromdate and @todate and ORD_SQ_Company = @company", con);
-                cmd.Parameters.AddWithValue("@company", dropdownseller.SelectedItem.Text);
-                cmd.Parameters.AddWithValue("@fromdate", Convert.ToDateTime(txtfromorderdate.Text));
-                cmd.Parameters.AddWithValue("@todate", Convert.ToDateTime(txttoorderdate.Text));
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                OrderGridView.DataSource = ds;
-                OrderGridView.DataBind();
-                con.Close(); 
+
+
+            SqlCommand cmd = new SqlCommand("select ORD_Number,ORD_Date,ORD_SQ_RFQ_Number,ORD_SQ_RFQ_Company,ORD_SQ_RFQ_OriginCountry,ORD_SQ_RFQ_DestinationCountry,ORD_SQ_RFQ_OriginAirport,ORD_SQ_RFQ_DestinationAirport,ORD_SQ_RFQ_NumberofPackages,ORD_SQ_RFQ_TotalChwt,ORD_SQ_RFQ_Commodity,ORD_SQ_BuyerCurrency,ORD_SellerCurrency from Orders where ORD_Date between @fromdate and @todate and ORD_SQ_RFQ_Company = @company", con);
+            cmd.Parameters.AddWithValue("@company", dropdowncustomer.SelectedItem.Text);
+            cmd.Parameters.AddWithValue("@fromdate", Convert.ToDateTime(txtfromorderdate.Text));
+            cmd.Parameters.AddWithValue("@todate", Convert.ToDateTime(txttoorderdate.Text));
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            OrderGridView.DataSource = ds;
+            OrderGridView.DataBind();
+            con.Close();
+
         }
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
+        }
+
+
         protected void ExportExcel(object sender, EventArgs e)
         {
 
@@ -92,8 +93,8 @@ namespace FinalYearProject
 
 
         }
-       
-        
+
+
 
         protected void ExportToExcel(object sender, EventArgs e)
         {
@@ -152,7 +153,7 @@ namespace FinalYearProject
         {
             txtfromorderdate.Text = string.Empty;
             txttoorderdate.Text = string.Empty;
-            dropdownseller.SelectedIndex = 0;
+            dropdowncustomer.SelectedIndex = 0;
         }
 
     }

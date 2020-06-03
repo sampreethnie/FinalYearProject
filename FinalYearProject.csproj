@@ -20,6 +20,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -192,10 +193,12 @@
     <Content Include="InvoiceReport.aspx" />
     <Content Include="MasterPage.Master" />
     <Content Include="OrderReport%28Buyer%29.aspx" />
+    <Content Include="OrderReport%28Seller%29.aspx" />
     <Content Include="Orders%28Buyer%29.aspx" />
     <Content Include="Orders%28Seller%29.aspx" />
     <Content Include="QuoteNegotiation%28Buyer%29.aspx" />
     <Content Include="QuoteNegotiation%28Seller%29.aspx" />
+    <Content Include="RateComparisonReport.aspx" />
     <Content Include="RFQ.aspx" />
     <Content Include="SQ.aspx" />
     <Content Include="WebForm1.aspx" />
@@ -414,6 +417,13 @@
     <Compile Include="OrderReport%28Buyer%29.aspx.designer.cs">
       <DependentUpon>OrderReport%28Buyer%29.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OrderReport%28Seller%29.aspx.cs">
+      <DependentUpon>OrderReport%28Seller%29.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderReport%28Seller%29.aspx.designer.cs">
+      <DependentUpon>OrderReport%28Seller%29.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Orders%28Buyer%29.aspx.cs">
       <DependentUpon>Orders%28Buyer%29.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -448,6 +458,13 @@
     </Compile>
     <Compile Include="QuoteNegotiation%28Seller%29.aspx.designer.cs">
       <DependentUpon>QuoteNegotiation%28Seller%29.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RateComparisonReport.aspx.cs">
+      <DependentUpon>RateComparisonReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RateComparisonReport.aspx.designer.cs">
+      <DependentUpon>RateComparisonReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="RFQ.aspx.cs">
       <DependentUpon>RFQ.aspx</DependentUpon>

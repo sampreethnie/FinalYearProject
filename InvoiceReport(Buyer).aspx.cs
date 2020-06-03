@@ -34,6 +34,28 @@ namespace FinalYearProject
                 concompany.Close();
                 dropdowncustomer.Items.Insert(0, new ListItem("--Select Company--"));
                 btnexport.Visible = false;
+
+                lblusername.Text = "Username:" + Session["M_Subscriber_UserID"];
+                SqlConnection con2 = new SqlConnection(_ConnStr);
+                con2.Open();
+                string str = "select M_Company_Slno,M_Company_Name,M_Company_BuyerSellerFlag from M_Subscriber,M_Company where M_Subscriber_UserID = '" + Session["M_Subscriber_UserID"] + "' and M_Subscriber.M_Subscriber_MCompanySlno = M_Company.M_Company_Slno";
+                SqlCommand com1 = new SqlCommand(str, con2);
+                SqlDataAdapter da1 = new SqlDataAdapter(com1);
+                DataSet ds1 = new DataSet();
+                da1.Fill(ds1);
+                lblcompanyname.Text = "CompanyName:" + ds1.Tables[0].Rows[0]["M_Company_Name"].ToString();
+                //lblbuyersellerflag.Text = "Type:" + ds.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString();
+                if (ds1.Tables[0].Rows[0]["M_Company_BuyerSellerFlag"].ToString() == "b")
+                {
+                    ButtonSeller.Visible = false;
+
+
+                }
+                else
+                {
+                    ButtonBuyer.Visible = false;
+
+                }
             }
 
         }
@@ -43,7 +65,7 @@ namespace FinalYearProject
             con.Open();
             if (chkall.Checked)
             {
-                SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE.TM_INVOICE_No,TM_INVOICE.TM_INVOICE_Date,M_Company.M_Company_Name,TM_INVOICE.TM_INVOICE_RFQNumber,ShipmentDetailsSeller.hawb,ShipmentDetailsSeller.delivery,TM_INVOICE.TM_INVOICE_Status from TM_INVOICE inner join ShipmentDetailsSeller on TM_INVOICE.TM_INVOICE_RFQNumber = ShipmentDetailsSeller.ShipmentRFQ_Number inner join M_Company on TM_INVOICE.TM_INVOICE_COMPANYSLNO = M_Company.M_Company_Slno where TM_INVOICE_Date between @fromdate and @todate and  TM_INVOICE.TM_INVOICE_Customer='freightoptics' and TM_INVOICE_Status = 'Y' or TM_INVOICE_Status = 'P' or TM_INVOICE_Status = 'N'   ;select SUM(TD_INVOICE_TAXAMOUNT), SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No   group by TM_INVOICE.TM_INVOICE_No", con);
+                SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE.TM_INVOICE_No,TM_INVOICE.TM_INVOICE_Date,M_Company.M_Company_Name,TM_INVOICE.TM_INVOICE_RFQNumber,ShipmentDetailsSeller.hawb,ShipmentDetailsSeller.delivery,TM_INVOICE.TM_INVOICE_Status from TM_INVOICE inner join ShipmentDetailsSeller on TM_INVOICE.TM_INVOICE_RFQNumber = ShipmentDetailsSeller.ShipmentRFQ_Number inner join M_Company on TM_INVOICE.TM_INVOICE_COMPANYSLNO = M_Company.M_Company_Slno where TM_INVOICE_Date between @fromdate and @todate and  TM_INVOICE.TM_INVOICE_Customer='freightoptics' and TM_INVOICE_Status = 'Y' and TM_INVOICE_Status = 'P' and TM_INVOICE_Status = 'N'   ;select SUM(TD_INVOICE_TAXAMOUNT), SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No   group by TM_INVOICE.TM_INVOICE_No", con);
                 cmd.Parameters.AddWithValue("@customerinvoice", dropdowncustomer.SelectedItem.Value);
                 cmd.Parameters.AddWithValue("@fromdate", Convert.ToDateTime(txtfrominvoicedate.Text));
                 cmd.Parameters.AddWithValue("@todate", Convert.ToDateTime(txttoinvoicedate.Text));
@@ -55,7 +77,7 @@ namespace FinalYearProject
                 con.Close();
             }
 
-            if (chkapproved.Checked)
+            else if (chkapproved.Checked)
             {
                 SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE.TM_INVOICE_No,TM_INVOICE.TM_INVOICE_Date,M_Company.M_Company_Name,TM_INVOICE.TM_INVOICE_RFQNumber,ShipmentDetailsSeller.hawb,ShipmentDetailsSeller.delivery,TM_INVOICE.TM_INVOICE_Status from TM_INVOICE inner join ShipmentDetailsSeller on TM_INVOICE.TM_INVOICE_RFQNumber = ShipmentDetailsSeller.ShipmentRFQ_Number inner join M_Company on TM_INVOICE.TM_INVOICE_COMPANYSLNO = M_Company.M_Company_Slno where TM_INVOICE_Date between @fromdate and @todate and  TM_INVOICE.TM_INVOICE_Customer='freightoptics' and TM_INVOICE_Status = 'Y' ;select SUM(TD_INVOICE_TAXAMOUNT), SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No   group by TM_INVOICE.TM_INVOICE_No; ", con);
                 cmd.Parameters.AddWithValue("@customerinvoice", dropdowncustomer.SelectedItem.Value);
@@ -72,7 +94,7 @@ namespace FinalYearProject
 
             }
 
-            if (chkrejected.Checked)
+            else if (chkrejected.Checked)
             {
                 SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE.TM_INVOICE_No,TM_INVOICE.TM_INVOICE_Date,M_Company.M_Company_Name,TM_INVOICE.TM_INVOICE_RFQNumber,ShipmentDetailsSeller.hawb,ShipmentDetailsSeller.delivery,TM_INVOICE.TM_INVOICE_Status from TM_INVOICE inner join ShipmentDetailsSeller on TM_INVOICE.TM_INVOICE_RFQNumber = ShipmentDetailsSeller.ShipmentRFQ_Number inner join M_Company on TM_INVOICE.TM_INVOICE_COMPANYSLNO = M_Company.M_Company_Slno where TM_INVOICE_Date between @fromdate and @todate and  TM_INVOICE.TM_INVOICE_Customer='freightoptics' and TM_INVOICE_Status = 'N'   ;select SUM(TD_INVOICE_TAXAMOUNT), SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No   group by TM_INVOICE.TM_INVOICE_No ", con);
                 cmd.Parameters.AddWithValue("@customerinvoice", dropdowncustomer.SelectedItem.Value);
@@ -90,7 +112,7 @@ namespace FinalYearProject
             }
 
 
-            if (chkpending.Checked)
+            else if (chkpending.Checked)
             {
                 SqlCommand cmd = new SqlCommand("select TM_INVOICE_Slno,TM_INVOICE.TM_INVOICE_No,TM_INVOICE.TM_INVOICE_Date,M_Company.M_Company_Name,TM_INVOICE.TM_INVOICE_RFQNumber,ShipmentDetailsSeller.hawb,ShipmentDetailsSeller.delivery,TM_INVOICE.TM_INVOICE_Status from TM_INVOICE inner join ShipmentDetailsSeller on TM_INVOICE.TM_INVOICE_RFQNumber = ShipmentDetailsSeller.ShipmentRFQ_Number inner join M_Company on TM_INVOICE.TM_INVOICE_COMPANYSLNO = M_Company.M_Company_Slno where TM_INVOICE_Date between @fromdate and @todate and  TM_INVOICE.TM_INVOICE_Customer='freightoptics' and TM_INVOICE_Status = 'Y' or TM_INVOICE_Status = 'P' or TM_INVOICE_Status = 'N'   ;select SUM(TD_INVOICE_TAXAMOUNT), SUM(TD_INVOICE_TOTALAMOUNT) from TD_INVOICE inner join TM_INVOICE on TD_INVOICE.TD_INVOICE_TMSLNO = TM_INVOICE.TM_INVOICE_No   group by TM_INVOICE.TM_INVOICE_No ", con);
                 cmd.Parameters.AddWithValue("@customerinvoice", dropdowncustomer.SelectedItem.Value);
@@ -107,6 +129,12 @@ namespace FinalYearProject
 
             }
             con.Close();
+        }
+
+        protected void btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["M_Subscriber_UserID"] = null;
+            Response.Redirect("Mainpage.aspx");
         }
         protected void ExportExcel(object sender, EventArgs e)
         {

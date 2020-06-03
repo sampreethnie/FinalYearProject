@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalYearProject {
-    
-    
-    public partial class Company {
-        
+namespace FinalYearProject
+{
+
+
+    public partial class Company
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// lblusername control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblusername;
-        
+
         /// <summary>
         /// lblcompanyname control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblcompanyname;
-        
+
         /// <summary>
         /// btnlogout control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnlogout;
-        
+
         /// <summary>
         /// ButtonBuyer control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton ButtonBuyer;
-        
+
         /// <summary>
         /// ButtonSeller control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton ButtonSeller;
-        
+
         /// <summary>
         /// categorylist control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList categorylist;
-        
+
         /// <summary>
         /// txtcompanynamefinal control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtcompanynamefinal;
-        
+
         /// <summary>
         /// companyname control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator companyname;
-        
+
         /// <summary>
         /// txtaddress1final control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtaddress1final;
-        
+
         /// <summary>
         /// addressone control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator addressone;
-        
+
         /// <summary>
         /// txtaddress2final control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtaddress2final;
-        
+
         /// <summary>
         /// txtlandmarkfinal control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtlandmarkfinal;
-        
+
         /// <summary>
         /// txtcityfinal control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtcityfinal;
-        
+
         /// <summary>
         /// city control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator city;
-        
+
         /// <summary>
         /// txtpinfinal control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtpinfinal;
-        
+
         /// <summary>
         /// pin control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator pin;
-        
+
         /// <summary>
         /// dropdowncountryfinal control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropdowncountryfinal;
-        
+
         /// <summary>
         /// countrylist control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator countrylist;
-        
+
         /// <summary>
         /// dropdownstatefinal control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropdownstatefinal;
-        
+
         /// <summary>
         /// statelist control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator statelist;
-        
+
         /// <summary>
         /// dropdowncurrencyfinal control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropdowncurrencyfinal;
-        
+
         /// <summary>
         /// currencylist control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator currencylist;
-        
+
         /// <summary>
         /// txtpanfinal control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtpanfinal;
-        
+
         /// <summary>
         /// txttanfinal control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txttanfinal;
-        
+
         /// <summary>
         /// txtcompanyurlfinal control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtcompanyurlfinal;
-        
+
         /// <summary>
         /// companyurl control.
         /// </summary>
@@ -254,16 +256,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator companyurl;
-        
-        /// <summary>
-        /// enablebutton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button enablebutton;
-        
+
         /// <summary>
         /// txtname control.
         /// </summary>
@@ -272,7 +265,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtname;
-        
+
         /// <summary>
         /// name control.
         /// </summary>
@@ -281,7 +274,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator name;
-        
+
         /// <summary>
         /// txtmobile control.
         /// </summary>
@@ -290,7 +283,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtmobile;
-        
+
         /// <summary>
         /// mobileno control.
         /// </summary>
@@ -299,7 +292,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator mobileno;
-        
+
         /// <summary>
         /// txtuserid control.
         /// </summary>
@@ -308,7 +301,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtuserid;
-        
+
         /// <summary>
         /// userid control.
         /// </summary>

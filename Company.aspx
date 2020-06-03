@@ -91,34 +91,39 @@
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-  <li><a href="RFQ.aspx">RFQ</a></li>
+   <li><a href="RFQ.aspx">RFQ</a></li>
     
     <li><a href="QuoteNegotiation(Buyer).aspx">Quote Negotiation(Buyer)</a></li>
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
-   
+      <li><a href="OrderReport(Buyer).aspx">Order Report(Buyer)</a></li>
+      <li><a href="InvoiceReport(Buyer).aspx"> Invoice Report(Buyer)</a></li>
+      <li><a href="RateComparisonReport.aspx"> Rate Comparison Report(Buyer) </a></li>
   </ul>
                                  </div>
        <div class="btn-group" style="vertical-align:bottom;">
                 
                                  
                     
-                <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
-    Seller
-                    <span class="caret"></span>
+                
+           <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+      Seller
+               <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
+    
     <li><a href="SQ.aspx">SellerQuote</a></li>
       <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
       <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
-   
+      <li><a href="InvoiceReport.aspx">Invoice Report(Seller)</a></li>
+      <li><a href="OrderReport(Seller).aspx"> Order Report(Seller)</a></li>
   </ul>
                                  </div>
         </div> 
@@ -157,46 +162,46 @@
                                                
                                                <div>
                                                    
-                                                   <label>Company Name *<br> <asp:TextBox ID="txtcompanynamefinal" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
+                                                   <label style="font-size:19px;margin-left:2px;margin-right:50px">Company Name *<br> <asp:TextBox ID="txtcompanynamefinal" runat="server" Height="34px" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                    <asp:RequiredFieldValidator ID="companyname" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtcompanynamefinal" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
-                                                    <label>Address1 *<br> <asp:TextBox ID="txtaddress1final" Width="400px" CssClass="form-control" ReadOnly="true" Height="34px"  runat="server"></asp:TextBox> </label>
+                                                    <label style="font-size:19px;margin-left:20px;margin-right:50px">Address1 *<br> <asp:TextBox ID="txtaddress1final" Width="400px" CssClass="form-control" ReadOnly="true" Height="34px"  runat="server"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="addressone" runat="server" ValidationGroup="registrationform" SetFocusOnError="true"  ControlToValidate="txtaddress1final" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
-                                                   <label>Address2<br> <asp:TextBox ID="txtaddress2final" ReadOnly="true" Width="400px" CssClass="form-control" Height="34px"  runat="server"></asp:TextBox> </label>
+                                                   <label style="font-size:19px;margin-left:20px;margin-right:50px">Address2<br> <asp:TextBox ID="txtaddress2final" ReadOnly="true" Width="400px" CssClass="form-control" Height="34px"  runat="server"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
-                                                   <label>Landmark<br> <asp:TextBox ID="txtlandmarkfinal" ReadOnly="true" Width="400px" CssClass="form-control" Height="34px" runat="server"></asp:TextBox> </label>
+                                                   <label style="font-size:19px;margin-left:2px;margin-right:50px">Landmark<br> <asp:TextBox ID="txtlandmarkfinal" ReadOnly="true" CssClass="form-control" Height="34px" runat="server"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
-                                                    <label>City *<br> <asp:TextBox ID="txtcityfinal" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
+                                                    <label style="font-size:19px;margin-left:20px;margin-right:50px">City *<br> <asp:TextBox ID="txtcityfinal" runat="server" ReadOnly="true" Height="34px" CssClass="form-control"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="city" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtcityfinal" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
                                                       </div>
                                                <div>
-                                               <label>ZipCode *<br> <asp:TextBox ID="txtpinfinal" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
+                                               <label style="font-size:19px;margin-left:2px;margin-right:50px">ZipCode *<br> <asp:TextBox ID="txtpinfinal" runat="server" ReadOnly="true" Height="34px" CssClass="form-control"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="pin" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtpinfinal" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
-                                               <label>Country *<br> <asp:DropDownList ID="dropdowncountryfinal" Enabled="false" CssClass="form-control" AutoPostBack="true" Width="140px" runat="server"></asp:DropDownList> </label>
+                                               <label style="font-size:19px;margin-left:20px;margin-right:50px">Country *<br> <asp:DropDownList ID="dropdowncountryfinal" Enabled="false" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="countrylist" runat="server" InitialValue="0" Text="" ValidationGroup="registrationform" ControlToValidate="dropdowncountryfinal"  ErrorMessage=""></asp:RequiredFieldValidator>
-                                                <label>State<br> <asp:DropDownList ID="dropdownstatefinal" Enabled="false"  Width="140px" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
+                                                <label style="font-size:19px;margin-left:20px;margin-right:50px">State<br> <asp:DropDownList ID="dropdownstatefinal" Enabled="false"  Width="140px" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="statelist" runat="server" InitialValue="0" Text="" ValidationGroup="registrationform" ControlToValidate="dropdownstatefinal"  ErrorMessage=""></asp:RequiredFieldValidator>
-                                                <label>Currency *<br> <asp:DropDownList ID="dropdowncurrencyfinal" Enabled="false" Width="140px"  CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
+                                                <label style="font-size:19px;margin-left:20px;margin-right:50px">Currency *<br> <asp:DropDownList ID="dropdowncurrencyfinal" Enabled="false" Width="140px"  CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="currencylist" runat="server" InitialValue="0" Text="" ValidationGroup="registrationform" ControlToValidate="dropdowncurrencyfinal"  ErrorMessage=""></asp:RequiredFieldValidator>
                                                    </div>
                                                <div>
-                                                    <label>PAN<br> <asp:TextBox ID="txtpanfinal" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox> </label>
+                                                    <label style="font-size:19px;margin-left:2px;margin-right:50px">PAN<br> <asp:TextBox ID="txtpanfinal" ReadOnly="true" CssClass="form-control" Height="34px" runat="server"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                    
-                                                    <label>TAN<br> <asp:TextBox ID="txttanfinal" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox> </label>
+                                                    <label style="font-size:19px;margin-left:20px;margin-right:50px">TAN<br> <asp:TextBox ID="txttanfinal" ReadOnly="true" CssClass="form-control" Height="34px" runat="server"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
-                                                   <label>CompanyURL *<br> <asp:TextBox ID="txtcompanyurlfinal" ReadOnly="true" CssClass="form-control" runat="server"></asp:TextBox> </label>
+                                                   <label style="font-size:19px;margin-left:20px;margin-right:50px">CompanyURL *<br> <asp:TextBox ID="txtcompanyurlfinal" ReadOnly="true" CssClass="form-control" Height="34px" runat="server"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                    <asp:RequiredFieldValidator ID="companyurl" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtcompanyurlfinal" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
                                                    <br />
                                                    <br />
-                                                   <asp:Button ID="enablebutton" runat="server" CssClass="btn btn-primary" Text="Enable" OnClick="btnEnable" Width="90px" Height="30px" BackColor="YellowGreen"/>
+<%--                                                   <asp:Button ID="enablebutton" runat="server" CssClass="btn btn-primary" Text="Enable" OnClick="btnEnable" Width="90px" Height="30px" BackColor="YellowGreen"/>--%>
                                                    <%--<asp:Button ID="editbutton" runat="server" CssClass="btn btn-primary" Text="Edit" OnClick="btnEdit" Width="90px" Height="30px" BackColor="CornflowerBlue"/>--%>
                         
                                                </div></div></div> </div> </div> 
@@ -213,13 +218,13 @@
                                   <div id="collapseTwo" class="panel panel-collapse" role="tabpanel" aria-labelledby="headingTwo">
                                       <div class="panel-body">
                                           <div>
-                                              <label>Name *<br> <asp:TextBox ID="txtname" runat="server" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
+                                              <label style="font-size:19px;margin-left:20px;margin-right:50px">Name *<br> <asp:TextBox ID="txtname" runat="server" Height="34px" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;&nbsp;
                                                <asp:RequiredFieldValidator ID="name" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtname" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
-                                                    <label>Mobile *<br> <asp:TextBox ID="txtmobile" TextMode="Number" ReadOnly="true" runat="server" CssClass="form-control"></asp:TextBox> </label>
+                                                    <label style="font-size:19px;margin-left:20px;margin-right:50px">Mobile *<br> <asp:TextBox ID="txtmobile" TextMode="Number" Height="34px" ReadOnly="true" runat="server" CssClass="form-control"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;&nbsp;
                                                <asp:RequiredFieldValidator ID="mobileno" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtmobile" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
-                                               <label>UserId *<br> <asp:TextBox ID="txtuserid" CssClass="form-control" ReadOnly="true" runat="server"></asp:TextBox> </label>
+                                               <label style="font-size:19px;margin-left:20px;margin-right:50px">UserId *<br> <asp:TextBox ID="txtuserid" CssClass="form-control" Height="34px" ReadOnly="true" runat="server"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                <asp:RequiredFieldValidator ID="userid" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtuserid" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
                                                

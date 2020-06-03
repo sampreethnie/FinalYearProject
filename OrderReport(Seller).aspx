@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InvoiceReport(Buyer).aspx.cs" Inherits="FinalYearProject.InvoiceReport_Buyer_" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OrderReport(Seller).aspx.cs" Inherits="FinalYearProject.OrderReport_Seller_" %>
 
 <%@Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -146,7 +146,7 @@
 
          <nav class="navbar3 navbar navbar-dark bg-primary" style="height:20px;"id="navbarthree"> 
  
-    <p class="navbar-text" style="font-size:21px">Invoice Report(Seller)</p>
+    <p class="navbar-text" style="font-size:21px">Order Report(Buyer)</p>
 
      <div class="input-group topspace5 bottomspace5">
              
@@ -169,22 +169,21 @@
   
 </nav>
     <div>
-     <label style="font-size:19px;margin-left:20px;margin-right:50px;"> From Date * <br > <asp:TextBox ID = "txtfrominvoicedate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
-                <ajaxToolkit:CalendarExtender ID="Calendarfromdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtfrominvoicedate" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
-<%--             <asp:RequiredFieldValidator ID="rfvfromdate" ControlToValidate="txtfrominvoicedate" ValidationGroup="invoicereporting" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>--%>
+     <label style="font-size:19px;margin-left:20px;margin-right:50px;"> From Date * <br > <asp:TextBox ID = "txtfromorderdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+                <ajaxToolkit:CalendarExtender ID="Calendarfromdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtfromorderdate" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
+             <asp:RequiredFieldValidator ID="rfvfromdate" ControlToValidate="txtfromorderdate" ValidationGroup="invoicereporting" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
     
-    <label style="font-size:19px;margin-left:20px;margin-right:50px;"> To Date * <br > <asp:TextBox ID = "txttoinvoicedate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
-                <ajaxToolkit:CalendarExtender ID="Calendartodate" PopupButtonID="imgPopup" runat="server" TargetControlID="txttoinvoicedate"  Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
+    <label style="font-size:19px;margin-left:20px;margin-right:50px;"> To Date * <br > <asp:TextBox ID = "txttoorderdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+                <ajaxToolkit:CalendarExtender ID="Calendartodate" PopupButtonID="imgPopup" runat="server" TargetControlID="txttoorderdate"  Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
 <%--             <asp:RequiredFieldValidator ID="rfvtodate" ControlToValidate="txttoinvoicedate" ValidationGroup="invoicereporting" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>--%>
 
 
         
 
-         <label style="font-size:19px;margin-left:20px;margin-right:50px">LSP* <br> <asp:DropDownList ID="dropdowncustomer"  Height="30px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
+         <label style="font-size:19px;margin-left:20px;margin-right:50px">Customer* <br> <asp:DropDownList ID="dropdowncustomer"  Height="30px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
             <asp:RequiredFieldValidator ID="rfvcustomer" ControlToValidate="dropdowncustomer" ValidationGroup="invoicereporting" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
     
-        <label style="font-size:19px;margin-left:20px;margin-right:50px">Type <br> <asp:CheckBox ID="chkall"  runat="server" Text="All" Value="A" style="margin-right:30px" /> <asp:CheckBox ID="chkapproved" runat="server" Value="Y" Text="Approved" style="margin-right:30px" /> <asp:CheckBox ID="chkrejected" runat="server" Text="Rejected" Value="N" style="margin-right:30px" /> <asp:CheckBox ID="chkpending" runat="server" Text="Pending" Value="P" /> </label>
-   <br />
+        
         <br /><br />
         <asp:Button Text="Display Data" OnClick="ExportExcel" runat="server"  style="width:110px;height:40px;margin-left:50px;color:white;background-color:deepskyblue;    border:solid;border-top-left-radius:8px;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;display:inline" />
          <asp:Button Text="Export" ID="btnexport" OnClick="ExportToExcel" runat="server" style= "width:70px;height:40px;margin-left:50px;color:white; background-color:green; border:solid;border-top-left-radius:8px;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;display:inline" />
@@ -193,7 +192,7 @@
          <br />
         <br />
         <br />
-         <asp:GridView ID="InvoiceGridView" runat="server"   Width="90%" Height="50px"  AllowPaging="true" DataKeyNames="TM_INVOICE_Slno" OnRowDataBound="InvoiceDisplay_RowDataBound" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
+         <asp:GridView ID="OrderGridView" runat="server"   Width="90%" Height="50px"  AllowPaging="true" DataKeyNames="ORD_Number" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
                                                   <AlternatingRowStyle BackColor="White" />
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -206,45 +205,25 @@
   
 
 
-<asp:BoundField DataField="TM_INVOICE_Slno" HeaderText="Invoice Slno" Visible="false"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+<asp:BoundField DataField="ORD_Number" HeaderText="Order Number"    ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 
          
-<asp:BoundField DataField="TM_INVOICE_No" HeaderText="Invoice Number"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+<asp:BoundField DataField="ORD_Date" HeaderText="Order Date"   ItemStyle-Width="50px" DataFormatString="{0:dd/MM/yyyy}" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
    
-    <asp:BoundField DataField="TM_INVOICE_Date" HeaderText="Invoice Date" DataFormatString="{0:dd/MM/yyyy}"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
-<asp:BoundField DataField="M_Company_Name" HeaderText="LSP"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
-<asp:BoundField DataField="TM_INVOICE_RFQNumber" HeaderText="RFQ Number"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+    <asp:BoundField DataField="ORD_SQ_RFQ_Number" HeaderText="RFQ Number"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+<asp:BoundField DataField="ORD_SQ_RFQ_Company" HeaderText="Customer"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+<asp:BoundField DataField="ORD_SQ_RFQ_OriginCountry" HeaderText="Origin Country"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 
-<asp:BoundField DataField="hawb" HeaderText="Airway Bill No"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
-   <asp:BoundField DataField="delivery" HeaderText="DeliveryDate"   ItemStyle-Width="50px" DataFormatString="{0:dd/MM/yyyy}" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
-    <asp:BoundField DataField="TM_INVOICE_Status" HeaderText="Invoice Status"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+<asp:BoundField DataField="ORD_SQ_RFQ_DestinationCountry" HeaderText="Destination Country"  ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left"  />
+   <asp:BoundField DataField="ORD_SQ_RFQ_OriginAirport" HeaderText="Origin Airport"   ItemStyle-Width="50px" DataFormatString="{0:dd/MM/yyyy}" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+    <asp:BoundField DataField="ORD_SQ_RFQ_DestinationAirport" HeaderText="Destination Airport"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+    <asp:BoundField DataField="ORD_SQ_RFQ_NumberofPackages" HeaderText="Number of Packages"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+        <asp:BoundField DataField="ORD_SQ_RFQ_TotalChwt" HeaderText="Total Ch.Wt"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+        <asp:BoundField DataField="ORD_SQ_RFQ_Commodity" HeaderText="Commodity"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+        <asp:BoundField DataField="ORD_SQ_BuyerCurrency" HeaderText="Buyer Currency"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
+        <asp:BoundField DataField="ORD_SellerCurrency" HeaderText="Seller Currency"   ItemStyle-Width="50px" HeaderStyle-Width="400px" HeaderStyle-HorizontalAlign="Left" />
 
-    <asp:TemplateField HeaderText="Billed Amount">
-        <ItemTemplate>
-           <asp:Label ID="lblbilledamt" runat="server"  ></asp:Label>
-        </ItemTemplate>
-        
-        </asp:TemplateField>
-    
-    
-    
-    
-    <asp:TemplateField HeaderText="Tax Amount">
-        <ItemTemplate>
-           <asp:Label ID="lbltaxamt" runat="server"  ></asp:Label>
-        </ItemTemplate>
-        <FooterTemplate>
-            <asp:Label ID="lbltaxtotal" runat="server" Text="Total Tax Amount"></asp:Label>
-        </FooterTemplate>
-        </asp:TemplateField>
-    <asp:TemplateField HeaderText="Total Amount">
-        <ItemTemplate>
-           <asp:Label ID="lbltotalamt" runat="server" ></asp:Label>
-        </ItemTemplate>
-        <FooterTemplate>
-            <asp:Label ID="lblfinaltotal" runat="server" Text="Total"></asp:Label>
-        </FooterTemplate>
-        </asp:TemplateField>
+  
     
 </Columns>
                                               </asp:GridView> 
@@ -267,4 +246,3 @@
     </form>
 </body>
 </html>
-

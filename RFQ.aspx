@@ -116,28 +116,33 @@
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
-   
+      <li><a href="OrderReport(Buyer).aspx">Order Report(Buyer)</a></li>
+      <li><a href="InvoiceReport(Buyer).aspx"> Invoice Report(Buyer)</a></li>
+      <li><a href="RateComparisonReport.aspx"> Rate Comparison Report(Buyer) </a></li>
   </ul>
                                  </div>
        <div class="btn-group" style="vertical-align:bottom;">
                 
                                  
                     
-                <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
-    Seller
-                    <span class="caret"></span>
+                
+           <button type="button" id="ButtonSeller" runat="server" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+      Seller
+               <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>
   </button>
   <ul class="dropdown-menu" role="menu">
     <!-- here is the asp.net link button to make post back -->
           
-     <li><a href="SQ.aspx">SellerQuote</a></li>
+    
+    <li><a href="SQ.aspx">SellerQuote</a></li>
       <li><a href="QuoteNegotiation(Seller).aspx">Quote Negotiation(Seller)</a></li>
       <li><a href="Orders(Seller).aspx">Orders(Seller)</a></li>
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
-   
+      <li><a href="InvoiceReport.aspx">Invoice Report(Seller)</a></li>
+      <li><a href="OrderReport(Seller).aspx"> Order Report(Seller)</a></li>
   </ul>
                                  </div>
         </div> 
@@ -153,7 +158,7 @@
             <div >
             
             <asp:label ID="lblrfqslno" runat="server" Visible="false">Slno</asp:label>
-            <label for="txtrfq" style="font-size:19px;margin-left:20px;margin-right:50px"> RFQ Number* <br> <asp:TextBox ID="txtrfqnumber"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
+            <label for="txtrfq" style="font-size:19px;margin-left:20px;margin-right:50px"> RFQ Number* <br> <asp:TextBox ID="txtrfqnumber" TextMode="Number"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
            <asp:RequiredFieldValidator ID="rfvrfqnumber" ControlToValidate="txtrfqnumber" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
             <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarcreationdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtcreationdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>

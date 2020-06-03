@@ -99,7 +99,9 @@
      <li><a href="Orders(Buyer).aspx">Orders(Buyer)</a></li>
       <li><a href="ShipmentDelivery(Buyer).aspx">ShipmentDelivery</a></li>
       <li><a href="InvoiceAudit.aspx">Invoice Verification </a></li>
-   
+      <li><a href="OrderReport(Buyer).aspx">Order Report(Buyer)</a></li>
+      <li><a href="InvoiceReport(Buyer).aspx"> Invoice Report(Buyer)</a></li>
+      <li><a href="RateComparisonReport.aspx"> Rate Comparison Report(Buyer) </a></li>
   </ul>
                                  </div>
        <div class="btn-group" style="vertical-align:bottom;">
@@ -122,7 +124,8 @@
 
       <li><a href="ShipmentDetails(Seller).aspx">ShipmentDetails</a></li>
       <li><a href="InvoiceDetails.aspx">Invoice</a></li>
-   
+      <li><a href="InvoiceReport.aspx">Invoice Report(Seller)</a></li>
+      <li><a href="OrderReport(Seller).aspx"> Order Report(Seller)</a></li>
   </ul>
                                  </div>
         </div> 
