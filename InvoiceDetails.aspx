@@ -32,7 +32,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -161,7 +161,12 @@
         <!- GridView Code to show invoice details -->
        <%-- <div class="table-responsive col-xs-12 nopadding table-shadow">--%>
         <asp:GridView ID="gvInvoiceDetails" runat="server" AutoGenerateColumns="false" OnRowDataBound="gvInvoiceDetails_RowDataBound"   Width="100%"  EmptyDataText="No records found!!" Height="70px"   AllowPaging="true" CellPadding="4" ForeColor="#333333" GridLines="None">
-            <AlternatingRowStyle BackColor="White" />
+           <AlternatingRowStyle BackColor="White" />
+                                                  <RowStyle BackColor="#EFF3FB" />
+<FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
+
             <Columns>
                 <asp:BoundField HeaderText="RFQ Number"  DataField="ShipmentRFQ_Number" />
                 <asp:BoundField HeaderText="ShipmentNumber" DataField="shipmentnumber" InsertVisible="false" ReadOnly="true" SortExpression="shipmentnumber"  />

@@ -43,7 +43,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -171,7 +171,12 @@
                 
                 <asp:GridView ID="GridViewQnb" OnSelectedIndexChanged="GridViewQnb_SelectedIndexChanged"  runat="server" OnRowDataBound="GridViewQnb_RowDataBound" AutoGenerateColumns="false" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" DataKeyNames="SQ_Slno"  CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                    <AlternatingRowStyle BackColor="White" />
+                                                  <RowStyle BackColor="#EFF3FB" />
+<FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
+<AlternatingRowStyle BackColor="White" />
                     
                     <Columns>
 
@@ -185,7 +190,7 @@
     </ItemTemplate>
     </asp:TemplateField>
                         
-                        <asp:BoundField DataField="SQ_Slno" HeaderText="SQ_Slno" />
+                        <asp:BoundField DataField="SQ_Slno" HeaderText="Slno" />
                         <asp:BoundField DataField="SQ_RFQ_Number" HeaderText="RFQ Number" />
                        
                        <asp:BoundField DataField="SQ_RFQ_CreationDate" HeaderText="CreationDate" />
@@ -194,9 +199,9 @@
                         <asp:BoundField DataField="SQ_RFQ_OriginAirport" HeaderText="Origin Airport" />
                         <asp:BoundField DataField="SQ_RFQ_DestinationAirport" HeaderText="Destination Airport" />
                         <asp:BoundField DataField="SQ_RFQ_NumberofPackages" HeaderText="Number of Packages" />
-                        <asp:BoundField DataField="SQ_RFQ_TotalGrwt" HeaderText="Gross Weight" />
-                        <asp:BoundField DataField="SQ_RFQ_TotalVolwt" HeaderText="Volumetric Weight" />
-                        <asp:BoundField DataField="SQ_RFQ_TotalChwt" HeaderText="Chargeable Weight" />
+                        <asp:BoundField DataField="SQ_RFQ_TotalGrwt" HeaderText="Gr.Wt(kg)" />
+                        <asp:BoundField DataField="SQ_RFQ_TotalVolwt" HeaderText="Vol.Wt(Kg)" />
+                        <asp:BoundField DataField="SQ_RFQ_TotalChwt" HeaderText="Ch.Wt(kg)" />
                         <asp:BoundField DataField="SQ_RFQ_PickupAddress" HeaderText="Pickup Address" />
                         <asp:BoundField DataField="SQ_RFQ_DeliveryAddress" HeaderText="Delivery Address" />
                         <asp:BoundField DataField="SQ_RFQ_PickupDate" HeaderText="Pickup Date" />
@@ -296,19 +301,19 @@ Expected Price
         <label style="font-size:19px;margin-left:20px;margin-right:50px"> Destination Airport <br> <asp:TextBox ID="txtdestinationairport" Width="150px" runat="server" ReadOnly="true"></asp:TextBox> </label>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="txtdestinationairport" ValidationGroup="addorderbuyer" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
         
-          <label style="font-size:19px;margin-left:20px;margin-right:37px"> Number Of Packages <br> <asp:TextBox ID="txtnumberofpackages" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
+          <label style="font-size:19px;margin-left:20px;margin-right:37px"> No of Packages <br> <asp:TextBox ID="txtnumberofpackages" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
       <asp:RequiredFieldValidator ID="RequiredFieldValidator7" ControlToValidate="txtnumberofpackages" ValidationGroup="addorderbuyer" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-        <label style="font-size:19px;margin-left:20px;margin-right:59px"> Total GrWt <br> <asp:TextBox ID="txtgrossweight" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
+        <label style="font-size:19px;margin-left:20px;margin-right:59px"> Total GrWt (Kg) <br> <asp:TextBox ID="txtgrossweight" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator8" ControlToValidate="txtgrossweight" ValidationGroup="addorderbuyer" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
         <br />
         <br />
-          <label style="font-size:19px;margin-left:20px;margin-right:59px"> Total VolWt <br> <asp:TextBox ID="txtvolumetricweight" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
+          <label style="font-size:19px;margin-left:20px;margin-right:59px"> Total VolWt (Kg) <br> <asp:TextBox ID="txtvolumetricweight" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator9" ControlToValidate="txtvolumetricweight" ValidationGroup="addorderbuyer" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-         <label style="font-size:19px;margin-left:20px;margin-right:59px"> Total ChWt <br> <asp:TextBox ID="txtchargeableweight" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
+         <label style="font-size:19px;margin-left:20px;margin-right:59px"> Total ChWt (Kg)<br> <asp:TextBox ID="txtchargeableweight" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator10" ControlToValidate="txtchargeableweight" ValidationGroup="addorderbuyer" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-         <label style="font-size:19px;margin-left:20px;margin-right:59px"> Pickup Address <br> <asp:TextBox ID="txtpickupaddress" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
+         <label style="font-size:19px;margin-left:20px;margin-right:59px"> Pickup Addr <br> <asp:TextBox ID="txtpickupaddress" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator11" ControlToValidate="txtpickupaddress" ValidationGroup="addorderbuyer" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-         <label style="font-size:19px;margin-left:20px;margin-right:59px"> DeliveryAddress <br> <asp:TextBox ID="txtdeliveryaddress" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
+         <label style="font-size:19px;margin-left:20px;margin-right:59px"> DeliveryAddr <br> <asp:TextBox ID="txtdeliveryaddress" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator12" ControlToValidate="txtdeliveryaddress" ValidationGroup="addorderbuyer" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
        <br /> <br />
          <label style="font-size:19px;margin-left:20px;margin-right:59px"> Pickup Date <br> <asp:TextBox ID="txtpickupdate" Width="150px"   runat="server" ReadOnly="true"></asp:TextBox> </label>

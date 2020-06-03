@@ -24,14 +24,14 @@ namespace FinalYearProject
                 con.Open();
 
 
-                SqlCommand comrfqnumber = new SqlCommand("select distinct SQ_RFQ_Number from SQ where SQ_Submit='Y'", con);
-
+                SqlCommand comrfqnumber = new SqlCommand("select distinct RFQ_Number from RFQ inner join SQ on RFQ.RFQ_Number = SQ.SQ_RFQ_Number where SQ_Submit = 'Y' and RFQ.RFQ_UserID = @buyerrfquserid", con);
+                comrfqnumber.Parameters.AddWithValue("@buyerrfquserid", Session["M_Subscriber_UserID"]);
 
                 SqlDataAdapter darfqnumber = new SqlDataAdapter(comrfqnumber);
                 DataSet dsrfqnumber = new DataSet();
                 darfqnumber.Fill(dsrfqnumber);
 
-                dropdownrfq.DataValueField = dsrfqnumber.Tables[0].Columns["SQ_RFQ_Number"].ToString();
+                dropdownrfq.DataValueField = dsrfqnumber.Tables[0].Columns["RFQ_Number"].ToString();
                 //dropdownrfq.DataTextField = dsrfqnumber.Tables[0].Columns["RFQ_Number"].ToString();
                 dropdownrfq.DataSource = dsrfqnumber.Tables[0];
                 dropdownrfq.DataBind();

@@ -34,7 +34,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -183,7 +183,7 @@
                                     </div>
                                     <div id="collapseOne" class="panel panel-collapse" role="tabpanel" aria-labelledby="headingOne">
                                            <div class="panel-body">
-                                               <div>
+                                               <div style="font-family:'Times New Roman', Times, serif;font-size:medium">
     RFQ Number : <asp:Label ID="Label1" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
     ShipmentNumber : <asp:Label ID="Label2" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
     CustomerName :  <asp:Label ID="Label3" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
@@ -197,7 +197,7 @@
       Delivered? : <asp:Label ID="Label12" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
      Received? : <asp:Label ID="Label13" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
       Buyer Currency: <asp:Label ID="Label14" runat="server" Text="Label" style="font-size:large"></asp:Label> <br />
-       CompanySlno: <asp:Label ID="lblcompanyslno" runat="server" Text="Label" Visible="false" style="font-size:large"></asp:Label> <br />
+        <asp:Label ID="lblcompanyslno" runat="server" Text="Label" Visible="false" style="font-size:large"></asp:Label> <br />
        </div>
                                                </div>
                                         </div>
@@ -459,7 +459,12 @@ Customer:
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingThree">
                     <h4 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="collapseThree" aria-expanded="false" aria-controls="collapseThree">
+
+                        
+
+
+
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             <i class="more-less glyphicon glyphicon-plus"></i>
                             Enter Charge Details
                         </a>
@@ -469,7 +474,7 @@ Customer:
                     <div class="panel-body">
                         <div>
                             <asp:Button ID="AddbuttonCharge" runat="server" Text="Add" style="width:80px" OnClick="AddbuttonCharge_Click" />
-                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="None" Width="98%" Height="50px"  AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
+                             <asp:GridView ID="gvChargeInvoice" runat="server" OnRowDataBound="gvChargeInvoice_RowDataBound" CellPadding="4" ForeColor="#333333" GridLines="Vertical" Width="98%" Height="50px"  AllowPaging="true" DataKeyNames="TD_INVOICE_Slno" AutoGenerateColumns="false">
                                                   <AlternatingRowStyle BackColor="White" />
                                                   <RowStyle BackColor="#EFF3FB" />
 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -796,34 +801,12 @@ Quantity:
 
             <br />
             <br />
-            <asp:Label ID="lbluploadfile" runat="server" Text="Upload File" style="font-size:10px"></asp:Label>
-            <br />
-            <asp:FileUpload ID="invoiceupload" runat="server" /> &nbsp;&nbsp; <asp:Button ID="btnUpload" runat="server" style="width:90px" OnClick="btnUpload_Click" Text="UploadFile" />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None" Height="253px" OnRowCommand="GridView1_RowCommand" Width="345px">
-                <AlternatingRowStyle BackColor="White" />
-                <Columns>
-                    <asp:TemplateField HeaderText="File">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("File") %>' CommandName="Download"  Text='<%# Eval("File") %>'></asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="Size" HeaderText="Size in Bytes" />
-                    <asp:BoundField DataField="Type" HeaderText="File Type" />
-                </Columns>
-                <EditRowStyle BackColor="#2461BF" />
-                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EFF3FB" />
-                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#F5F7FB" />
-                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-                <SortedDescendingCellStyle BackColor="#E9EBEF" />
-                <SortedDescendingHeaderStyle BackColor="#4870BE" />
-            </asp:GridView>
+            <asp:Label ID="lbluploadfile" runat="server" Text="Upload File" Visible="false" style="font-size:10px"></asp:Label>
             <br />
             
-            <asp:Label ID="lblMessage" runat="server" Font-Bold="true" style="font-size:30px"></asp:Label>
+            <br />
+            
+            <asp:Label ID="lblMessage" runat="server" Font-Bold="true" Visible="false" style="font-size:30px"></asp:Label>
           </div>
         
 

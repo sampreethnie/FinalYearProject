@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinalYearProject {
-    
-    
-    public partial class Orders_Buyer_ {
-        
+namespace FinalYearProject
+{
+
+
+    public partial class Orders_Buyer_
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// lblusername control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblusername;
-        
+
         /// <summary>
         /// lblcompanyname control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblcompanyname;
-        
+
         /// <summary>
         /// btnlogout control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnlogout;
-        
+
         /// <summary>
         /// ScriptManager control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager;
-        
+
         /// <summary>
         /// upn1Users control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upn1Users;
-        
+
         /// <summary>
         /// ButtonBuyer control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton ButtonBuyer;
-        
+
         /// <summary>
         /// ButtonSeller control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton ButtonSeller;
-        
+
         /// <summary>
         /// txtfromdate control.
         /// </summary>
@@ -92,7 +94,16 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtfromdate;
-        
+
+        /// <summary>
+        /// Calendarfromdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender Calendarfromdate;
+
         /// <summary>
         /// txttodate control.
         /// </summary>
@@ -101,7 +112,16 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txttodate;
-        
+
+        /// <summary>
+        /// CalenderToDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalenderToDate;
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -110,7 +130,7 @@ namespace FinalYearProject {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-        
+
         /// <summary>
         /// GridViewOrdersBuyer control.
         /// </summary>

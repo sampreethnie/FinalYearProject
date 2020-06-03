@@ -33,7 +33,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">

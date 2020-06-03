@@ -153,6 +153,8 @@ namespace FinalYearProject
         {
             
             dropdownseller.SelectedIndex = 0;
+            btnexport.Visible = false;
+          
         }
 
     }

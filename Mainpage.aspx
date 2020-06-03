@@ -74,7 +74,7 @@
          <nav class="navbar navbar-inverse">
   <div class="container demo">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#">AirFreightPro</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
        <%-- <li> <button type="button" class="glyphicon glyphicon-log-in" data-toggle="modal" data-target="#loginModal">Login</button></li>--%>

@@ -42,7 +42,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -246,7 +246,12 @@
                 
                 <asp:GridView ID="GridViewSq"  runat="server" AutoGenerateColumns="false" OnRowDeleting ="GridViewSq_RowDeleting" OnRowDataBound="GridViewSq_RowDataBound"   RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" OnSelectedIndexChanged="GridViewSq_SelectedIndexChanged"  DataKeyNames="SQ_Slno"  CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                    <AlternatingRowStyle BackColor="White" />
+                                                  <RowStyle BackColor="#EFF3FB" />
+<FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
+<AlternatingRowStyle BackColor="White" />
                     
                     <Columns>
                         <asp:CommandField HeaderText="Select"  ShowSelectButton="true" />

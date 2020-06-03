@@ -74,6 +74,7 @@ namespace FinalYearProject
                     
                 }
                 
+                
 
             }
         }
@@ -197,7 +198,7 @@ namespace FinalYearProject
                     cmd.Parameters.AddWithValue("@buyerdeliverydate", Convert.ToDateTime(txtbuyerdeliverydatetime.Text));
                     cmd.Parameters.AddWithValue("@BuyerUserID", Session["M_Subscriber_UserID"]);
                     cmd.Parameters.AddWithValue("@BuyerTimestamp", DateTime.Now);
-                    con.Open();
+                    
                     cmd.ExecuteNonQuery();
                     BindGridView();
                     clear();
@@ -211,6 +212,8 @@ namespace FinalYearProject
 
         protected void UpdatebuttonBuyer_Click(object sender, EventArgs e)
         {
+            
+            
             string updatebuyer = @"update [ShipmentDeliveryBuyer] set [sellerdeliverydate]=@sellerdeliverydate,[sellerreceivedbyname]=@sellerreceivedbyname,[buyerreceived]=@buyerreceived,[buyerreceivedbyname]=@buyerreceivedbyname,[buyerdeliverydate]=@buyerdeliverydate where [buyerid] = @buyerid";
             using (SqlConnection con = new SqlConnection(_ConnStr))
             {
@@ -243,6 +246,60 @@ namespace FinalYearProject
 
         protected void Mailbutton_Click(object sender, EventArgs e)
         {
+            SqlConnection con = new SqlConnection(_ConnStr);
+            string buyercompanyname = dropdowncustomer.SelectedItem.Text;
+            SqlCommand cmd = new SqlCommand("select userid from ShipmentDetailsSeller inner join ShipmentDeliveryBuyer on ShipmentDetailsSeller.shipmentnumber = ShipmentDeliveryBuyer.sellershipmentnumber where BuyerUserID = @buyerid", con);
+            cmd.Parameters.AddWithValue("@buyerid",Session["M_Subscriber_UserID"]);
+            string email;
+
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                email = dr[0].ToString();
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress(Session["M_Subscriber_UserID"].ToString());
+                msg.To.Add(email);
+                msg.Subject = "Buyer RFQ details";
+                msg.IsBodyHtml = true;
+
+                msg.Body = "Please find herewith the details of Shipment" + "<br/>" +
+                    "Seller UserName:" + Session["M_Subscriber_UserID"].ToString() + "<br/>" +
+                    "Seller :" + lblcompanyname.Text + "<br/>" +
+                    "BuyerCompanyName:" + dropdowncustomer.SelectedItem.Text + "<br/>" +
+
+                           "Creation Date:" + txtcreationdate.Text + "<br/>" +
+
+                             "Number of Packages:" + txtnoofpackages.Text + "<br/>" +
+
+                             "HAWB:" + txthawb.Text + "<br/>" +
+                             "HAWB Date:" + txthawb.Text + "<br/>" +
+                             "MAWB:" + txtmawb.Text + "<br/>" +
+                             "MAWB Date:" + txtmawbdate.Text + "<br/>" +
+                             "Airline:" + txtairline.Text + "<br/>" +
+                             "FlightNumber:" + txtflightnumber.Text + "<br/>" +
+                             "ETD:" + txtetd.Text + "<br/>" +
+                             "ETA:" + txteta.Text + "<br/>" +
+                             "ATD:" + txtata.Text + "<br/>" +
+                             "ETA:" + txtata.Text + "<br/>" +
+                "Delivered:" + delivery.Text + "<br/>" +
+                "Deliverydate:" + txtdeliverydate.Text + " < br /> ";
+                   
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.Credentials = new System.Net.NetworkCredential("freightlogisticsnie@gmail.com", "niemysuru");
+                smtp.EnableSsl = true;
+                smtp.Send(msg);
+            }
+
+
+
+
+
+
+
             SqlConnection con1 = new SqlConnection(_ConnStr);
             con1.Open();
             SqlCommand cmd1 = new SqlCommand("update ShipmentDeliveryBuyer set ShipmentDeliveryBuyer_Submit = 'Y' where buyerid=@buyerid", con1);

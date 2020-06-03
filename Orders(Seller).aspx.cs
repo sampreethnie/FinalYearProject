@@ -65,5 +65,26 @@ namespace FinalYearProject
 
             con1.Close();
         }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+
+            using (SqlConnection con = new SqlConnection(_ConnStr))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Orders WHERE ORD_Date BETWEEN @From AND @To", con))
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        cmd.Parameters.AddWithValue("@From", Convert.ToDateTime(this.txtfromdate.Text));
+                        cmd.Parameters.AddWithValue("@To", Convert.ToDateTime(this.txttodate.Text));
+                        DataSet ds = new DataSet();
+                        da.Fill(ds);
+                        GridViewOrdersBuyer.DataSource = ds;
+                        GridViewOrdersBuyer.DataBind();
+                    }
+                }
+            }
+        }
+
     }
 }

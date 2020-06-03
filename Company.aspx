@@ -30,7 +30,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -142,7 +142,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h4 class="panel-title">
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="CollapseOne">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="CollapseOne" style="font-size:20px">
                                             <i class="more-less glyphicon glyphicon-plus"></i>
                                              
                                             Company Registration Details
@@ -152,14 +152,14 @@
                                     <div id="collapseOne" class="panel panel-collapse" role="tabpanel" aria-labelledby="headingOne">
                                            <div class="panel-body">
                                                <div>
-                                                   <label>Category
+                                                   <label  style="font-size:19px">Category
                                                        <br> <asp:RadioButtonList ID="categorylist" Enabled="false" runat="server" >
                                                            <asp:ListItem Value="b">Buyer</asp:ListItem>
                                                            <asp:ListItem Value="s">Seller</asp:ListItem>
                                                             </asp:RadioButtonList>
                                                    </label>
                                                </div>
-                                               
+                                               </div>
                                                <div>
                                                    
                                                    <label style="font-size:19px;margin-left:2px;margin-right:50px">Company Name *<br> <asp:TextBox ID="txtcompanynamefinal" runat="server" Height="34px" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
@@ -176,17 +176,18 @@
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="city" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtcityfinal" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
                                                       </div>
+                                        
                                                <div>
                                                <label style="font-size:19px;margin-left:2px;margin-right:50px">ZipCode *<br> <asp:TextBox ID="txtpinfinal" runat="server" ReadOnly="true" Height="34px" CssClass="form-control"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="pin" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtpinfinal" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
-                                               <label style="font-size:19px;margin-left:20px;margin-right:50px">Country *<br> <asp:DropDownList ID="dropdowncountryfinal" Enabled="false" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
+                                               <label style="font-size:19px;margin-left:20px;margin-right:50px">Country *<br> <asp:DropDownList ID="dropdowncountryfinal" Enabled="false" CssClass="form-control" AutoPostBack="true" Width="188px" runat="server"></asp:DropDownList> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="countrylist" runat="server" InitialValue="0" Text="" ValidationGroup="registrationform" ControlToValidate="dropdowncountryfinal"  ErrorMessage=""></asp:RequiredFieldValidator>
-                                                <label style="font-size:19px;margin-left:20px;margin-right:50px">State<br> <asp:DropDownList ID="dropdownstatefinal" Enabled="false"  Width="140px" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
+                                                <label style="font-size:19px;margin-left:20px;margin-right:50px">State<br> <asp:DropDownList ID="dropdownstatefinal" Enabled="false"  Width="180px" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="statelist" runat="server" InitialValue="0" Text="" ValidationGroup="registrationform" ControlToValidate="dropdownstatefinal"  ErrorMessage=""></asp:RequiredFieldValidator>
-                                                <label style="font-size:19px;margin-left:20px;margin-right:50px">Currency *<br> <asp:DropDownList ID="dropdowncurrencyfinal" Enabled="false" Width="140px"  CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
+                                                <label style="font-size:19px;margin-left:20px;margin-right:50px">Currency *<br> <asp:DropDownList ID="dropdowncurrencyfinal" Enabled="false" Width="180px"  CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList> </label>
                                                    &nbsp;&nbsp;
                                                     <asp:RequiredFieldValidator ID="currencylist" runat="server" InitialValue="0" Text="" ValidationGroup="registrationform" ControlToValidate="dropdowncurrencyfinal"  ErrorMessage=""></asp:RequiredFieldValidator>
                                                    </div>
@@ -204,12 +205,12 @@
 <%--                                                   <asp:Button ID="enablebutton" runat="server" CssClass="btn btn-primary" Text="Enable" OnClick="btnEnable" Width="90px" Height="30px" BackColor="YellowGreen"/>--%>
                                                    <%--<asp:Button ID="editbutton" runat="server" CssClass="btn btn-primary" Text="Edit" OnClick="btnEdit" Width="90px" Height="30px" BackColor="CornflowerBlue"/>--%>
                         
-                                               </div></div></div> </div> </div> 
+                                               </div></div></div> </div>  
              <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
                               <div class="panel panel-default">
                                   <div class="panel-heading" role="tab" id="headingTwo">
                                       <h4 class="panel-title">
-                                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="CollapseTwo">
+                                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="CollapseTwo" style="font-size:20px">
                                               <i class="more-less glyphicon glyphicon-plus"></i>
                                               Contact Details
                                           </a> 
@@ -218,7 +219,7 @@
                                   <div id="collapseTwo" class="panel panel-collapse" role="tabpanel" aria-labelledby="headingTwo">
                                       <div class="panel-body">
                                           <div>
-                                              <label style="font-size:19px;margin-left:20px;margin-right:50px">Name *<br> <asp:TextBox ID="txtname" runat="server" Height="34px" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
+                                              <label style="font-size:19px;margin-left:2px;margin-right:50px">Name *<br> <asp:TextBox ID="txtname" runat="server" Height="34px" ReadOnly="true" CssClass="form-control"></asp:TextBox> </label>
                                                    &nbsp;&nbsp;&nbsp;
                                                <asp:RequiredFieldValidator ID="name" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtname" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
                                                     <label style="font-size:19px;margin-left:20px;margin-right:50px">Mobile *<br> <asp:TextBox ID="txtmobile" TextMode="Number" Height="34px" ReadOnly="true" runat="server" CssClass="form-control"></asp:TextBox> </label>
@@ -228,10 +229,10 @@
                                                    &nbsp;&nbsp;
                                                <asp:RequiredFieldValidator ID="userid" runat="server" ValidationGroup="registrationform" SetFocusOnError="true" ControlToValidate="txtuserid" EnableClientScript="true" ErrorMessage=""></asp:RequiredFieldValidator>
                                                
-                                                       
+                                                       </div>
                                               </div>
                                               </div></div>
-                                  </div> </div>
+                                  </div> 
     </form>
 </body>
 </html>

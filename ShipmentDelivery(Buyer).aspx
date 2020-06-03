@@ -40,7 +40,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -164,7 +164,7 @@
             <br />
                              <label for="txtshipmentnumber" style="font-size:19px;margin-left:20px;margin-right:50px"> Shipment number <br> <asp:TextBox ID="txtshipmentnumber" ReadOnly="true"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
            
-            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creationdate * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creationdate * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" ReadOnly="true" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarcreationdate" OnClientDateSelectionChanged="AppendTime" PopupButtonID="imgPopup" runat="server" TargetControlID="txtcreationdate" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              
             <label style="font-size:19px;margin-left:20px;margin-right:50px">Customer <br> <asp:DropDownList ID="dropdowncustomer" Enabled="false" Height="27px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
@@ -235,7 +235,12 @@
                 <asp:Label ID="lbltotalcount" runat="server" Font-Bold="true" Font-Size="17px"></asp:Label>
                 <asp:GridView ID="GridViewBuyer" AutoGenerateColumns="false" runat="server" OnRowDataBound="GridViewBuyer_RowDataBound" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="buyerid" OnSelectedIndexChanged="GridViewBuyer_SelectedIndexChanged" OnRowDeleting ="GridViewBuyer_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                     <AlternatingRowStyle BackColor="White" />
+                                                  <RowStyle BackColor="#EFF3FB" />
+<FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
+<AlternatingRowStyle BackColor="White" />
                     
                     <Columns>
                         <asp:CommandField HeaderText="Select" ShowSelectButton="true" />
@@ -247,7 +252,7 @@
                         <asp:BoundField DataField="sellernumberofpackages" HeaderText="NumberOfPackages" />
                         <asp:BoundField DataField="sellerhawb" HeaderText="HAWB" />
                         <asp:BoundField DataField="sellerhawbdate" HeaderText="HAWB Date" />
-                        <asp:BoundField DataField="sellermawb" HeaderText="MAWB Date" />
+                        <asp:BoundField DataField="sellermawb" HeaderText="MAWB" />
                         <asp:BoundField DataField="sellermawbdate" HeaderText="MAWB Date" />
                         <asp:BoundField DataField="sellerairline" HeaderText="Airline" />
                         <asp:BoundField DataField="sellerflightnumber" HeaderText="FlightNumber" />

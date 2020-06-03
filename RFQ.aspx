@@ -23,7 +23,21 @@
             sender.get_element().value = selectedDate.format("dd/MM/yyyy") + " " + now.format("hh:mm tt");
         }
     </script>
-    
+    <script type="text/javascript" src="../js/jquery-1.11.3.min.js">
+       <script>
+        $(document).ready(function() {
+        var maxlen = 8;
+        $('#txtrfqnumber').keypress(function(k) {
+        if($(this).val().length>=maxlen)
+        {
+        k.preventDefault();
+        alert('character count' +maxlen);
+        }
+        });
+
+        });
+  
+    </script>
    
     
     <style type="text/css">
@@ -42,7 +56,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -158,9 +172,9 @@
             <div >
             
             <asp:label ID="lblrfqslno" runat="server" Visible="false">Slno</asp:label>
-            <label for="txtrfq" style="font-size:19px;margin-left:20px;margin-right:50px"> RFQ Number* <br> <asp:TextBox ID="txtrfqnumber" TextMode="Number"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
+            <label for="txtrfq" style="font-size:19px;margin-left:20px;margin-right:50px"> RFQ Number* <br> <asp:TextBox ID="txtrfqnumber" TextMode="Number" MaxLength="2"  CssClass="form-control" Width="145px" runat="server"></asp:TextBox> </label>
            <asp:RequiredFieldValidator ID="rfvrfqnumber" ControlToValidate="txtrfqnumber" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+            <label style="font-size:19px;margin-left:20px;margin-right:50px;"> Creation Date * <br > <asp:TextBox ID="txtcreationdate"  CssClass="form-control" TextMode="DateTime" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarcreationdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtcreationdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              <asp:RequiredFieldValidator ID="rfvcreationdate" ControlToValidate="txtcreationdate" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
             <label style="font-size:19px;margin-left:20px;margin-right:50px">Origin Country* <br> <asp:DropDownList ID="dropdownorigincountry" Height="29px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
@@ -174,16 +188,16 @@
                <label style="font-size:19px;margin-left:20px;margin-right:32px">Destination Airport* <br> <asp:DropDownList ID="dropdowndestinationairport" Height="29px"  Width="145px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
             <asp:RequiredFieldValidator ID="rfvdestinationairport" ControlToValidate="dropdowndestinationairport" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator> 
                 
-           <label style="font-size:19px;margin-left:15px;margin-right:38px"> Number of Packages* <br> <asp:TextBox ID="txtnoofpackages" runat="server" Width="157px"></asp:TextBox> </label>
+           <label style="font-size:19px;margin-left:15px;margin-right:38px"> Number of Packages* <br> <asp:TextBox ID="txtnoofpackages" TextMode="Number" MaxLength="6" runat="server" Width="157px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvnoofpackages" ControlToValidate="txtnoofpackages" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                
                  
                  
-                 <label style="font-size:19px;margin-left:14px;margin-right:38px"> Gross Weight(Kg)* <br> <asp:TextBox ID="txtgrossweight"  runat="server" onkeyup="WeightCalculation()"  Width="157px"></asp:TextBox> </label>
+                 <label style="font-size:19px;margin-left:14px;margin-right:38px"> Gross Weight(Kg)* <br> <asp:TextBox ID="txtgrossweight" TextMode="Number" MaxLength="8"  runat="server" onkeyup="WeightCalculation()"  Width="157px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvgrossweight" ControlToValidate="txtgrossweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
                 <br /> <br />
-                <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight"   runat="server" onkeyup="WeightCalculation()"  Width="145px"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:20px;margin-right:36px"> Vol.Weight(Kg)* <br> <asp:TextBox ID="txtvolumetricweight"   runat="server" TextMode="Number" onkeyup="WeightCalculation()"  Width="145px"></asp:TextBox> </label>
                 <asp:RequiredFieldValidator ID="rfvvolumetricweight" ControlToValidate="txtvolumetricweight" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
                 <label style="font-size:19px;margin-left:37px;margin-right:52px"> Ch.Weight(Kg)* <br> <asp:TextBox ID="txtchargeableweight" runat="server" onkeyup="WeightCalculation()"  Width="142px"></asp:TextBox> </label>
@@ -198,13 +212,13 @@
                 
             
                 <br /> <br />
-                <label style="font-size:19px;margin-left:20px;margin-right:71px"> Pickup Date * <br > <asp:TextBox ID="txtpickupdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+                <label style="font-size:19px;margin-left:20px;margin-right:71px"> Pickup Date * <br > <asp:TextBox ID="txtpickupdate" TextMode="DateTime" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
                 <ajaxToolkit:CalendarExtender ID="Calendarpickupdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtpickupdate" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
              <asp:RequiredFieldValidator ID="rfvpickupdate" ControlToValidate="txtpickupdate" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
-                <label style="font-size:19px;margin-right:28px"> Required T/T(Days)* <br> <asp:TextBox ID="txttransittime" Width="142px" runat="server"></asp:TextBox> </label>
+                <label style="font-size:19px;margin-right:28px"> Required T/T(Days)* <br> <asp:TextBox ID="txttransittime" Width="142px" TextMode="Number" MaxLength="4" runat="server"></asp:TextBox> </label>
            <asp:RequiredFieldValidator ID="rfvtransittime" ControlToValidate="txttransittime" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
               
-                 <label style="font-size:19px;margin-left:15px;margin-right:52px"> Quote Due By * <br > <asp:TextBox ID="txtquotedueby" CssClass="form-control" Width="159px" runat="server" ></asp:TextBox> </label>
+                 <label style="font-size:19px;margin-left:15px;margin-right:52px"> Quote Due By * <br > <asp:TextBox ID="txtquotedueby" TextMode="DateTime"  CssClass="form-control" Width="159px" runat="server" ></asp:TextBox> </label>
 
                 <ajaxToolkit:CalendarExtender ID="CalendarExtenderquoutedueby" PopupButtonID="imgPopup" runat="server" TargetControlID="txtquotedueby" OnClientDateSelectionChanged="AppendTime" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
                 <asp:RequiredFieldValidator ID="rfvquotedueby" ControlToValidate="txtquotedueby" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
@@ -212,7 +226,7 @@
             <asp:RequiredFieldValidator ID="rfvcommodity" ControlToValidate="dropdowncommodity" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 <br /> <br />
                  <label style="font-size:19px;margin-left:20px;margin-right:59px"> Handling Info <br> <asp:TextBox ID="txthandlinginfo" Width="145px"  runat="server"></asp:TextBox> </label>
-                 <label style="font-size:19px;margin-left:20px;margin-right:59px"> ExpectedPrice <br> <asp:TextBox ID="txtexpectedprice" Width="145px"  runat="server"></asp:TextBox> </label>
+                 <label style="font-size:19px;margin-left:20px;margin-right:59px"> ExpectedPrice <br> <asp:TextBox ID="txtexpectedprice" Width="145px" TextMode="Number"  runat="server"></asp:TextBox> </label>
                   <asp:RequiredFieldValidator ID="rfvexpectedprice" ControlToValidate="txtexpectedprice" ValidationGroup="addrfq" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
                 
                 <br />
@@ -240,27 +254,32 @@
                  <asp:ImageButton ID="btnRefresh" runat="server" CssClass="pull-right" width="20" Height="20" ImageUrl="/images/refresh.png" OnClick="Refresh"  />
                  
                 
-                <asp:GridView ID="GridViewRfq"  runat="server" AutoGenerateColumns="false"  RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="RFQ_Slno"  OnRowDataBound="GridViewRfq_RowDataBound" OnSelectedIndexChanged="GridViewRfq_SelectedIndexChanged" OnRowDeleting ="GridViewRfq_RowDeleting" CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
+                <asp:GridView ID="GridViewRfq"  runat="server" AutoGenerateColumns="false"  RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center"  DataKeyNames="RFQ_Slno"  OnRowDataBound="GridViewRfq_RowDataBound" OnSelectedIndexChanged="GridViewRfq_SelectedIndexChanged" OnRowDeleting ="GridViewRfq_RowDeleting" CellPadding="5" CellSpacing="5" ForeColor="#333333" GridLines="Vertical" Height="10px" Width="90%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                    <AlternatingRowStyle BackColor="White" />
+                                                  <RowStyle BackColor="#EFF3FB" />
+<FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
+<AlternatingRowStyle BackColor="White" />
                     
                     <Columns>
                         <asp:CommandField HeaderText="Select"  ShowSelectButton="true" />
                         <asp:CommandField HeaderText="Delete" ShowDeleteButton="true" />
-                        <asp:BoundField DataField="RFQ_Slno" HeaderText="RfqSlno"  />
+                        <asp:BoundField DataField="RFQ_Slno" HeaderText="Slno"  />
                         <asp:BoundField DataField="RFQ_Number" HeaderText="RFQ Number" />
                         <asp:BoundField DataField="RFQ_Company" HeaderText="BuyerCompanyname" Visible="false" />
                        <asp:BoundField DataField="RFQ_CreationDate" HeaderText="CreationDate" />
                          <asp:BoundField DataField="RFQ_OriginCountry" HeaderText="Origin Country" />
                          <asp:BoundField DataField="RFQ_DestinationCountry" HeaderText="Destination Country" />
                         <asp:BoundField DataField="RFQ_OriginAirport" HeaderText="Origin Airport" />
-                        <asp:BoundField DataField="RFQ_DestinationAirport" HeaderText="Destination Airport" />
-                        <asp:BoundField DataField="RFQ_NumberofPackages" HeaderText="Number of Packages" />
-                        <asp:BoundField DataField="RFQ_TotalGrwt" HeaderText="Gross Weight" />
-                        <asp:BoundField DataField="RFQ_TotalVolwt" HeaderText="Volumetric Weight" />
-                        <asp:BoundField DataField="RFQ_TotalChwt" HeaderText="Chargeable Weight" />
-                        <asp:BoundField DataField="RFQ_PickupAddress" HeaderText="Pickup Address" />
-                        <asp:BoundField DataField="RFQ_DeliveryAddress" HeaderText="Delivery Address" />
+                        <asp:BoundField DataField="RFQ_DestinationAirport" HeaderText="DestinationAirport" />
+                        <asp:BoundField DataField="RFQ_NumberofPackages" HeaderText="No of Packages" />
+                        <asp:BoundField DataField="RFQ_TotalGrwt" HeaderText="Gr.Wt(Kg)" />
+                        <asp:BoundField DataField="RFQ_TotalVolwt" HeaderText="Vol.Wt(Kg)" />
+                        <asp:BoundField DataField="RFQ_TotalChwt" HeaderText="Ch.Wt(Kg)" />
+                        <asp:BoundField DataField="RFQ_PickupAddress" HeaderText="Pickup Addr" />
+                        <asp:BoundField DataField="RFQ_DeliveryAddress" HeaderText="Delivery Addr" />
                         <asp:BoundField DataField="RFQ_PickupDate" HeaderText="Pickup Date" />
                         <asp:BoundField DataField="RFQ_ReqTT" HeaderText="Required T/T" />
                         <asp:BoundField DataField="RFQ_QuoteDueBy" HeaderText="Quote DueBy" />

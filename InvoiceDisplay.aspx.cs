@@ -685,56 +685,7 @@ VALUES(@TD_INVOICE_TMSLNO,@TD_INVOICE_DESCRIPTION,@TD_INVOICE_CHARGESLNO,@TD_INV
         {
             mpeInvoiceEdit.Show();
         }
-        protected void btnUpload_Click(object sender, EventArgs e)
-        {
-
-            //invoiceupload.SaveAs(Server.MapPath("~/Uploads/" + invoiceupload.FileName));
-            //lblMessage.Text = "File Uploaded";
-            //lblMessage.ForeColor = System.Drawing.Color.Green;
-            if(invoiceupload.HasFile)
-            {
-                invoiceupload.PostedFile.SaveAs(Server.MapPath("~/Uploads/" + invoiceupload.FileName));
-            }
-            DataTable dt = new DataTable();
-            dt.Columns.Add("File", typeof(string));
-            dt.Columns.Add("Size", typeof(string));
-            dt.Columns.Add("Type", typeof(string));
-            foreach (string strFile in Directory.GetFiles(Server.MapPath("~/Uploads/")))
-            {
-                FileInfo fi = new FileInfo(strFile);
-                dt.Rows.Add(fi.Name, fi.Length, GetFileTypeByExtension(fi.Extension));
-
-
-
-            }
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-        }
-        
-        private string GetFileTypeByExtension(string extension)
-        {
-            switch(extension.ToLower())
-            {
-                case ".doc":
-                case ".docx":
-                    return "Microsoft Word Document";
-                case ".jpg":
-                case ".png":
-                    return "Image";
-                case ".pdf":
-                    return "PDF Document";
-                case ".txt":
-                    return "Text Document";
-                case ".xlsx":
-                case ".xls":
-                    return "Microsoft Excel Document";
-                default:
-                    return "Unknown";
-
-
-
-            }
-        }
+       
         private void clear()
         {
             txtinvoicenumber.Text = string.Empty;

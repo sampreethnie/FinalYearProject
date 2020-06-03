@@ -43,7 +43,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -154,15 +154,20 @@
  
     <p class="navbar-text" style="font-size:21px">Orders(Buyer)</p>
              </nav>
-        <label style="font-size:19px;margin-left:20px;margin-right:170px;"> From Date  <br > <asp:TextBox ID="txtfromdate" TextMode="Date" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
-              
-         <label style="font-size:19px;margin-left:20px;margin-right:110px;"> To Date  <br > <asp:TextBox ID="txttodate" TextMode="Date" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
-                
-            <asp:Button ID="btnSave" runat="server" Text="Search" style="width:70px" OnClick="btnSearch_Click" />
+        <label style="font-size:19px;margin-left:20px;margin-right:170px;"> From Date  <br > <asp:TextBox ID="txtfromdate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+              <ajaxToolkit:CalendarExtender ID="Calendarfromdate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtfromdate" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
+         <label style="font-size:19px;margin-left:20px;margin-right:110px;"> To Date  <br > <asp:TextBox ID="txttodate" CssClass="form-control" Width="145px" runat="server" ></asp:TextBox> </label>
+                <ajaxToolkit:CalendarExtender ID="CalenderToDate" PopupButtonID="imgPopup" runat="server" TargetControlID="txttodate" Format="dd/MM/yyyy"> </ajaxToolkit:CalendarExtender>
+            <asp:Button ID="btnSave" runat="server" Text="Search" OnClick="btnSearch_Click" style="width:110px;height:40px;margin-left:20px;color:white;background-color:deepskyblue;    border:solid;border-top-left-radius:8px;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;display:inline" />
             <div>
                 <asp:GridView ID="GridViewOrdersBuyer"  runat="server"  AutoGenerateColumns="false" RowStyle-HorizontalAlign="Center" RowStyle-VerticalAlign="Middle" HeaderStyle-VerticalAlign="Middle" HeaderStyle-HorizontalAlign="Center" DataKeyNames="ORD_Number"  CellPadding="1" CellSpacing="1" ForeColor="#333333" GridLines="Vertical" Height="100px" Width="100%" AllowCustomPaging="True" AllowSorting="True" BorderWidth="2px" Font-Bold="True" Font-Names="Times New Roman" >
                     
-                    <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                     <AlternatingRowStyle BackColor="White" />
+                                                  <RowStyle BackColor="#EFF3FB" />
+<FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+<PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+<HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" Font-Size="Medium" />
+<AlternatingRowStyle BackColor="White" />
                     
                     <Columns>
                         <asp:BoundField DataField="ORD_Number" HeaderText="Order Number" />

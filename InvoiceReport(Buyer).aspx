@@ -33,7 +33,7 @@
         <nav class="navbar1 navbar navbar-default" id="navbarone">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">FreightDeals</a>
+      <a class="navbar-brand" href="#" style="font-family:'Times New Roman', Times, serif;font-size:medium;color:blue;font-style:italic">AirFreightPro</a>
     </div>
     <ul class="nav navbar-right pull-right top-nav">
               <li class="dropdown">
@@ -183,7 +183,7 @@
          <label style="font-size:19px;margin-left:20px;margin-right:50px">LSP* <br> <asp:DropDownList ID="dropdowncustomer"  Height="30px"  Width="160px" runat="server" CssClass="form-control" AutoPostBack="true" ></asp:DropDownList></label>
             <asp:RequiredFieldValidator ID="rfvcustomer" ControlToValidate="dropdowncustomer" ValidationGroup="invoicereporting" SetFocusOnError="true" EnableClientScript="true" runat="server" ErrorMessage="*"></asp:RequiredFieldValidator>
     
-        <label style="font-size:19px;margin-left:20px;margin-right:50px">Type <br> <asp:CheckBox ID="chkall"  runat="server" Text="All" Value="A" style="margin-right:30px" /> <asp:CheckBox ID="chkapproved" runat="server" Value="Y" Text="Approved" style="margin-right:30px" /> <asp:CheckBox ID="chkrejected" runat="server" Text="Rejected" Value="N" style="margin-right:30px" /> <asp:CheckBox ID="chkpending" runat="server" Text="Pending" Value="P" /> </label>
+        <label style="font-size:19px;margin-left:20px;margin-right:50px">Type <br> <asp:CheckBox ID="chkall"  runat="server" Text="All" Value="A" AutoPostBack="true" style="margin-right:30px" /> <asp:CheckBox ID="chkapproved" runat="server" Value="Y" Text="Approved" AutoPostBack="true" style="margin-right:30px" /> <asp:CheckBox ID="chkrejected" runat="server" Text="Rejected" Value="N" AutoPostBack="true" style="margin-right:30px" /> <asp:CheckBox ID="chkpending" runat="server" AutoPostBack="true" Text="Pending" Value="P" /> </label>
    <br />
         <br /><br />
         <asp:Button Text="Display Data" OnClick="ExportExcel" runat="server"  style="width:110px;height:40px;margin-left:50px;color:white;background-color:deepskyblue;    border:solid;border-top-left-radius:8px;border-top-right-radius:8px;border-bottom-left-radius:8px;border-bottom-right-radius:8px;display:inline" />

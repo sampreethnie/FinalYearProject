@@ -207,7 +207,7 @@ namespace FinalYearProject
                 con.Open();
 
 
-                string query = "select RFQ_Number from RFQ where RFQ_Number = '" + txtrfqnumber.Text + "' ";
+                string query = "select SQ_RFQ_Number from SQ where SQ_RFQ_Number = '" + txtrfqnumber.Text + "' ";
                 SqlCommand cmd2 = new SqlCommand(query, con);
                 SqlDataReader dr = cmd2.ExecuteReader();
                 dr.Read();
@@ -259,10 +259,11 @@ namespace FinalYearProject
                     cmd.Parameters.AddWithValue("@SQ_RFQ_Company", txtbuyername.Text);
                     cmd.Parameters.AddWithValue("@SQ_BuyerCurrency", txtbuyercurrency.Text);
                     cmd.Parameters.AddWithValue("@SQ_RFQ_ExpectedPrice", txtexpectedprice.Text);
-                    con.Open();
+                    
                     cmd.ExecuteNonQuery();
                     BindGridView();
                     clear();
+                    
                     con.Close();
                 }
 
@@ -475,6 +476,7 @@ namespace FinalYearProject
                 smtp.EnableSsl = true;
                 smtp.Send(msg);
             }
+            dr.Close();
 
             SqlConnection con1 = new SqlConnection(_ConnStr);
             con1.Open();
